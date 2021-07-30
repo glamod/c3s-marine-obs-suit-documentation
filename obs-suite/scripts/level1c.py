@@ -3,94 +3,87 @@
 """
 Created on Mon Jun 17 14:24:10 2019
 
-Script to generate the C3S CDM Marine level1c data: validate 
-header.report_timestamp and header.primary_station_id and apply outcome to rest
-of tables, rejecting reports not validating any of these two fields.
+Script to generate the C3S CDM Marine level1c data.
+
+The output files of this script will contain reports from level1b that have been further validated following corrections
+to the ``date/time``, location and station ID. Those failing validation are rejected and archived for future analysis.
+Additionally, datetime corrections applied previously in level1b, can potentially result in reports being relocated to a different month.
+These reports are moved to their correct monthly file in this level. Validates ``header.report_timestamp`` and ``header.primary_station_id``
+and apply this outcome to rest of tables, rejecting reports not valid in any of these two fields.
+
+Workflow:
+ - Read header data
+ - Initialized mask for id and datetime to True
+ - Validate header.report_timestamp (see Notes below)
+ - Validate header.primary_station_id (see Notes below)
+
+Output all reports not validating timestamp to:
+  - ``/level1c/invalid/sid-dck/header-fileID-report_timsetamp.psv``
+
+Output all reports not validating primary_station_id to:
+  - ``/level1c/invalid/sid-dck/header-fileID-primary_station_id.psv``
     
-    - Read header data
-    
-    - Initialized mask for id and datetime to True
-    
-    - Validate header.report_timestamp (see Notes below)
-    - Validate header.primary_station_id (see Notes below)
-    
-    - Output all reports not validating timestamp to:
-        -> /level1c/invalid/sid-dck/header-fileID-report_timsetamp.psv
-    - Output all reports not validating primary_station_id to:
-        -> /level1c/invalid/sid-dck/header-fileID-primary_station_id.psv
-    
-    - Merge report_timestamp and primary_station_id in a single validation rule
-    (fail if any fails)
-    - Drop corresponding records from all tables
-    
-    - Log to json dropped per table per validated field and final numer of 
-    records in the resulting tables
-    - Log to json unique primary_station_id counts
-    - Log to json primary_station_id validation rules numbers:
-        1. callsings
-        2. rest
-        3. restored because output from Liz's process
+  - Merge report_timestamp and primary_station_id in a single validation rule (fail if any fails)
+  - Drop corresponding records from all tables
+  - Log to json dropped per table per validated field and final number of records in the resulting tables
+  - Log to json unique primary_station_id counts
+  - Log to json primary_station_id validation rules numbers:
+    1. callsings
+    2. rest
+    3. restored because output from Liz's process
 
 The processing unit is the source-deck monthly set of CDM tables.
 
 On reading the table files from the source level (1b), it read:
-    1. master table file (table-yyyy-mm-release-update.psv)
-    2. datetime leak files (table-yyyy-mm-release-update-YYYY-MM.psv), where 
-    YYYY-MM indicates the initial yyyy-mm stamp of the reports contained in that
-    leak file upon arrival to level1b. 
+ 1. master table file (``table-yyyy-mm-release-update.psv``)
+ 2. datetime leak files (``table-yyyy-mm-release-update-YYYY-MM.psv``), where ``YYYY-MM`` indicates the initial ``yyyy-mm`` stamp of the reports contained in that leak file upon arrival to level1b.
 
-Outputs data to /<data_path>/<release>/<dataset>/level1c/<sid-dck>/table[i]-fileID.psv
-Outputs invalid data to /<data_path>/<release>/<dataset>/level1c/invalid/<sid-dck>/header-fileID-<element>.psv
-Outputs quicklook info to:  /<data_path>/<release>/<dataset>/level1c/quicklooks/<sid-dck>/fileID.json
+Outputs data to:
+ - ``/<data_path>/<release>/<dataset>/level1c/<sid-dck>/table[i]-fileID.psv``
 
-where fileID is yyyy-mm-release-update
+Outputs invalid data to:
+ - ``/<data_path>/<release>/<dataset>/level1c/invalid/<sid-dck>/header-fileID-<element>.psv``
+
+Outputs quicklook info to:
+ - ``/<data_path>/<release>/<dataset>/level1c/quicklooks/<sid-dck>/fileID.json`` where fileID is yyyy-mm-release-update
 
 Before processing starts:
-    - checks the existence of all io subdirectories in level1b|c -> exits if fails
-    - checks the existence of the source table to be converted (header only) -> exits if fails
-    - removes all level1c products on input file resulting from previous runs
+ - checks the existence of all io subdirectories in level1b|c -> exits if fails
+ - checks the existence of the source table to be converted (header only) -> exits if fails
+ - removes all level1c products on input file resulting from previous runs
 
 Inargs:
-------
-data_path: marine data path in file system
-release: release tag
-update: udpate tag
-dataset: dataset tag
-config_path: configuration file path
-sid_dck: source-deck data partition (optional, from config_file otherwise)
-year: data file year (yyyy) (optional, from config_file otherwise)
-month: data file month (mm) (optional, from config_file otherwise)
+-------
+- data_path: marine data path in file system
+- release: release tag
+- update: udpate tag
+- dataset: dataset tag
+- config_path: configuration file path
+- sid_dck: source-deck data partition (optional, from config_file otherwise)
+- year: data file year (yyyy) (optional, from config_file otherwise)
+- month: data file month (mm) (optional, from config_file otherwise)
 
 Notes on validations:
---------------------
-** HEADER.REPORT_TIMESTAMP VALIDATION **
-This validation is just trying to convert to a datetime object the content of
-the field. Where empty, this conversion (and validation) will fail. 
-And will be empty if during the mapping in level1a the report_timestamp could 
-not be built from the source data, or if there was any kind of messing in level1b
-datetime corrections......
+---------------------
 
+* HEADER.REPORT_TIMESTAMP VALIDATION:
+    This validation is just trying to convert to a datetime object the content of the field.
+    Where empty, this conversion (and validation) will fail.
+    And will be empty if during the mapping in level1a the report_timestamp could not be built from the source data,
+    or if there was any kind of messing in level1b datetime corrections...
 
-** HEADER.PRIMARY_STATION_ID VALIDATION **
-Due to various reasons, the validation is done in 3 stages and using different methods:
+* HEADER.PRIMARY_STATION_ID VALIDATION:
+    Due to various reasons, the validation is done in 3 stages and using different methods:
     1. Callsign IDs: use set of validation patterns harcoded here
     2. Rest of IDs: use set of valid patterns per dck in NOC_ANC_INFO json files
-    3. All: set all that Liz's ID linkage modified to True. We are parsing the
-    history field for a "Corrected primary_station_id" text...maybe it should 
-    read this from the level1b config file? But then we need to give this
-    file as an argument....
+    3. All: set all that Liz's ID linkage modified to True. We are parsing the history field for a "Corrected primary_station_id" text...
+    maybe it should read this from the level1b config file? But then we need to give this file as an argument...
 
 Dev notes:
 ----------
 
-1) This script is fully tailored to the idea of how validation and cleaning should
-be at the time of developing it. It is not parameterized and is hardly flexible.
-
-2) Why don't we just pick the NaN dates as invalid, instead of looking where conversion
-fails?
-
-
-.....
+1. This script is fully tailored to the idea of how validation and cleaning should be at the time of developing it. It is not parameterized and is hardly flexible.
+2. Why don't we just pick the NaN dates as invalid, instead of looking where conversion fails?
 
 @author: iregon
 """

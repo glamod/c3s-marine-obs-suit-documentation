@@ -3,116 +3,97 @@
 """
 Created on Mon Jun 17 14:24:10 2019
 
-See IMPORTANT NOTE!
+SEE IMPORTANT NOTE!
 
 Script to generate level1e CDM data: adding MO-QC (a.k.a. John's QC) flags
 
-    - Reads QC files and creates unique flag per QC file (observed parameter)
-    using columns from each QC file as parameterized at the very beginning.
-    This is done with function get_qc_flags()
-    See notes below on how QC files are expected to be
-    
-    - Creates the report_quality CDM field with function add_report_quality()
-    See below notes on the rules to create it
-    
-    - Merge quality flags with CDM tables with function process_table()
-    Here, additionally,  we set 'report_time_quality' to '2' to all reports
-    
-    - Log, per table, total number of records and qc flag counts
+- Reads QC files and creates unique flag per QC file (observed parameter) using columns from each QC file as parameterized at the very beginning. This is done with function get_qc_flags(). See notes below on how QC files are expected to be.
+- Creates the report_quality CDM field with function add_report_quality(). See below notes on the rules to create it.
+- Merge quality flags with CDM tables with function process_table(). Here, additionally,  we set 'report_time_quality' to '2' to all reports.
+- Log, per table, total number of records and qc flag counts
 
 Note again that the following flagging is decided/set here, does not come from QC files:
-    
-    1) header.report_time_quality = '2', as by the time a report gets here we know
-    that it is at least a valid datetime 
-    2) header.report_quality = following the rules in the notes below
 
-Note also that if a report is not qced (not in QC files, like worst duplicates) we override the default
-settings in the initial mappings (not all not-checked...) to not-checked with:
-            observations*.quality_flag = '2'
-            header.'report_time_quality' = '2'
-            header.'report_quality' = '2'
-            header.'location_quality' = '3'
+1. header.report_time_quality = '2', as by the time a report gets here we know that it is at least a valid datetime
+2. header.report_quality = following the rules in the notes below
+
+Note also that if a report is not qced (not in QC files, like worst duplicates) we override the default settings in the initial mappings (not all not-checked) to not-checked with:
+
+- observations*.quality_flag = '2'
+- header.'report_time_quality' = '2'
+- header.'report_quality' = '2'
+- header.'location_quality' = '3'
 
 The processing unit is the source-deck monthly set of CDM tables.
 
-Outputs data to /<data_path>/<release>/<source>/level1e/<sid-dck>/table[i]-fileID.psv
-Outputs quicklook info to:  /<data_path>/<release>/<source>/level1c/quicklooks/<sid-dck>/fileID.json
+Outputs data to:
+    - ``/<data_path>/<release>/<source>/level1e/<sid-dck>/table[i]-fileID.psv``
+Outputs quicklook info to:
+    - ``/<data_path>/<release>/<source>/level1c/quicklooks/<sid-dck>/fileID.json``
 
-where fileID is yyyy-mm-release_tag-update_tag
+Where fileID is yyyy-mm-release_tag-update_tag
 
 Before processing starts:
-    - checks the existence of all io subdirectories in level1d|e -> exits if fails
-    - checks availability of the source header table -> exits if fails
-    - checks existence of source observation tables -> exits if no obs tables -> requirement removed to
-    give way to sid-dck monthly partitions with no obs tables
-    - checks of existence of the monthly QC (POS) file -> exits if fails. See IMPORTANT NOTE!!!!
-    - removes all level1e products on input file resulting from previous runs
+
+- checks the existence of all io subdirectories in level1d|e -> exits if fails
+- checks availability of the source header table -> exits if fails
+- checks existence of source observation tables -> exits if no obs tables -> requirement removed to give way to sid-dck monthly partitions with no obs tables
+- checks of existence of the monthly QC (POS) file -> exits if fails. See IMPORTANT NOTE!!!!
+- removes all level1e products on input file resulting from previous runs
 
 Inargs:
-------
-data_path: marine data path in file system
-release: release tag
-update: udpate tag
-dataset: dataset tag
-config_path: configuration file path
-sid_dck: source-deck data partition (optional, from config_file otherwise)
-year: data file year (yyyy) (optional, from config_file otherwise)
-month: data file month (mm) (optional, from config_file otherwise)
+-------
 
+- data_path: marine data path in file system
+- release: release tag
+- update: udpate tag
+- dataset: dataset tag
+- config_path: configuration file path
+- sid_dck: source-deck data partition (optional, from config_file otherwise)
+- year: data file year (yyyy) (optional, from config_file otherwise)
+- month: data file month (mm) (optional, from config_file otherwise)
 
 On expected format and content of QC files:
-------------------------------------------
+-------------------------------------------
 
-- qc monthly files in <data_path/<release>/<source>/metoffice_qc/base/<yyyy>/<mm>/<id>_qc_yyyymm_CCIrun.csv
-with id in [POS,SST,AT,SLP,DPT,W]
+- qc monthly files in ``<data_path/<release>/<source>/metoffice_qc/base/<yyyy>/<mm>/<id>_qc_yyyymm_CCIrun.csv`` with id in [POS,SST,AT,SLP,DPT,W]
 - qc monthly files assumed to have 1 hdr line (first) with column names
 - qc monthly files with FS=','
 - qc field names assumed as those listed in qc_columns below
 
-Note that all the qc files have an entry per qced** report in its header table,
-even if the corresponfing observed parameter does not have an entry in that report,
-in which case has the 'noval' flag set to '1'
+Note that all the qc files have an entry per qced** report in its header table, even if the corresponding observed parameter does not have an entry in that report, in which case has the ``noval`` flag set to ``1``.
 
-WE ASSUME HERE THAT ALL MEASURED PARAMETERS HAVE A NOVAL FLAG THAT WE USE TO
-TELL APART MISSING AND FAILED 
+WE ASSUME HERE THAT ALL MEASURED PARAMETERS HAVE A NOVAL FLAG THAT WE USE TO TELL APART MISSING AND FAILED *per qced report, but duplicates are not qced*
 
-** per qced report, but duplicates are not qced....vaya caña!
+Note also that since the qc files have a UID that is the imma UID, not the CDM report_id,
+with the source pre-appended (ICOADS-30-UID for source ICOADS_R3.0.0),
+and I still don't have the rules to build the CDM report_id from the source (any) UID.
 
-Note also that since the qc files have a UID that is the imma UID, not the CDM
-report_id, with the source preprended (ICOADS-30-UID for source ICOADS_R3.0.0),
-and I still don't have the rules to build the CDM report_id from the source (any)
-UID:
-    THE WAY QC-FILES UID AND CDM-TABLES REPORT_ID ARE LINKED HERE IS HARDCODED
-    IN FUNCTION get_qc_flags() TO RELEASE1 SOURCE ICOADS_R3.0.0T
+THE WAY QC-FILES UID AND CDM-TABLES REPORT_ID ARE LINKED HERE IS HARDCODED IN FUNCTION get_qc_flags() TO RELEASE1 SOURCE ICOADS_R3.0.0T
 
 
 report_quality flag rules:
--------------------------
-
-    POS             PARAMS              report_quality
-    ----------------------------------------------------
-    passed          all failed          fail
-                    rest                pass
-                
-    failed          all                 fail
-                            
-    not checked     at least 1 passed   pass
-    (3              all failed          fail
-                    all not checked     not checked
-    ---------------------------------------------------
-
-
+--------------------------
++-----------+------------------+---------------------+
+| POS       | PARAMS           | report_quality      |
++-----------+------------------+---------------------+
+|passed     |     all failed   |        fail         |
++-----------+------------------+---------------------+
+|           |     rest         |        pass         |
++-----------+------------------+---------------------+
+|failed     |     all          |        fail         |
++-----------+------------------+---------------------+
+|not checked| at least 1 passed|   pass              |
++-----------+------------------+---------------------+
+|(3)        |     all failed   |       fail          |
++-----------+------------------+---------------------+
+|           |  all not checked |     not checked     |
++-----------+------------------+---------------------+
 
 Dev NOTES:
----------
-There are some hardcoding for ICOADS_R3.0.0.T: we are looking for report_id in CDM
-adding 'ICOADS_30' to the UID in the QC flags!!!!!
-
-Maybe should pass a QC version configuration file, with the path
-of the QC files relative to a set path (i.e. informing of the QC version)
-
-
-.....
+----------
+There are some parts here hard-coded for ICOADS_R3.0.0.T: we are looking for report_id in CDM adding 'ICOADS_30' to the UID in the QC flags!!!!!
+Maybe should pass a QC version configuration file, with the path of the QC files relative to a set path (i.e. informing of the QC version)
 
 @author: iregon
 """

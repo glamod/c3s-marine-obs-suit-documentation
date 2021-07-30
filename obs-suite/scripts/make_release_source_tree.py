@@ -3,17 +3,15 @@
 """
 Created on Mon Jul  8 12:29:06 2019
 
-Creates the directory tree for a new C3S data release and source or for a new
-source in a pre-existing release
+Creates the directory tree for a new C3S data release and source or for a new source in a pre-existing release
 
 Inargs:
-------
-
-data_path: parent directory where tree is to be created
-config_path: path to the obs-suite config directory
-release: name for release directory
-update_tag: tag for the release update
-dataset: name for data source in directory tree
+-------
+- data_path: parent directory where tree is to be created
+- config_path: path to the obs-suite config directory
+- release: name for release directory
+- update_tag: tag for the release update
+- dataset: name for data source in directory tree
 
 @author: iregon
 """

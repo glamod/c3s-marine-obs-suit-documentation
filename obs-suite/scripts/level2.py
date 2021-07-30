@@ -8,45 +8,39 @@ inspection of data.
 
 The processing unit is the source-deck.
 
-Outputs included data to /<data_path>/<release>/<source>/level2/<sid-dck>/table[i]-fileID.psv
-Outputs exluded data to /<data_path>/<release>/<source>/level2/excluded/<sid-dck>/table[i]-fileID.psv
+Outputs included data to:
+    - ``/<data_path>/<release>/<source>/level2/<sid-dck>/table[i]-fileID.psv``
+Outputs exluded data to:
+    - ``/<data_path>/<release>/<source>/level2/excluded/<sid-dck>/table[i]-fileID.psv``
 
 where fileID is yyyy-mm-release_tag-update_tag
 
 Before processing starts:
     - checks the existence of input data subdirectory in level1e -> exits if fails
-    - checks the existence of the level2 selection file (level2_list) and that
-    sid-dck is registered in it -> exits if fails
-    - checks that a sid-dck to be included has at least an observation table
-    registered to be included  -> exits if fails
+    - checks the existence of the level2 selection file (level2_list) and that sid-dck is registered in it -> exits if fails
+    - checks that a sid-dck to be included has at least an observation table registered to be included  -> exits if fails
     - removes level2 sid-dck subdirs (except log/sid-dck)
     
-If at any point during copying an exception is raised, cleans sid-dck level2
-before exiting.
+If at any point during copying an exception is raised, cleans sid-dck level2 before exiting.
 
 Inargs:
-------
-data_path: data release parent path (i.e./gws/nopw/c3s311_lot2/data/marine)
-sid_dck: source-deck partition (sss-ddd)
-release: release identifier
-update: release update identifier
-source: source dataset identifier
-level2_list: path to file with level2 configuration
+-------
+- data_path: data release parent path (i.e./gws/nopw/c3s311_lot2/data/marine)
+- sid_dck: source-deck partition (sss-ddd)
+- release: release identifier
+- update: release update identifier
+- source: source dataset identifier
+- level2_list: path to file with level2 configuration
 
 Uses level2_list:
-----------------
+-----------------
 json file as created by L2_list_create.py, with:
 
-{
-    'params_exclude':[],
-    'ss1-dd1':{'exclude':True|False,'params_exclude':[]},
-    ....
-    'ssN-ddN':{'exclude':True|False,'params_exclude':[]}
+{ 'params_exclude':[],
+  'ss1-dd1':{'exclude':True|False,'params_exclude':[]},
+  ....
+  'ssN-ddN':{'exclude':True|False,'params_exclude':[]}
 }
-
-
-
-.....
 
 @author: iregon
 """

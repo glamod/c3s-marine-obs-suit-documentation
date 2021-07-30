@@ -3,23 +3,22 @@
 """
 Created on Mon Jun 17 14:24:10 2019
 
-Script to generate the C3S CDM Marine level1d data: add external MD (pub47...):
+Script to generate the C3S CDM Marine level1d data and add external MD (pub47):
 
-    - Read header table and MD and see if there is anything to merge
-    
-    - Map MD to CDM with module cdm
-    
-    - Merge mapped MD with CDM tables by primary_station_id and
-    save to file with function process_table()
-    (if nothing to merge, just save the file to level1d...)
-    
-    - log, per table, total number of records and those with MD added/updated
+- Read header table and MD and see if there is anything to merge
+- Map MD to CDM with module cdm
+- Merge mapped MD with CDM tables by primary_station_id and save to file with function ``process_table()`` (if nothing to merge, just save the file to level1d...)
+- log, per table, total number of records and those with MD added/updated
 
 The processing unit is the source-deck monthly set of CDM tables.
 
-Outputs data to /<data_path>/<release>/<dataset>/level1d/<sid-dck>/table[i]-fileID.psv
-Outputs quicklook info to:  /<data_path>/<release>/<dataset>/level1d/quicklooks/<sid-dck>/fileID.json
-where fileID is yyyy-mm-release_tag-update_tag
+Outputs data to:
+    - ``/<data_path>/<release>/<dataset>/level1d/<sid-dck>/table[i]-fileID.psv``
+
+Outputs quicklook info to:
+    - ``/<data_path>/<release>/<dataset>/level1d/quicklooks/<sid-dck>/fileID.json``
+
+where fileID is ``yyyy-mm-release_tag-update_tag``
 
 Before processing starts:
     - checks the existence of all io subdirectories in level1c|d -> exits if fails
@@ -27,30 +26,28 @@ Before processing starts:
     - checks the existence of the monthly MD file -> exits if fails
     - removes all level1d products on input file resulting from previous runs
 
-
 Inargs:
-------
-data_path: marine data path in file system
-release: release tag
-update: udpate tag
-dataset: dataset tag
-config_path: configuration file path
-sid_dck: source-deck data partition (optional, from config_file otherwise)
-year: data file year (yyyy) (optional, from config_file otherwise)
-month: data file month (mm) (optional, from config_file otherwise)
+-------
+- data_path: marine data path in file system
+- release: release tag
+- update: udpate tag
+- dataset: dataset tag
+- config_path: configuration file path
+- sid_dck: source-deck data partition (optional, from config_file otherwise)
+- year: data file year (yyyy) (optional, from config_file otherwise)
+- month: data file month (mm) (optional, from config_file otherwise)
 
 On input data:
--------------
-If the pre-processing of the MD changes, then how we map the MD in map_to_cdm()
- changes also. The mappings there as for MD pre-processing in Autumn2019
+--------------
+If the pre-processing of the MD changes, then how we map the MD in ``map_to_cdm()`` changes also.
+The mappings there as for MD pre-processing in Autumn2019:
+    - pub47 monthly files assumed to have 1 hdr line (first) with column names
+    - pub47 monthly files with FS=';'
+    - pub47 field names assumed:
 
-pub47 monthly files assumed to have 1 hdr line (first) with column names
-pub47 monthly files with FS=';'
-pub47 field names assumed: call;record;name;freq;vsslM;vssl;automation;rcnty;
-                           valid_from;valid_to;uid;thmH1;platH;brmH1;
-                           anmH;anHL1;wwH;sstD1;th1;hy1;st1;bm1;an1
-
-.....
+    ``call;record;name;freq;vsslM;vssl;automation;rcnty;``
+    ``valid_from;valid_to;uid;thmH1;platH;brmH1;anmH;anHL1;``
+    ``wwH;sstD1;th1;hy1;st1;bm1;an1``
 
 @author: iregon
 """

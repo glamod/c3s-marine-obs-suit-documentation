@@ -4,23 +4,26 @@
 Created on Mon Jun 17 14:24:10 2019
 
 Script to generate the C3S CDM Marine level1b data:
-    
-    - read linkage and duplicate identification output (previously pre-processed)
-    - merge with CDM tables on record_id
-    - re-assign dates
-    - save tables to ascii
+- read linkage and duplicate identification output (previously pre-processed)
+- merge with CDM tables on record_id
+- re-assign dates
+- save tables to ascii
 
-Uses modules cdm and pandas_operations to read CDM tables and handle corrections
+Uses modules cdm and pandas_operations to read CDM tables and handle corrections.
+The processing unit is the source-deck monthly set of CDM observation tables (header + observations-variable).
 
-The processing unit is the source-deck monthly set of CDM observation tables (header + observations-*).
+Outputs data to:
+    - ``/<data_path>/<release>/<dataset>/level1b/<sid-dck>/table[i]-fileID.psv``
 
-Outputs data to /<data_path>/<release>/<dataset>/level1b/<sid-dck>/table[i]-fileID.psv
-Outputs quicklook info to:  /<data_path>/<release>/<dataset>/level1b/quicklooks/<sid-dck>/fileID.json
-where fileID is yyyy-mm-release_tag-update_tag
+Outputs quicklook info to:
+    - ``/<data_path>/<release>/<dataset>/level1b/quicklooks/<sid-dck>/fileID.json``
 
-If any data in dataset yyyy-mm is identified to be in a different yyyy-mm (mainly after datetime corrections):
-Outputs data to /<data_path>/<release>/<dataset>/level1b/<sid-dck>/table[i]-fileLeakID.psv        
-where fileLeakID is yyyy-mm(real)-release_tag-update_tag-yyyy-mm(dataset)
+Where `fileID` is `yyyy-mm-release_tag-update_tag`.
+
+If any data in dataset `yyyy-mm` is identified to be in a different `yyyy-mm` (mainly after datetime corrections), outputs data to:
+    - ``/<data_path>/<release>/<dataset>/level1b/<sid-dck>/table[i]-fileLeakID.psv``
+
+Where fileLeakID is yyyy-mm(real)-release_tag-update_tag-yyyy-mm(dataset)
 
 Before processing starts:
     - checks the existence of all io subdirectories in level1a|b -> exits if fails
@@ -28,19 +31,19 @@ Before processing starts:
     - removes all level1b products on input file resulting from previous runs
 
 Inargs:
-------
-data_path: marine data path in file system
-release: release tag
-update: udpate tag
-dataset: dataset tag
-config_path: configuration file path
-sid_dck: source-deck data partition (optional, from config_file otherwise)
-year: data file year (yyyy) (optional, from config_file otherwise)
-month: data file month (mm) (optional, from config_file otherwise)
+-------
+- data_path: marine data path in file system
+- release: release tag
+- update: udpate tag
+- dataset: dataset tag
+- config_path: configuration file path
+- sid_dck: source-deck data partition (optional, from config_file otherwise)
+- year: data file year (yyyy) (optional, from config_file otherwise)
+- month: data file month (mm) (optional, from config_file otherwise)
 
 
 configfile includes:
--------------------
+--------------------
 - NOC_corrections version
 - CDM tables elements with subdirectory prefix where corrections are in release/NOC_corrections/version
 - subdirectory prefix with history event to append to history field

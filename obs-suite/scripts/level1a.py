@@ -5,57 +5,55 @@ Created on Mon Jun 17 14:24:10 2019
 
 Script to generate the C3S CDM Marine level1a data. 
 
-    - Reads dataset data (and supp if avail) file with module mdf_reader. This 
-    includes a data model validation mask.
-    - fixes known PT type errors in source dataset with module metmetpy
-    - selects data reports according to filtering requests
-    - rejects data reports not validiting against its data model
-    - maps to the C3S CDM header and observations tables if there is data left
-    after cleaning (table[i].psv CDM table-like files)
+- Reads dataset data (and supp if avail) file with module mdf_reader. This includes a data model validation mask.
+- Fixes known PT type errors in source dataset with module metmetpy
+- Selects data reports according to filtering requests
+- Rejects data reports not validiting against its data model
+- Maps to the C3S CDM header and observations tables if there is data left after cleaning (table[i].psv CDM table-like files)
 
 The processing unit is the source-deck monthly file.
 
-Outputs data to /<data_path>/<release>/<dataset>/level1a/<sid-dck>/table[i]-fileID.psv
-Outputs invalid data to /<data_path>/<release>/<dataset>/level1a/invalid/<sid-dck>/fileID-data|mask.psv
-Outputs exluded data to /<data_path>/<release>/<dataset>/level1a/excluded/<sid-dck>/fileID-<element>.psv
-Outputs quicklook info to:  /<data_path>/<release>/<dataset>/level1a/quicklooks/<sid-dck>/fileID.json
+- Outputs data to: `/<data_path>/<release>/<dataset>/level1a/<sid-dck>/table[i]-fileID.psv`
+- Outputs invalid data to: `/<data_path>/<release>/<dataset>/level1a/invalid/<sid-dck>/fileID-data|mask.psv`
+- Outputs exluded data to: `/<data_path>/<release>/<dataset>/level1a/excluded/<sid-dck>/fileID-<element>.psv`
+- Outputs quicklook info to: `/<data_path>/<release>/<dataset>/level1a/quicklooks/<sid-dck>/fileID.json`
 
-where fileID is year-month-release-update
+Where fileID is year-month-release-update
 
 Before processing starts:
-    - checks the existence of all output subdirectories in level1a -> exits if fails
-    - checks the existence of the source file to be converted -> exits if fails
-    - removes all level1a products on input file resulting from previous runs
+
+- Checks the existence of all output subdirectories in level1a -> exits if fails
+- Checks the existence of the source file to be converted -> exits if fails
+- Removes all level1a products on input file resulting from previous runs
 
 On input data:
--------------
+--------------
+
 Records of input data assumed to be in sid-dck monthly partitions which imply:
-    - data for same month-year period
-    - data from a unique data model
+
+- Data for same month-year period
+- Data from a unique data model
     
-
 Inargs:
-------
-data_path: marine data path in file system
-release: release tag
-update: udpate tag
-dataset: dataset tag
-config_path: configuration file path
-sid_dck: source-deck data partition (optional, from config_file otherwise)
-year: data file year (yyyy) (optional, from config_file otherwise)
-month: data file month (mm) (optional, from config_file otherwise)
+-------
 
+- data_path: marine data path in file system
+- release: release tag
+- update: udpate tag
+- dataset: dataset tag
+- config_path: configuration file path
+- sid_dck: source-deck data partition (optional, from config_file otherwise)
+- year: data file year (yyyy) (optional, from config_file otherwise)
+- month: data file month (mm) (optional, from config_file otherwise)
 
 configfile:
-----------
-To specify processing options that may be shared in different processing
-settings:
-    - main data model
-    - supplemental data model
-    - processing options: supplemental replacements,
-    record selection/filtering by field (i.e. PT....)
-        
-.....
+-----------
+
+To specify processing options that may be shared in different processing settings:
+
+- main data model
+- supplemental data model
+- processing options: supplemental replacements, record selection/filtering by field (i.e. PT....)
 
 @author: iregon
 """

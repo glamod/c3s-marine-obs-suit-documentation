@@ -3,29 +3,19 @@
 """
 Created on Mon Jun 17 14:24:10 2019
 
-This is to merge the duplicate files from Liz's dup identification: main file
- from first iteration, second file from second iteration after ID fixing....
-
+This is to merge the duplicate files from Liz's dup identification: main file from first iteration, second file from second iteration after ID fixing.
 Merges both files from and outputs 2 separate files: one for dup status and another for duplicates.
-
 This is tailored to the output as it was in Autumn2019 (C3S Release1)
+It is assumed that filenames are ``yyyy-mm.txt`` and pipe separated and that the second file with additional dup info may not be available
 
-It is assumed that filenames are yyyy-mm.txt and pipe separated and that the second
-file with additional dup info may not be available
-
-On output, pandas.to_csv will detect compresion from filename
-(compression default is 'infer')
-if input file is like *.gz, output will also be compressed
-
+On output, pandas.to_csv will detect compresion from filename (compression default is 'infer') if input file is like ``*.gz``, output will also be compressed
 
 Inargs:
-------
-file1: path to main original duplicate file
-file2: path to secondary duplicate file (from second iteration after ID fixing)
-dir_flags: directory to output merged duplicate flags
-dir_dups: diretory to output merged duplicates
-------------------
-.....
+-------
+- file1: path to main original duplicate file
+- file2: path to secondary duplicate file (from second iteration after ID fixing)
+- dir_flags: directory to output merged duplicate flags
+- dir_dups: diretory to output merged duplicates
 
 @author: iregon
 """

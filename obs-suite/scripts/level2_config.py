@@ -5,14 +5,14 @@ Created on Wed Nov 13 16:18:36 2019
 
 Create initial level2 product list from the initial source-deck periods list
 
-Outputs file to /<data_path>/<release>/<source>/level2/level.json
+Outputs file to:
+- ``/<data_path>/<release>/<source>/level2/level.json``
 
 Inargs:
-------
-release_periods_file: full path to release periods file
-year_init: first year in release period to include in level2
-year_end: last year in release period to include in level2
-
+-------
+- release_periods_file: full path to release periods file
+- year_init: first year in release period to include in level2
+- year_end: last year in release period to include in level2
 
 @author: iregon
 """
