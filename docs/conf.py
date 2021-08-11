@@ -17,7 +17,7 @@ import sys
 
 # -- Project information -----------------------------------------------------
 
-project = 'C3S-marine-obs-suit'
+project = 'C3S-marine-obs-suite'
 copyright = '2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos'
 author = 'David Berry, Irene Perez Gonzalez and Beatriz Recinos'
 

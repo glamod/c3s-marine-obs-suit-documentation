@@ -17,9 +17,9 @@ For deck 704, there is no need to commit and push the files created for the ``im
 
 .. note:: Sometimes the remote branch can have the name **main or master** so make sure you check that in the Github repository online.
 
-.. note:: Before pushing any change to the main repository make sure that you have maintainer access and you are allow to push/merge changes. If you don't have this, you can ask for access or keep a fork copy of the main repository in your github/gitlab account. If you use your own copy, make sure you clone that copy in the obs-suit framework, when you want to test and run your new CDM.
+.. note:: Before pushing any change to the main repository make sure that you have maintainer access and you are allow to push/merge changes. If you don't have this, you can ask for access or keep a fork copy of the main repository in your github/gitlab account. If you use your own copy, make sure you clone that copy in the obs-suite framework, when you want to test and run your new CDM.
 
-- For the ``cdm_mapper`` committing changes to the main repository **is different**. Because the python module name in the **obs-suit** code differs from the repository name. Module name = **cdm**, Repository name = **cdm_mapper**. This means that when we clone the cdm_mapper as a module, we use the attribute ``--single-branch``. This does not allow direct commits to the main repository. Therefore, to commit changes to this repository you need to clone again the mapper repo in the normal way::
+- For the ``cdm_mapper`` committing changes to the main repository **is different**. Because the python module name in the **obs-suite** code differs from the repository name. Module name = **cdm**, Repository name = **cdm_mapper**. This means that when we clone the cdm_mapper as a module, we use the attribute ``--single-branch``. This does not allow direct commits to the main repository. Therefore, to commit changes to this repository you need to clone again the mapper repo in the normal way::
 
     $ cd ../to_your_designated_folder_where_you_installed_mdf_reader_and_cdm/
     $ git clone git@github.com:glamod/cdm-mapper.git --branch master
@@ -38,22 +38,22 @@ For deck 704, there is no need to commit and push the files created for the ``im
 4. Clone the latest version of the modified tools
 =================================================
 
-- Once you have commit your changes to the online version of both repositories, you can go back to JASMIN and pull the latest changes. We recommend that in the JASMIN obs-suit installation folder, you always delete old versions of the **mdf_reader** and **cdm** folders under ``obs-suit/modules/python`` before cloning again the latest changes::
+- Once you have commit your changes to the online version of both repositories, you can go back to JASMIN and pull the latest changes. We recommend that in the JASMIN obs-suite installation folder, you always delete old versions of the **mdf_reader** and **cdm** folders under ``obs-suite/modules/python`` before cloning again the latest changes::
 
-    $ cd ../obs-suit/modules/python
+    $ cd ../obs-suite/modules/python
     $ rm -r mdf_reader
     $ rm -r cdm
 
 - Before cloning again the modules, you should remember to activate the python environment by::
 
-    $ cd ../obs-suit
+    $ cd ../obs-suite
     $ module load jaspy
     $ source setpaths.sh
     $ source setenv0.sh
 
 - Clone the repositories again making sure your environment is activated::
 
-    (env0)$ cd obs-suit/modules/python
+    (env0)$ cd obs-suite/modules/python
     (env0)[python]$ git clone git@github.com:glamod/mdf_reader.git --branch master
     (env0)[python]$ git clone git@github.com:glamod/cdm-mapper.git --branch master --single-branch cdm
     (env0)[python] $ ls

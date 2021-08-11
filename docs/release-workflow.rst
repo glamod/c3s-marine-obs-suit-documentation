@@ -111,11 +111,11 @@ In the following table we describe what each parameter in the ``level1a.json`` f
  **json variable**        **Description**
 ----------------------   --------------------------------------------------------------------
  ``job_memo_mb``          | Memory in MB needed to run the job. This is part of the SLURM set up
-                          | defined in the following script: `lotus_scripts.level1a_slurm <https://glamod.github.io/c3s-marine-obs-suit-documentation/_modules/lotus_scripts/level1a_slurm.html#log_diri>`_.
+                          | defined in the following script: `lotus_scripts.level1a_slurm <https://glamod.github.io/c3s-marine-obs-suite-documentation/_modules/lotus_scripts/level1a_slurm.html#log_diri>`_.
  ``job_time_hr``          | Hours needed to run the job. This is part of the SLURM set up
-                          | defined in the following script: `lotus_scripts.level1a_slurm <https://glamod.github.io/c3s-marine-obs-suit-documentation/_modules/lotus_scripts/level1a_slurm.html#log_diri>`_.
+                          | defined in the following script: `lotus_scripts.level1a_slurm <https://glamod.github.io/c3s-marine-obs-suite-documentation/_modules/lotus_scripts/level1a_slurm.html#log_diri>`_.
  ``job_time_min``         | Minutes needed to run the job. This is part of the SLURM set up
-                          | defined in the following script: `lotus_scripts.level1a_slurm <https://glamod.github.io/c3s-marine-obs-suit-documentation/_modules/lotus_scripts/level1a_slurm.html#log_diri>`_.
+                          | defined in the following script: `lotus_scripts.level1a_slurm <https://glamod.github.io/c3s-marine-obs-suite-documentation/_modules/lotus_scripts/level1a_slurm.html#log_diri>`_.
  ``data_model``           | Data model or schema use to read the input data (e.g. ``imma``).
  ``read_sections``        | Specifies sections to read from the original data that are <br>
                           | require by the common data model mapper (e.g. ``icoads_r3000``)

@@ -1,4 +1,4 @@
-.. _obs-suit-set-up:
+.. _obs-suite-set-up:
 
 ================================================
 Observation suit set up and directories overview
@@ -17,7 +17,7 @@ Observation suit set up and directories overview
 
 2. Set up the obs-suite python environment::
 
-    $ cd obs-suit/pyenvs
+    $ cd obs-suite/pyenvs
     $ module load jaspy
     $ virtualenv --system-site-packages env0
     $ source env0/bin/activate
@@ -25,7 +25,7 @@ Observation suit set up and directories overview
 
 3. Install all additional modules, coded specifically for the C3s processing. Make sure to activated your python environment (env0) before cloning any repository. From these modules listed below, only two have been updated and documented, the `mdf_reader <https://glamod.github.io/mdf_reader_documentation/>`_ and `cdm_mapper <https://glamod.github.io/cdm_mapper_documentation/>`_::
 
-    (env0)$ cd obs-suit/modules/python
+    (env0)$ cd obs-suite/modules/python
     (env0)[python]$ git clone git@github.com:glamod/mdf_reader.git --branch master
     (env0)[python]$ git clone git@github.com:glamod/cdm-mapper.git --branch master --single-branch cdm
     (env0)[python]$ git clone git@github.com:glamod/metmetpy.git --branch v1.0
@@ -37,7 +37,7 @@ Observation suit set up and directories overview
 
 4. Set the paths to the input ``data_directory``, ``configuration_directory``, ``environment_directory`` and ``code_directory``.
 
-Under ``glamod-marine-processing/obs-suit/`` there are two .sh files (``setenv0.sh`` and ``setpaths.sh``) that contain paths that link the python environment, input and output data and the obs-suit code. The first file that you need to modify is the ``setpaths.sh`` to let the code be aware of where everything is::
+Under ``glamod-marine-processing/obs-suite/`` there are two .sh files (``setenv0.sh`` and ``setpaths.sh``) that contain paths that link the python environment, input and output data and the obs-suite code. The first file that you need to modify is the ``setpaths.sh`` to let the code be aware of where everything is::
 
         $ vim setpaths.sh
 
@@ -88,7 +88,7 @@ After this you need to also change ``setenv0.sh`` to point to the environment cr
         export LD_LIBRARY_PATH=/apps/contrib/jaspy/miniconda_envs/jaspy3.7/m3-4.6.14/envs/jaspy3.7-m3-4.6.14-r20200606/lib/:$LD_LIBRARY_PATH
         echo "Python environment loaded from gws: $pyEnvironment_directory"
 
-5. Deactivate your environment and check the connection by sourcing both .sh files under ``../obs-suit/``::
+5. Deactivate your environment and check the connection by sourcing both .sh files under ``../obs-suite/``::
 
     $ deactivate env0
     $ module load jaspy
@@ -127,7 +127,7 @@ Unless working spaces in jasmin change, this directory is where you will always 
     r092019-000000      release_3.0-000000  release_demo-000000
     release_2.0-000000  release_4.0-000000  release_test-000000
 
-The configuration directory is where you define several ``.json`` and `.txt` files that will indicate to the ``obs-suit`` software the following:
+The configuration directory is where you define several ``.json`` and `.txt` files that will indicate to the ``obs-suite`` software the following:
     - What sources and decks we would be processing?
     - Do we need to apply a specific schema and mapper to a deck or a number of decks?
     - What periods of data are we going to process?

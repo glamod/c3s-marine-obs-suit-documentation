@@ -4,7 +4,7 @@
 Adding new data models
 ======================
 
-**Obs-suit/level1a** has the capacity to map any type of data to the C3S Common Data Model format. Specifics about this data format can be found in the following `site <https://glamod.github.io/cdm-obs-documentation/index.html>`_.
+**Obs-suite/level1a** has the capacity to map any type of data to the C3S Common Data Model format. Specifics about this data format can be found in the following `site <https://glamod.github.io/cdm-obs-documentation/index.html>`_.
 
 The main task of this level of processing is to map data from ICOADS using schemas and common data model mappers already contained within the `mdf_reader <https://glamod.github.io/mdf_reader_documentation/>`_ and `cdm_mapper <https://glamod.github.io/cdm_mapper_documentation/>`_ tools. However, you can add new schemas and mappers **of your own making** to the tools, in order to process a specific ``sid-dck`` or an ICOADS-data collection.
 
@@ -17,9 +17,9 @@ The first step probably is to select a source and deck that needs mapping; a lis
 
     Simplified workflow of the steps needed to add a new CDM.
 
-We recommend that you change the `mdf_reader <https://glamod.github.io/mdf_reader_documentation/>`_ and `cdm_mapper <https://glamod.github.io/cdm_mapper_documentation/>`_ repositories outside of the ``../glamod-marine/obs-suit/`` folder in JASMIN. You can either use another folder directory within JASMIN or just make a local copy of the two tools in your PC, this will facilitate to create, edit and test all the ``.json`` files that compose a schema and a cdm mapper.
+We recommend that you change the `mdf_reader <https://glamod.github.io/mdf_reader_documentation/>`_ and `cdm_mapper <https://glamod.github.io/cdm_mapper_documentation/>`_ repositories outside of the ``../glamod-marine/obs-suite/`` folder in JASMIN. You can either use another folder directory within JASMIN or just make a local copy of the two tools in your PC, this will facilitate to create, edit and test all the ``.json`` files that compose a schema and a cdm mapper.
 
-To install the **mdf_reader** and **cdm_mapper** on your local PC (or in any other directory) you should follow the instructions in the following `documentation website <https://glamod.github.io/cdm_mapper_documentation/tool-set-up.html>`_. You will have to make *another python environment* just to run those tools separate from the **obs-suit** code.
+To install the **mdf_reader** and **cdm_mapper** on your local PC (or in any other directory) you should follow the instructions in the following `documentation website <https://glamod.github.io/cdm_mapper_documentation/tool-set-up.html>`_. You will have to make *another python environment* just to run those tools separate from the **obs-suite** code.
 
 Once you have set up the tools in another working directory, you are ready follow the instructions below. We will use **the US Marine Meteorological Journals Collection (MMJ 1878-1894)** ``125-704`` as an example for the following tutorial:
 
