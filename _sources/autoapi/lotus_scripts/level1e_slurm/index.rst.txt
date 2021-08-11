@@ -1,0 +1,290 @@
+:mod:`lotus_scripts.level1e_slurm`
+==================================
+
+.. py:module:: lotus_scripts.level1e_slurm
+
+.. autoapi-nested-parse::
+
+   Created on Wed Jul 22 09:09:41 2020
+
+   @author: iregou
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   lotus_scripts.level1e_slurm.check_file_exit
+   lotus_scripts.level1e_slurm.check_dir_exit
+   lotus_scripts.level1e_slurm.launch_process
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   lotus_scripts.level1e_slurm.LEVEL
+   lotus_scripts.level1e_slurm.LEVEL_SOURCE
+   lotus_scripts.level1e_slurm.SOURCE_PATTERN
+   lotus_scripts.level1e_slurm.PYSCRIPT
+   lotus_scripts.level1e_slurm.CONFIG_FILE
+   lotus_scripts.level1e_slurm.PERIODS_FILE
+   lotus_scripts.level1e_slurm.PYCLEAN
+   lotus_scripts.level1e_slurm.BSH_REMOVE_FILES
+   lotus_scripts.level1e_slurm.QUEUE
+   lotus_scripts.level1e_slurm.release
+   lotus_scripts.level1e_slurm.update
+   lotus_scripts.level1e_slurm.dataset
+   lotus_scripts.level1e_slurm.config_path
+   lotus_scripts.level1e_slurm.process_list_file
+   lotus_scripts.level1e_slurm.parser
+   lotus_scripts.level1e_slurm.args
+   lotus_scripts.level1e_slurm.failed_only
+   lotus_scripts.level1e_slurm.remove_source
+   lotus_scripts.level1e_slurm.lotus_dir
+   lotus_scripts.level1e_slurm.scripts_dir
+   lotus_scripts.level1e_slurm.data_dir
+   lotus_scripts.level1e_slurm.scratch_dir
+   lotus_scripts.level1e_slurm.release_tag
+   lotus_scripts.level1e_slurm.script_config_file
+   lotus_scripts.level1e_slurm.release_periods_file
+   lotus_scripts.level1e_slurm.level_dir
+   lotus_scripts.level1e_slurm.level_source_dir
+   lotus_scripts.level1e_slurm.log_dir
+   lotus_scripts.level1e_slurm.script_config
+   lotus_scripts.level1e_slurm.process_list
+   lotus_scripts.level1e_slurm.release_periods
+   lotus_scripts.level1e_slurm.status
+   lotus_scripts.level1e_slurm.py_path
+   lotus_scripts.level1e_slurm.py_clean_path
+   lotus_scripts.level1e_slurm.bsh_remove_path
+   lotus_scripts.level1e_slurm.pycommand
+   lotus_scripts.level1e_slurm.mem
+   lotus_scripts.level1e_slurm.t_hh
+   lotus_scripts.level1e_slurm.t_mm
+   lotus_scripts.level1e_slurm.t
+   lotus_scripts.level1e_slurm.log_diri
+
+
+.. data:: LEVEL
+   :annotation: = level1e
+
+   
+
+.. data:: LEVEL_SOURCE
+   :annotation: = level1d
+
+   
+
+.. data:: SOURCE_PATTERN
+   :annotation: = header-????-??-*.psv
+
+   
+
+.. data:: PYSCRIPT
+   :annotation: = level1e.py
+
+   
+
+.. data:: CONFIG_FILE
+   :annotation: = level1e.json
+
+   
+
+.. data:: PERIODS_FILE
+   :annotation: = source_deck_periods.json
+
+   
+
+.. data:: PYCLEAN
+   :annotation: = array_output_hdlr.py
+
+   
+
+.. data:: BSH_REMOVE_FILES
+   :annotation: = remove_level_data.sh
+
+   
+
+.. data:: QUEUE
+   :annotation: = short-serial
+
+   
+
+.. function:: check_file_exit(files)
+
+
+.. function:: check_dir_exit(dirs)
+
+
+.. function:: launch_process(process)
+
+
+.. data:: release
+   
+
+   
+
+.. data:: update
+   
+
+   
+
+.. data:: dataset
+   
+
+   
+
+.. data:: config_path
+   
+
+   
+
+.. data:: process_list_file
+   
+
+   
+
+.. data:: parser
+   
+
+   
+
+.. data:: args
+   
+
+   
+
+.. data:: failed_only
+   
+
+   
+
+.. data:: remove_source
+   
+
+   
+
+.. data:: lotus_dir
+   
+
+   
+
+.. data:: scripts_dir
+   
+
+   
+
+.. data:: data_dir
+   
+
+   
+
+.. data:: scratch_dir
+   
+
+   
+
+.. data:: release_tag
+   
+
+   
+
+.. data:: script_config_file
+   
+
+   
+
+.. data:: release_periods_file
+   
+
+   
+
+.. data:: level_dir
+   
+
+   
+
+.. data:: level_source_dir
+   
+
+   
+
+.. data:: log_dir
+   
+
+   
+
+.. data:: script_config
+   
+
+   
+
+.. data:: process_list
+   
+
+   
+
+.. data:: release_periods
+   
+
+   
+
+.. data:: status
+   
+
+   
+
+.. data:: py_path
+   
+
+   
+
+.. data:: py_clean_path
+   
+
+   
+
+.. data:: bsh_remove_path
+   
+
+   
+
+.. data:: pycommand
+   
+
+   
+
+.. data:: mem
+   
+
+   
+
+.. data:: t_hh
+   
+
+   
+
+.. data:: t_mm
+   
+
+   
+
+.. data:: t
+   
+
+   
+
+.. data:: log_diri
+   
+
+   
+

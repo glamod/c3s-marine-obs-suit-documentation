@@ -1,0 +1,182 @@
+:mod:`lotus_scripts.level2_slurm`
+=================================
+
+.. py:module:: lotus_scripts.level2_slurm
+
+.. autoapi-nested-parse::
+
+   Created on Wed Jul 22 09:09:41 2020
+
+   @author: iregou
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   lotus_scripts.level2_slurm.check_file_exit
+   lotus_scripts.level2_slurm.check_dir_exit
+   lotus_scripts.level2_slurm.launch_process
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   lotus_scripts.level2_slurm.LEVEL
+   lotus_scripts.level2_slurm.PYSCRIPT
+   lotus_scripts.level2_slurm.CONFIG_FILE
+   lotus_scripts.level2_slurm.QUEUE
+   lotus_scripts.level2_slurm.JOB_TIME
+   lotus_scripts.level2_slurm.JOB_MEMO
+   lotus_scripts.level2_slurm.release
+   lotus_scripts.level2_slurm.update
+   lotus_scripts.level2_slurm.dataset
+   lotus_scripts.level2_slurm.config_path
+   lotus_scripts.level2_slurm.process_list_file
+   lotus_scripts.level2_slurm.lotus_dir
+   lotus_scripts.level2_slurm.scripts_dir
+   lotus_scripts.level2_slurm.data_dir
+   lotus_scripts.level2_slurm.scratch_dir
+   lotus_scripts.level2_slurm.release_tag
+   lotus_scripts.level2_slurm.script_config_file
+   lotus_scripts.level2_slurm.level_dir
+   lotus_scripts.level2_slurm.log_dir
+   lotus_scripts.level2_slurm.process_list
+   lotus_scripts.level2_slurm.py_path
+   lotus_scripts.level2_slurm.pycommand
+   lotus_scripts.level2_slurm.log_diri
+
+
+.. data:: LEVEL
+   :annotation: = level2
+
+   
+
+.. data:: PYSCRIPT
+   :annotation: = level2.py
+
+   
+
+.. data:: CONFIG_FILE
+   :annotation: = level2.json
+
+   
+
+.. data:: QUEUE
+   :annotation: = short-serial
+
+   
+
+.. data:: JOB_TIME
+   :annotation: = 10:00:00
+
+   
+
+.. data:: JOB_MEMO
+   :annotation: = 500
+
+   
+
+.. function:: check_file_exit(files)
+
+
+.. function:: check_dir_exit(dirs)
+
+
+.. function:: launch_process(process)
+
+
+.. data:: release
+   
+
+   
+
+.. data:: update
+   
+
+   
+
+.. data:: dataset
+   
+
+   
+
+.. data:: config_path
+   
+
+   
+
+.. data:: process_list_file
+   
+
+   
+
+.. data:: lotus_dir
+   
+
+   
+
+.. data:: scripts_dir
+   
+
+   
+
+.. data:: data_dir
+   
+
+   
+
+.. data:: scratch_dir
+   
+
+   
+
+.. data:: release_tag
+   
+
+   
+
+.. data:: script_config_file
+   
+
+   
+
+.. data:: level_dir
+   
+
+   
+
+.. data:: log_dir
+   
+
+   
+
+.. data:: process_list
+   
+
+   
+
+.. data:: py_path
+   
+
+   
+
+.. data:: pycommand
+   
+
+   
+
+.. data:: log_diri
+   
+
+   
+

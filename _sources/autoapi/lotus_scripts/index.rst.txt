@@ -1,0 +1,22 @@
+:mod:`lotus_scripts`
+====================
+
+.. py:module:: lotus_scripts
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   array_output_hdlr/index.rst
+   level1a_slurm/index.rst
+   level1b_slurm/index.rst
+   level1c_slurm/index.rst
+   level1d_slurm/index.rst
+   level1e_slurm/index.rst
+   level2_slurm/index.rst
+   lotus_paths/index.rst
+
+

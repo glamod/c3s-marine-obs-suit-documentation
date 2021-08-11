@@ -1,0 +1,400 @@
+:mod:`level1c`
+==============
+
+.. py:module:: level1c
+
+.. autoapi-nested-parse::
+
+   Created on Mon Jun 17 14:24:10 2019
+
+   Script to generate the C3S CDM Marine level1c data.
+
+   The output files of this script will contain reports from level1b that have been further validated following corrections
+   to the ``date/time``, location and station ID. Those failing validation are rejected and archived for future analysis.
+   Additionally, datetime corrections applied previously in level1b, can potentially result in reports being relocated to a different month.
+   These reports are moved to their correct monthly file in this level. Validates ``header.report_timestamp`` and ``header.primary_station_id``
+   and apply this outcome to rest of tables, rejecting reports not valid in any of these two fields.
+
+   Workflow:
+    - Read header data
+    - Initialized mask for id and datetime to True
+    - Validate header.report_timestamp (see Notes below)
+    - Validate header.primary_station_id (see Notes below)
+
+   Output all reports not validating timestamp to:
+     - ``/level1c/invalid/sid-dck/header-fileID-report_timsetamp.psv``
+
+   Output all reports not validating primary_station_id to:
+     - ``/level1c/invalid/sid-dck/header-fileID-primary_station_id.psv``
+
+     - Merge report_timestamp and primary_station_id in a single validation rule (fail if any fails)
+     - Drop corresponding records from all tables
+     - Log to json dropped per table per validated field and final number of records in the resulting tables
+     - Log to json unique primary_station_id counts
+     - Log to json primary_station_id validation rules numbers:
+       1. callsings
+       2. rest
+       3. restored because output from Liz's process
+
+   The processing unit is the source-deck monthly set of CDM tables.
+
+   On reading the table files from the source level (1b), it read:
+    1. master table file (``table-yyyy-mm-release-update.psv``)
+    2. datetime leak files (``table-yyyy-mm-release-update-YYYY-MM.psv``), where ``YYYY-MM`` indicates the initial ``yyyy-mm`` stamp of the reports contained in that leak file upon arrival to level1b.
+
+   Outputs data to:
+    - ``/<data_path>/<release>/<dataset>/level1c/<sid-dck>/table[i]-fileID.psv``
+
+   Outputs invalid data to:
+    - ``/<data_path>/<release>/<dataset>/level1c/invalid/<sid-dck>/header-fileID-<element>.psv``
+
+   Outputs quicklook info to:
+    - ``/<data_path>/<release>/<dataset>/level1c/quicklooks/<sid-dck>/fileID.json`` where fileID is yyyy-mm-release-update
+
+   Before processing starts:
+    - checks the existence of all io subdirectories in level1b|c -> exits if fails
+    - checks the existence of the source table to be converted (header only) -> exits if fails
+    - removes all level1c products on input file resulting from previous runs
+
+   Inargs:
+   -------
+   - data_path: marine data path in file system
+   - release: release tag
+   - update: udpate tag
+   - dataset: dataset tag
+   - config_path: configuration file path
+   - sid_dck: source-deck data partition (optional, from config_file otherwise)
+   - year: data file year (yyyy) (optional, from config_file otherwise)
+   - month: data file month (mm) (optional, from config_file otherwise)
+
+   Notes on validations:
+   ---------------------
+
+   * HEADER.REPORT_TIMESTAMP VALIDATION:
+       This validation is just trying to convert to a datetime object the content of the field.
+       Where empty, this conversion (and validation) will fail.
+       And will be empty if during the mapping in level1a the report_timestamp could not be built from the source data,
+       or if there was any kind of messing in level1b datetime corrections...
+
+   * HEADER.PRIMARY_STATION_ID VALIDATION:
+       Due to various reasons, the validation is done in 3 stages and using different methods:
+       1. Callsign IDs: use set of validation patterns harcoded here
+       2. Rest of IDs: use set of valid patterns per dck in NOC_ANC_INFO json files
+       3. All: set all that Liz's ID linkage modified to True. We are parsing the history field for a "Corrected primary_station_id" text...
+       maybe it should read this from the level1b config file? But then we need to give this file as an argument...
+
+   Dev notes:
+   ----------
+
+   1. This script is fully tailored to the idea of how validation and cleaning should be at the time of developing it. It is not parameterized and is hardly flexible.
+   2. Why don't we just pick the NaN dates as invalid, instead of looking where conversion fails?
+
+   @author: iregon
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   level1c.script_setup
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   level1c.validate_id
+   level1c.read_table_files
+   level1c.process_table
+   level1c.clean_level
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   level1c.date_handler
+   level1c.args
+   level1c.params
+   level1c.FFS
+   level1c.delimiter
+   level1c.level
+   level1c.level_prev
+   level1c.header
+   level1c.wmode
+   level1c.release_path
+   level1c.release_id
+   level1c.fileID
+   level1c.fileID_date
+   level1c.prev_level_path
+   level1c.level_path
+   level1c.level_ql_path
+   level1c.level_invalid_path
+   level1c.id_validation_path
+   level1c.data_paths
+   level1c.prev_level_filename
+   level1c.validation_dict
+   level1c.dataset_id
+   level1c.validated
+   level1c.history
+   level1c.history_tstmp
+   level1c.cdm_tables
+   level1c.table
+   level1c.table_df
+   level1c.mask_df
+   level1c.field
+   level1c.field
+   level1c.callsigns
+   level1c.nocallsigns
+   level1c.relist
+   level1c.callre
+   level1c.linked_history
+   level1c.linked_IDs
+   level1c.linked_IDs_no
+   level1c.cdm_columns
+   level1c.idata_filename
+   level1c.obs_tables
+   level1c.table_pattern
+   level1c.L1b_io_filename
+
+
+.. class:: script_setup(inargs)
+
+
+
+.. data:: date_handler
+   
+
+   
+
+.. function:: validate_id(idSeries)
+
+
+.. function:: read_table_files(table)
+
+
+.. function:: process_table(table_df, table_name)
+
+
+.. function:: clean_level(file_id)
+
+
+.. data:: args
+   
+
+   
+
+.. data:: params
+   
+
+   
+
+.. data:: FFS
+   :annotation: = -
+
+   
+
+.. data:: delimiter
+   :annotation: = |
+
+   
+
+.. data:: level
+   :annotation: = level1c
+
+   
+
+.. data:: level_prev
+   :annotation: = level1b
+
+   
+
+.. data:: header
+   :annotation: = True
+
+   
+
+.. data:: wmode
+   :annotation: = w
+
+   
+
+.. data:: release_path
+   
+
+   
+
+.. data:: release_id
+   
+
+   
+
+.. data:: fileID
+   
+
+   
+
+.. data:: fileID_date
+   
+
+   
+
+.. data:: prev_level_path
+   
+
+   
+
+.. data:: level_path
+   
+
+   
+
+.. data:: level_ql_path
+   
+
+   
+
+.. data:: level_invalid_path
+   
+
+   
+
+.. data:: id_validation_path
+   
+
+   
+
+.. data:: data_paths
+   
+
+   
+
+.. data:: prev_level_filename
+   
+
+   
+
+.. data:: validation_dict
+   
+
+   
+
+.. data:: dataset_id
+   :annotation: = icoads_r3000
+
+   
+
+.. data:: validated
+   :annotation: = ['report_timestamp', 'primary_station_id']
+
+   
+
+.. data:: history
+   :annotation: = Performed report_timestamp (date_time) and primary_station_id validation
+
+   
+
+.. data:: history_tstmp
+   
+
+   
+
+.. data:: cdm_tables
+   
+
+   
+
+.. data:: table
+   :annotation: = header
+
+   
+
+.. data:: table_df
+   
+
+   
+
+.. data:: mask_df
+   
+
+   
+
+.. data:: field
+   :annotation: = report_timestamp
+
+   
+
+.. data:: field
+   :annotation: = primary_station_id
+
+   
+
+.. data:: callsigns
+   
+
+   
+
+.. data:: nocallsigns
+   
+
+   
+
+.. data:: relist
+   :annotation: = ['^([0-9]{1}[A-Z]{1}|^[A-Z]{1}[0-9]{1}|^[A-Z]{2})[A-Z0-9]{1,}$', '^[0-9]{5}$']
+
+   
+
+.. data:: callre
+   
+
+   
+
+.. data:: linked_history
+   :annotation: = Corrected primary_station_id
+
+   
+
+.. data:: linked_IDs
+   
+
+   
+
+.. data:: linked_IDs_no
+   
+
+   
+
+.. data:: cdm_columns
+   
+
+   
+
+.. data:: idata_filename
+   
+
+   
+
+.. data:: obs_tables
+   
+
+   
+
+.. data:: table_pattern
+   
+
+   
+
+.. data:: L1b_io_filename
+   
+
+   
+

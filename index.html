@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>C3S marine-obs-suite documentation &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Observation suite set up and directories overview" href="obs-suite-set-up.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding-new-data-models.html">Adding new data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build-new-schema.html">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>C3S marine-obs-suite documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="c3s-marine-obs-suite-documentation">
+<h1>C3S marine-obs-suite documentation<a class="headerlink" href="#c3s-marine-obs-suite-documentation" title="Permalink to this headline">¶</a></h1>
+<p>The Marine Observations Suite (or just obs-suite) is part of the code implemented to produce the data deliveries for the C3S Marine In Situ Component.</p>
+<p>Instructions to run the full set of suites, including this one, are available in this <a class="reference external" href="https://github.com/glamod/glamod-marine-processing/blob/master/obs-suite/docs/build/latex/marineobservationssuite.pdf">technical guide</a>  and the scientific background of the processing can be found in the latest version of the <a class="reference external" href="https://github.com/glamod/marine_user_guide/blob/master/C3S_Marine_PUG/C3S_D311a_Lot2.3.4.4-2021_Final_Version_Marine_User_Guide.pdf">Marine data user guide</a>. However, the purpose of this documentation is to facilitate the understanding of the technical manual by covering the following topics:</p>
+<ul class="simple">
+<li><p>The update of old code paths and repositories found in the marine observation suit manual.</p></li>
+<li><p>Explain how to deploy and run the obs-suite code in the <a class="reference external" href="https://help.jasmin.ac.uk/category/158-getting-started">JASMIN cluster services</a></p></li>
+<li><p>Explain how to create and integrate a new <a class="reference external" href="https://glamod.github.io/mdf_reader_documentation/">mdf_reader schema</a> and <a class="reference external" href="https://glamod.github.io/cdm_mapper_documentation/">common data model mapper</a> to the <strong>obs-suite</strong> code for a specific data collection from <a class="reference external" href="https://icoads.noaa.gov/">ICOADS</a> (e.g. a new <strong>SID-DCK</strong>).</p></li>
+<li><p>Explain how to run the first level of processing: <a class="reference internal" href="autoapi/level1a/index.html#module-level1a" title="level1a"><code class="xref py py-func docutils literal notranslate"><span class="pre">level1a()</span></code></a> after adding the new schema and cdm mapper.</p></li>
+<li><p>How to use the <code class="docutils literal notranslate"><span class="pre">mdf_reader</span></code> tool and <code class="docutils literal notranslate"><span class="pre">cdm_mapper</span></code> tool to obtain missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> in the metadata.</p></li>
+<li><p>How to solve conflicts after adding schemas and mappers and dealing with <strong>invalid/excluded</strong> data.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding-new-data-models.html">Adding new data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build-new-schema.html">1. Build and add a mdf_reader schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">Version</dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Citation</dt>
+<dd class="field-even"><p></p></dd>
+<dt class="field-odd">License</dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Authors</dt>
+<dd class="field-even"><p>David Berry, Irene Perez Gonzalez and Beatriz Recinos</p>
+</dd>
+</dl>
+<a class="reference external image-reference" href="https://climate.copernicus.eu/"><img alt="_images/logo_c3s-392x154.png" src="_images/logo_c3s-392x154.png" style="width: 25%;" /></a>
+<a class="reference external image-reference" href="https://noc.ac.uk/"><img alt="_images/LOGO_2020_-_NOC_1_COLOUR.png" src="_images/LOGO_2020_-_NOC_1_COLOUR.png" style="width: 25%;" /></a>
+<a class="reference external image-reference" href="https://icoads.noaa.gov/"><img alt="_images/icoadsLogo.png" src="_images/icoadsLogo.png" style="width: 20%;" /></a>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="obs-suite-set-up.html" class="btn btn-neutral float-right" title="Observation suite set up and directories overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

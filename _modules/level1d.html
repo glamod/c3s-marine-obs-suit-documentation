@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>level1d &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../adding-new-data-models.html">Adding new data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../build-new-schema.html">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1c/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1c/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1c/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>level1d</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for level1d</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Mon Jun 17 14:24:10 2019</span>
+
+<span class="sd">Script to generate the C3S CDM Marine level1d data and add external MD (pub47):</span>
+
+<span class="sd">- Read header table and MD and see if there is anything to merge</span>
+<span class="sd">- Map MD to CDM with module cdm</span>
+<span class="sd">- Merge mapped MD with CDM tables by primary_station_id and save to file with function ``process_table()`` (if nothing to merge, just save the file to level1d...)</span>
+<span class="sd">- log, per table, total number of records and those with MD added/updated</span>
+
+<span class="sd">The processing unit is the source-deck monthly set of CDM tables.</span>
+
+<span class="sd">Outputs data to:</span>
+<span class="sd">    - ``/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1d/&lt;sid-dck&gt;/table[i]-fileID.psv``</span>
+
+<span class="sd">Outputs quicklook info to:</span>
+<span class="sd">    - ``/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1d/quicklooks/&lt;sid-dck&gt;/fileID.json``</span>
+
+<span class="sd">where fileID is ``yyyy-mm-release_tag-update_tag``</span>
+
+<span class="sd">Before processing starts:</span>
+<span class="sd">    - checks the existence of all io subdirectories in level1c|d -&gt; exits if fails</span>
+<span class="sd">    - checks the existence of the source table to be converted (header only) -&gt; exits if fails</span>
+<span class="sd">    - checks the existence of the monthly MD file -&gt; exits if fails</span>
+<span class="sd">    - removes all level1d products on input file resulting from previous runs</span>
+
+<span class="sd">Inargs:</span>
+<span class="sd">-------</span>
+<span class="sd">- data_path: marine data path in file system</span>
+<span class="sd">- release: release tag</span>
+<span class="sd">- update: udpate tag</span>
+<span class="sd">- dataset: dataset tag</span>
+<span class="sd">- config_path: configuration file path</span>
+<span class="sd">- sid_dck: source-deck data partition (optional, from config_file otherwise)</span>
+<span class="sd">- year: data file year (yyyy) (optional, from config_file otherwise)</span>
+<span class="sd">- month: data file month (mm) (optional, from config_file otherwise)</span>
+
+<span class="sd">On input data:</span>
+<span class="sd">--------------</span>
+<span class="sd">If the pre-processing of the MD changes, then how we map the MD in ``map_to_cdm()`` changes also.</span>
+<span class="sd">The mappings there as for MD pre-processing in Autumn2019:</span>
+<span class="sd">    - pub47 monthly files assumed to have 1 hdr line (first) with column names</span>
+<span class="sd">    - pub47 monthly files with FS=&#39;;&#39;</span>
+<span class="sd">    - pub47 field names assumed:</span>
+
+<span class="sd">    ``call;record;name;freq;vsslM;vssl;automation;rcnty;``</span>
+<span class="sd">    ``valid_from;valid_to;uid;thmH1;platH;brmH1;anmH;anHL1;``</span>
+<span class="sd">    ``wwH;sstD1;th1;hy1;st1;bm1;an1``</span>
+
+<span class="sd">@author: iregon</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">simplejson</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">cdm</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">imp</span> <span class="kn">import</span> <span class="n">reload</span>
+<span class="n">reload</span><span class="p">(</span><span class="n">logging</span><span class="p">)</span>  <span class="c1"># This is to override potential previous config of logging</span>
+
+
+<span class="c1"># FUNCTIONS -------------------------------------------------------------------</span>
+<div class="viewcode-block" id="script_setup"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.script_setup">[docs]</a><span class="k">class</span> <span class="nc">script_setup</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">release</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configfile</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileObj</span><span class="p">:</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fileObj</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Opening configuration file :</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configfile</span><span class="p">),</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span> 
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>    
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sid_dck&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;yyyy&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">)</span> 
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Parsing configuration from file :</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configfile</span><span class="p">),</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">dck</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># However md_subdir is then nested in monthly....and inside monthly files</span>
+        <span class="c1"># Other MD sources would stick to this? Force it otherwise?</span>
+        <span class="n">process_options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;md_model&#39;</span><span class="p">,</span><span class="s1">&#39;md_subdir&#39;</span><span class="p">,</span> <span class="s1">&#39;history_explain&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;md_first_yr_avail&#39;</span><span class="p">,</span> <span class="s1">&#39;md_last_yr_avail&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;md_not_avail&#39;</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>            
+            <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">process_options</span><span class="p">:</span> 
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">,{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Parsing configuration from file :</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configfile</span><span class="p">),</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span></div>
+            
+<span class="c1"># This is for json to handle dates</span>
+<div class="viewcode-block" id="date_handler"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.date_handler">[docs]</a><span class="n">date_handler</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="p">(</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">))</span>
+    <span class="k">else</span> <span class="kc">None</span></div>
+<span class="p">)</span>
+
+<div class="viewcode-block" id="map_to_cdm"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.map_to_cdm">[docs]</a><span class="k">def</span> <span class="nf">map_to_cdm</span><span class="p">(</span><span class="n">md_model</span><span class="p">,</span><span class="n">meta_df</span><span class="p">):</span>
+    <span class="c1"># Atts is a minimum info on vars the cdm mocule requires</span>
+    <span class="n">atts</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:{</span><span class="s1">&#39;column_type&#39;</span><span class="p">:</span><span class="s1">&#39;object&#39;</span><span class="p">}</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">meta_df</span><span class="o">.</span><span class="n">columns</span><span class="p">}</span>
+    <span class="n">meta_cdm_dict</span> <span class="o">=</span> <span class="n">cdm</span><span class="o">.</span><span class="n">map_model</span><span class="p">(</span><span class="n">md_model</span><span class="p">,</span> <span class="n">meta_df</span><span class="p">,</span> <span class="n">atts</span><span class="p">)</span>
+    <span class="n">meta_cdm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="s1">&#39;header&#39;</span>
+    <span class="n">meta_cdm_columns</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">table</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">meta_cdm_dict</span><span class="p">[</span><span class="n">table</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span> <span class="p">]</span>
+    <span class="n">meta_cdm</span><span class="p">[</span><span class="n">meta_cdm_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta_cdm_dict</span><span class="p">[</span><span class="n">table</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">obs_tables</span><span class="p">:</span>
+        <span class="n">meta_cdm_columns</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">table</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">meta_cdm_dict</span><span class="p">[</span><span class="n">table</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span> <span class="p">]</span>
+        <span class="n">meta_cdm</span><span class="p">[</span><span class="n">meta_cdm_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta_cdm_dict</span><span class="p">[</span><span class="n">table</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">meta_cdm</span></div>
+
+
+<div class="viewcode-block" id="process_table"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.process_table">[docs]</a><span class="k">def</span> <span class="nf">process_table</span><span class="p">(</span><span class="n">table_df</span><span class="p">,</span><span class="n">table_name</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Processing table </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">table_df</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># Assume &#39;header&#39; and in a DF in table_df otherwise</span>
+        <span class="c1"># Open table and reindex</span>
+        <span class="n">table_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">table_df</span> <span class="o">=</span> <span class="n">cdm</span><span class="o">.</span><span class="n">read_tables</span><span class="p">(</span><span class="n">prev_level_path</span><span class="p">,</span><span class="n">fileID</span><span class="p">,</span><span class="n">cdm_subset</span><span class="o">=</span><span class="p">[</span><span class="n">table_name</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">table_df</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Empty or non existing table </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">))</span>
+            <span class="k">return</span>
+        <span class="n">table_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;report_id&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># by this point, header_df has its index set to report_id, hopefully ;)</span>
+        <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">header_df</span><span class="p">[</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">table_df</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="n">meta_dict</span><span class="p">[</span><span class="n">table_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;total&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">table_df</span><span class="p">),</span><span class="s1">&#39;updated&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">merge</span><span class="p">:</span>
+        <span class="n">meta_dict</span><span class="p">[</span><span class="n">table_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;total&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">table_df</span><span class="p">),</span><span class="s1">&#39;updated&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+        <span class="n">table_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">meta_table</span> <span class="o">=</span> <span class="n">meta_cdm</span><span class="p">[[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">meta_cdm</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">table_name</span> <span class="p">]]</span>
+        <span class="n">meta_table</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">meta_table</span> <span class="p">]</span>
+        <span class="k">if</span> <span class="n">table_name</span> <span class="o">!=</span> <span class="s1">&#39;header&#39;</span><span class="p">:</span>
+            <span class="n">meta_table</span><span class="p">[</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta_cdm</span><span class="p">[(</span><span class="s1">&#39;header&#39;</span><span class="p">,</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">)]</span>
+        <span class="n">meta_table</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_df</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">meta_table</span><span class="p">)</span>
+
+        <span class="n">updated_locs</span> <span class="o">=</span>  <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">table_df</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">meta_table</span><span class="o">.</span><span class="n">index</span> <span class="p">]</span>
+        <span class="n">meta_dict</span><span class="p">[</span><span class="n">table_name</span><span class="p">][</span><span class="s1">&#39;updated&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">updated_locs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">table_name</span> <span class="o">==</span> <span class="s1">&#39;header&#39;</span><span class="p">:</span>
+            <span class="n">missing_ids</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">table_df</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">meta_table</span><span class="o">.</span><span class="n">index</span> <span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_ids</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;non &#39;</span> <span class="o">+</span> <span class="n">params</span><span class="o">.</span><span class="n">md_model</span> <span class="o">+</span> <span class="s1">&#39; ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">Counter</span><span class="p">(</span><span class="n">missing_ids</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="n">history_add</span> <span class="o">=</span> <span class="s1">&#39;;</span><span class="si">{0}</span><span class="s1">. </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">history_tstmp</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">history_explain</span><span class="p">)</span>
+            <span class="n">locs</span> <span class="o">=</span> <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">updated_locs</span><span class="p">)</span>
+            <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;history&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">locs</span><span class="p">]</span> <span class="o">=</span> <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;history&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">locs</span><span class="p">]</span> <span class="o">+</span> <span class="n">history_add</span>
+
+    <span class="n">cdm_columns</span> <span class="o">=</span> <span class="n">cdm_tables</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="n">odata_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_path</span><span class="p">,</span><span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">table_name</span><span class="p">,</span><span class="n">fileID</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;.psv&#39;</span><span class="p">)</span>
+    <span class="n">table_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">odata_filename</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="n">delimiter</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cdm_columns</span>
+                 <span class="p">,</span><span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">wmode</span><span class="p">,</span> <span class="n">na_rep</span> <span class="o">=</span> <span class="s1">&#39;null&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span></div>
+
+<div class="viewcode-block" id="clean_level"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.clean_level">[docs]</a><span class="k">def</span> <span class="nf">clean_level</span><span class="p">(</span><span class="n">file_id</span><span class="p">):</span>
+    <span class="n">level_prods</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_path</span><span class="p">,</span><span class="s1">&#39;*-&#39;</span> <span class="o">+</span> <span class="n">file_id</span> <span class="o">+</span> <span class="s1">&#39;.psv&#39;</span><span class="p">))</span>
+    <span class="n">level_logs</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_log_path</span><span class="p">,</span> <span class="n">file_id</span> <span class="o">+</span> <span class="s1">&#39;.*&#39;</span><span class="p">))</span>
+    <span class="n">level_ql</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_ql_path</span><span class="p">,</span> <span class="n">file_id</span> <span class="o">+</span> <span class="s1">&#39;.*&#39;</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">level_prods</span> <span class="o">+</span> <span class="n">level_ql</span> <span class="o">+</span> <span class="n">level_logs</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Removing previous file: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+
+<span class="c1"># END FUNCTIONS ---------------------------------------------------------------</span>
+
+
+<span class="c1"># MAIN ------------------------------------------------------------------------</span>
+
+<span class="c1"># Process input and set up some things and make sure we can do something-------</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="se">\t</span><span class="s1">[</span><span class="si">%(asctime)s</span><span class="s1">](</span><span class="si">%(filename)s</span><span class="s1">)</span><span class="se">\t</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span><span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reading command line arguments&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="args"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.args">[docs]</a>    <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span></div>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Need arguments to run!&#39;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="params"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.params">[docs]</a><span class="n">params</span> <span class="o">=</span> <span class="n">script_setup</span><span class="p">(</span><span class="n">args</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FFS"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.FFS">[docs]</a><span class="n">FFS</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span></div>
+<div class="viewcode-block" id="delimiter"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.delimiter">[docs]</a><span class="n">delimiter</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span></div>
+<div class="viewcode-block" id="md_delimiter"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.md_delimiter">[docs]</a><span class="n">md_delimiter</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span></div>
+<div class="viewcode-block" id="level"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.level">[docs]</a><span class="n">level</span> <span class="o">=</span> <span class="s1">&#39;level1d&#39;</span></div>
+<div class="viewcode-block" id="level_prev"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.level_prev">[docs]</a><span class="n">level_prev</span> <span class="o">=</span> <span class="s1">&#39;level1c&#39;</span></div>
+<div class="viewcode-block" id="header"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.header">[docs]</a><span class="n">header</span> <span class="o">=</span> <span class="kc">True</span></div>
+<div class="viewcode-block" id="wmode"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.wmode">[docs]</a><span class="n">wmode</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span></div>
+
+<div class="viewcode-block" id="release_path"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.release_path">[docs]</a><span class="n">release_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">release</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span></div>
+<div class="viewcode-block" id="release_id"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.release_id">[docs]</a><span class="n">release_id</span> <span class="o">=</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">params</span><span class="o">.</span><span class="n">release</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">update</span> <span class="p">])</span></div>
+<div class="viewcode-block" id="fileID"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.fileID">[docs]</a><span class="n">fileID</span> <span class="o">=</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">release_id</span> <span class="p">])</span></div>
+<div class="viewcode-block" id="fileID_date"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.fileID_date">[docs]</a><span class="n">fileID_date</span> <span class="o">=</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">month</span><span class="p">)])</span></div>
+
+<div class="viewcode-block" id="prev_level_path"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.prev_level_path">[docs]</a><span class="n">prev_level_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="n">level_prev</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+<div class="viewcode-block" id="level_path"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.level_path">[docs]</a><span class="n">level_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="n">level</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+<div class="viewcode-block" id="level_ql_path"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.level_ql_path">[docs]</a><span class="n">level_ql_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="n">level</span><span class="p">,</span><span class="s1">&#39;quicklooks&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+<div class="viewcode-block" id="level_log_path"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.level_log_path">[docs]</a><span class="n">level_log_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="n">level</span><span class="p">,</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="data_paths"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.data_paths">[docs]</a><span class="n">data_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">prev_level_path</span><span class="p">,</span> <span class="n">level_path</span><span class="p">,</span> <span class="n">level_ql_path</span><span class="p">,</span> <span class="n">level_log_path</span><span class="p">]</span></div>
+<span class="k">if</span> <span class="nb">any</span><span class="p">([</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_paths</span> <span class="p">]):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Could not find data paths: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_paths</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">x</span><span class="p">)])))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="prev_level_filename"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.prev_level_filename">[docs]</a><span class="n">prev_level_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prev_level_path</span><span class="p">,</span> <span class="s1">&#39;header-&#39;</span> <span class="o">+</span> <span class="n">fileID</span> <span class="o">+</span> <span class="s1">&#39;.psv&#39;</span><span class="p">)</span></div>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">prev_level_filename</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;L1c header file not found: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prev_level_filename</span><span class="p">))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="md_avail"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.md_avail">[docs]</a><span class="n">md_avail</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">params</span><span class="o">.</span><span class="n">md_not_avail</span> <span class="k">else</span> <span class="kc">False</span></div>
+
+<span class="k">if</span> <span class="n">md_avail</span><span class="p">:</span>
+<div class="viewcode-block" id="md_path"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.md_path">[docs]</a>    <span class="n">md_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">release</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">md_subdir</span><span class="p">,</span><span class="s1">&#39;monthly&#39;</span><span class="p">)</span></div>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Setting MD path to </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">md_path</span><span class="p">))</span>
+    <span class="n">metadata_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">md_path</span><span class="p">,</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">month</span><span class="p">,</span><span class="s1">&#39;01.csv&#39;</span><span class="p">]))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">metadata_filename</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">params</span><span class="o">.</span><span class="n">md_last_yr_avail</span> <span class="ow">or</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">params</span><span class="o">.</span><span class="n">md_first_yr_avail</span><span class="p">:</span>
+            <span class="n">md_avail</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Metadata source available only in period </span><span class="si">{0}</span><span class="s1">-</span><span class="si">{1}</span><span class="s1">&#39;</span>
+                            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">md_first_yr_avail</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">md_last_yr_avail</span><span class="p">)))</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;level1d data will be created with no merging&#39;</span><span class="p">)</span> 
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Metadata file not found: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">metadata_filename</span><span class="p">))</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Metadata not available for data source-deck </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">))</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;level1d data will be created with no merging&#39;</span><span class="p">)</span>
+        
+<span class="c1"># Clean previous L1a products and side files ----------------------------------</span>
+<span class="n">clean_level</span><span class="p">(</span><span class="n">fileID</span><span class="p">)</span>
+<div class="viewcode-block" id="meta_dict"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.meta_dict">[docs]</a><span class="n">meta_dict</span> <span class="o">=</span> <span class="p">{}</span></div>
+
+<span class="c1"># DO THE DATA PROCESSING ------------------------------------------------------</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="history_tstmp"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.history_tstmp">[docs]</a><span class="n">history_tstmp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span></div>
+<div class="viewcode-block" id="cdm_tables"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.cdm_tables">[docs]</a><span class="n">cdm_tables</span> <span class="o">=</span> <span class="n">cdm</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">tables_hdlr</span><span class="o">.</span><span class="n">load_tables</span><span class="p">()</span></div>
+<div class="viewcode-block" id="obs_tables"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.obs_tables">[docs]</a><span class="n">obs_tables</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cdm_tables</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;header&#39;</span> <span class="p">]</span></div>
+
+<span class="c1"># 1. SEE STATION ID&#39;s FROM BOTH DATA STREAMS AND SEE IF THERE&#39;S ANYTHING TO</span>
+<span class="c1"># MERGE AT ALL</span>
+<span class="c1"># Read the header table</span>
+<span class="n">table</span> <span class="o">=</span> <span class="s1">&#39;header&#39;</span>
+<span class="n">header_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<div class="viewcode-block" id="header_df"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.header_df">[docs]</a><span class="n">header_df</span> <span class="o">=</span> <span class="n">cdm</span><span class="o">.</span><span class="n">read_tables</span><span class="p">(</span><span class="n">prev_level_path</span><span class="p">,</span><span class="n">fileID</span><span class="p">,</span><span class="n">cdm_subset</span><span class="o">=</span><span class="p">[</span><span class="n">table</span><span class="p">],</span><span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;null&#39;</span><span class="p">)</span></div>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">header_df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Empty or non-existing header table&#39;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Read the metadona</span>
+<span class="k">if</span> <span class="n">md_avail</span><span class="p">:</span>
+    <span class="n">meta_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">meta_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">metadata_filename</span><span class="p">,</span><span class="n">delimiter</span> <span class="o">=</span> <span class="n">md_delimiter</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+                               <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;MSNG&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">meta_df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Empty or non-existing metadata file&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># See if there&#39;s anything to do</span>
+<span class="n">header_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">,</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="merge"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.merge">[docs]</a><span class="n">merge</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">md_avail</span> <span class="k">else</span> <span class="kc">False</span></div>
+<span class="k">if</span> <span class="n">md_avail</span><span class="p">:</span>
+<div class="viewcode-block" id="meta_df"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.meta_df">[docs]</a>    <span class="n">meta_df</span> <span class="o">=</span> <span class="n">meta_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">meta_df</span><span class="p">[</span><span class="s1">&#39;call&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">header_df</span><span class="p">[</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">])]</span></div>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">meta_df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;No metadata to merge in file&#39;</span><span class="p">)</span>
+        <span class="n">merge</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># 2. MAP PUB47 MD TO CDM FIELDS -----------------------------------------------</span>
+<span class="k">if</span> <span class="n">merge</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Mapping metadata to CDM&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="meta_cdm"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.meta_cdm">[docs]</a>    <span class="n">meta_cdm</span> <span class="o">=</span> <span class="n">map_to_cdm</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">md_model</span><span class="p">,</span><span class="n">meta_df</span><span class="p">)</span></div>
+
+<span class="c1"># 3. UPDATE CDM WITH PUB47 OR JUST COPY PREV LEVEL TO CURRENT -----------------</span>
+<span class="c1"># This is only valid for the header</span>
+<div class="viewcode-block" id="table"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.table">[docs]</a><span class="n">table</span> <span class="o">=</span>  <span class="s1">&#39;header&#39;</span></div>
+<span class="n">process_table</span><span class="p">(</span><span class="n">header_df</span><span class="p">,</span><span class="n">table</span><span class="p">)</span>
+
+<span class="n">header_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;report_id&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># for obs</span>
+<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">obs_tables</span><span class="p">:</span>
+    <span class="n">process_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span><span class="n">table</span><span class="p">)</span>
+
+<span class="c1"># 4. SAVE QUICKLOOK -----------------------------------------------------------</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Saving json quicklook&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="level_io_filename"><a class="viewcode-back" href="../autoapi/level1d/index.html#level1d.level_io_filename">[docs]</a><span class="n">level_io_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_ql_path</span><span class="p">,</span><span class="n">fileID</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">)</span></div>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">level_io_filename</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileObj</span><span class="p">:</span>
+    <span class="n">simplejson</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">month</span><span class="p">]):</span><span class="n">meta_dict</span><span class="p">},</span><span class="n">fileObj</span><span class="p">,</span>
+                     <span class="n">default</span> <span class="o">=</span> <span class="n">date_handler</span><span class="p">,</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">ignore_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

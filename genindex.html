@@ -1,0 +1,1874 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Index &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding-new-data-models.html">Adding new data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build-new-schema.html">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Index</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1e/index.html#level1e.add_report_quality">add_report_quality() (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.args">args (in module level1a)</a>
+
+      <ul>
+        <li><a href="autoapi/level1b/index.html#level1b.args">(in module level1b)</a>
+</li>
+        <li><a href="autoapi/level1c/index.html#level1c.args">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.args">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.args">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.args">(in module level2)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.args">(in module lotus_scripts.level1a_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.args">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.args">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.args">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.args">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.args">(in module noc_duplicates_merge)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.array_idx">array_idx (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.BSH_REMOVE_FILES">BSH_REMOVE_FILES (in module lotus_scripts.level1c_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.BSH_REMOVE_FILES">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.BSH_REMOVE_FILES">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.bsh_remove_path">bsh_remove_path (in module lotus_scripts.level1c_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.bsh_remove_path">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.bsh_remove_path">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.callre">callre (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.callsigns">callsigns (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.cdm_columns">cdm_columns (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.cdm_tables">cdm_tables (in module level1b)</a>
+
+      <ul>
+        <li><a href="autoapi/level1c/index.html#level1c.cdm_tables">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.cdm_tables">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.cdm_tables">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.cdm_tables">(in module level2)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.check_dir_exit">check_dir_exit() (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.check_dir_exit">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.check_dir_exit">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.check_dir_exit">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.check_dir_exit">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.check_dir_exit">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.check_file_exit">check_file_exit() (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.check_file_exit">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.check_file_exit">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.check_file_exit">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.check_file_exit">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.check_file_exit">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1a/index.html#level1a.chunksize">chunksize (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.clean_L1a">clean_L1a() (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.clean_L1b">clean_L1b() (in module level1b)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.clean_level">clean_level() (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.clean_level">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.clean_level">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.clean_level">(in module level2)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1a/index.html#level1a.col">col (in module level1a)</a>
+</li>
+      <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.columns">columns (in module noc_duplicates_merge)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.config">config (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.CONFIG_FILE">CONFIG_FILE (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.CONFIG_FILE">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.CONFIG_FILE">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.CONFIG_FILE">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.CONFIG_FILE">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.CONFIG_FILE">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.config_path">config_path (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.config_path">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.config_path">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.config_path">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.config_path">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.config_path">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1b/index.html#level1b.cor_ext">cor_ext (in module level1b)</a>
+</li>
+      <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.correction_df1">correction_df1 (in module noc_duplicates_merge)</a>
+</li>
+      <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.correction_df2">correction_df2 (in module noc_duplicates_merge)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.correction_dict">correction_dict (in module level1b)</a>
+</li>
+      <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.create_subdir">create_subdir() (in module make_release_source_tree)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1a/index.html#id1">data (in module level1a)</a>, <a href="autoapi/level1a/index.html#level1a.data">[1]</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.data_dir">data_dir (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.data_dir">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.data_dir">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.data_dir">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.data_dir">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.data_dir">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/lotus_paths/index.html#lotus_scripts.lotus_paths.data_directory">data_directory (in module lotus_scripts.lotus_paths)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.data_excluded">data_excluded (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.data_in">data_in (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.data_invalid">data_invalid (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.data_model">data_model (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.data_model_metmetpy">data_model_metmetpy (in module level1a)</a>
+</li>
+      <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.data_path">data_path (in module make_release_source_tree)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.data_paths">data_paths (in module level1a)</a>
+
+      <ul>
+        <li><a href="autoapi/level1b/index.html#level1b.data_paths">(in module level1b)</a>
+</li>
+        <li><a href="autoapi/level1c/index.html#level1c.data_paths">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.data_paths">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.data_paths">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.data_paths">(in module level2)</a>
+</li>
+        <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.data_paths">(in module noc_duplicates_merge)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1a/index.html#level1a.dataset">dataset (in module level1a)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.dataset">(in module lotus_scripts.level1a_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.dataset">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.dataset">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.dataset">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.dataset">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.dataset">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.dataset_id">dataset_id (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.dataset_metmetpy">dataset_metmetpy (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.date_handler">date_handler (in module level1a)</a>
+
+      <ul>
+        <li><a href="autoapi/level1b/index.html#level1b.date_handler">(in module level1b)</a>
+</li>
+        <li><a href="autoapi/level1c/index.html#level1c.date_handler">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.date_handler">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.date_handler">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.date_handler">(in module level2)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1b/index.html#level1b.datetime_col">datetime_col (in module level1b)</a>
+</li>
+      <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.deep_sublevels">deep_sublevels (in module make_release_source_tree)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.delimiter">delimiter (in module level1b)</a>
+
+      <ul>
+        <li><a href="autoapi/level1c/index.html#level1c.delimiter">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.delimiter">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.delimiter">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.delimiter">(in module noc_duplicates_merge)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.dtype">dtype (in module noc_duplicates_merge)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.dupNotEval">dupNotEval (in module level1b)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level2/index.html#level2.end_global">end_global (in module level2)</a>
+</li>
+      <li><a href="autoapi/level2/index.html#level2.exclude_param_global_list">exclude_param_global_list (in module level2)</a>
+</li>
+      <li><a href="autoapi/level2/index.html#level2.exclude_param_list">exclude_param_list (in module level2)</a>
+</li>
+      <li><a href="autoapi/level2/index.html#level2.exclude_param_sid_dck_list">exclude_param_sid_dck_list (in module level2)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level2/index.html#level2.exclude_sid_dck">exclude_sid_dck (in module level2)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.excluded_filename">excluded_filename (in module level1a)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.exit_status">exit_status (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.ext">ext (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.failed_only">failed_only (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.failed_only">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.failed_only">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.failed_only">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.failed_only">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1a/index.html#id0">FFS (in module level1a)</a>, <a href="autoapi/level1a/index.html#level1a.FFS">[1]</a>
+
+      <ul>
+        <li><a href="autoapi/level1c/index.html#level1c.FFS">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.FFS">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.FFS">(in module level2)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.FFS">(in module lotus_scripts.array_output_hdlr)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1c/index.html#id0">field (in module level1c)</a>, <a href="autoapi/level1c/index.html#level1c.field">[1]</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.file_date">file_date (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.fileID">fileID (in module level1b)</a>
+
+      <ul>
+        <li><a href="autoapi/level1c/index.html#level1c.fileID">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.fileID">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.fileID">(in module level1e)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1b/index.html#level1b.fileID_date">fileID_date (in module level1b)</a>
+
+      <ul>
+        <li><a href="autoapi/level1c/index.html#level1c.fileID_date">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.fileID_date">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.fileID_date">(in module level1e)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/noc_duplicates_merge/index.html#id1">filename (in module noc_duplicates_merge)</a>, <a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.filename">[1]</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.filename_field_sep">filename_field_sep (in module level1b)</a>
+
+      <ul>
+        <li><a href="autoapi/level1e/index.html#level1e.filename_field_sep">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.filename_field_sep">(in module noc_duplicates_merge)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level2/index.html#level2.files">files (in module level2)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#id1">flag (in module level1e)</a>, <a href="autoapi/level1e/index.html#level1e.flag">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1e/index.html#level1e.get_qc_flags">get_qc_flags() (in module level1e)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.header">header (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.header">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.header">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.header">(in module level2)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1d/index.html#id0">header_df (in module level1d)</a>, <a href="autoapi/level1d/index.html#level1d.header_df">[1]</a>
+
+      <ul>
+        <li><a href="autoapi/level1e/index.html#id0">(in module level1e)</a>, <a href="autoapi/level1e/index.html#level1e.header_df">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1e/index.html#level1e.header_filename">header_filename (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.history">history (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.history_tstmp">history_tstmp (in module level1b)</a>
+
+      <ul>
+        <li><a href="autoapi/level1c/index.html#level1c.history_tstmp">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.history_tstmp">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.history_tstmp">(in module level1e)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.id_validation_path">id_validation_path (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.idata_filename">idata_filename (in module level1c)</a>
+</li>
+      <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.in_files">in_files (in module noc_duplicates_merge)</a>
+</li>
+      <li><a href="autoapi/level2/index.html#level2.include_list">include_list (in module level2)</a>
+</li>
+      <li><a href="autoapi/level2/index.html#level2.include_param_list">include_param_list (in module level2)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level2/index.html#level2.init_global">init_global (in module level2)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.input_file">input_file (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.invalid_data_filename">invalid_data_filename (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.io_dict">io_dict (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.isChange">isChange (in module level1b)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.job_log">job_log (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.job_log_file">job_log_file (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.JOB_MEMO">JOB_MEMO (in module lotus_scripts.level2_slurm)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.JOB_TIME">JOB_TIME (in module lotus_scripts.level2_slurm)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1a/index.html#level1a.k">k (in module level1a)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1a/index.html#level1a.L0_filename">L0_filename (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.L0_path">L0_path (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.L1a_excluded_path">L1a_excluded_path (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.L1a_filename">L1a_filename (in module level1b)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.L1a_id">L1a_id (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.L1a_invalid_path">L1a_invalid_path (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.L1a_io_filename">L1a_io_filename (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.L1a_path">L1a_path (in module level1a)</a>
+
+      <ul>
+        <li><a href="autoapi/level1b/index.html#level1b.L1a_path">(in module level1b)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1a/index.html#level1a.L1a_ql_path">L1a_ql_path (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.L1b_io_filename">L1b_io_filename (in module level1b)</a>
+
+      <ul>
+        <li><a href="autoapi/level1c/index.html#level1c.L1b_io_filename">(in module level1c)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1b/index.html#level1b.L1b_main_corrections">L1b_main_corrections (in module level1b)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.L1b_path">L1b_path (in module level1b)</a>
+</li>
+      <li><a href="autoapi/level1b/index.html#level1b.L1b_ql_path">L1b_ql_path (in module level1b)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.launch_process">launch_process() (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.launch_process">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.launch_process">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.launch_process">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.launch_process">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.launch_process">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level2/index.html#level2.left_min_period">left_min_period (in module level2)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.level">level (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.level">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.level">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.level">(in module level2)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.LEVEL">LEVEL (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.LEVEL">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.LEVEL">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.LEVEL">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.LEVEL">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.LEVEL">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li>
+    level1a
+
+      <ul>
+        <li><a href="autoapi/level1a/index.html#module-level1a">module</a>
+</li>
+      </ul></li>
+      <li>
+    level1b
+
+      <ul>
+        <li><a href="autoapi/level1b/index.html#module-level1b">module</a>
+</li>
+      </ul></li>
+      <li>
+    level1c
+
+      <ul>
+        <li><a href="autoapi/level1c/index.html#module-level1c">module</a>
+</li>
+      </ul></li>
+      <li>
+    level1d
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#module-level1d">module</a>
+</li>
+      </ul></li>
+      <li>
+    level1e
+
+      <ul>
+        <li><a href="autoapi/level1e/index.html#module-level1e">module</a>
+</li>
+      </ul></li>
+      <li>
+    level2
+
+      <ul>
+        <li><a href="autoapi/level2/index.html#module-level2">module</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.level_dir">level_dir (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.level_dir">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.level_dir">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.level_dir">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.level_dir">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.level_dir">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level2/index.html#level2.level_excluded_path">level_excluded_path (in module level2)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.level_invalid_path">level_invalid_path (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1d/index.html#level1d.level_io_filename">level_io_filename (in module level1d)</a>
+
+      <ul>
+        <li><a href="autoapi/level1e/index.html#level1e.level_io_filename">(in module level1e)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1d/index.html#level1d.level_log_path">level_log_path (in module level1d)</a>
+
+      <ul>
+        <li><a href="autoapi/level1e/index.html#level1e.level_log_path">(in module level1e)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1c/index.html#level1c.level_path">level_path (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.level_path">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.level_path">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.level_path">(in module level2)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.level_prev">level_prev (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.level_prev">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.level_prev">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.level_prev">(in module level2)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1c/index.html#level1c.level_ql_path">level_ql_path (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.level_ql_path">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.level_ql_path">(in module level1e)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level2/index.html#level2.level_reports_path">level_reports_path (in module level2)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.LEVEL_SOURCE">LEVEL_SOURCE (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.LEVEL_SOURCE">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.LEVEL_SOURCE">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.LEVEL_SOURCE">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.LEVEL_SOURCE">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.level_source_dir">level_source_dir (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.level_source_dir">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.level_source_dir">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.level_source_dir">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.level_source_dir">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.level_subdir">level_subdir (in module make_release_source_tree)</a>
+</li>
+      <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.level_subdirs">level_subdirs (in module make_release_source_tree)</a>
+</li>
+      <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.levels">levels (in module make_release_source_tree)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.linked_history">linked_history (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.linked_IDs">linked_IDs (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.linked_IDs_no">linked_IDs_no (in module level1c)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.log_dir">log_dir (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.log_dir">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.log_dir">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.log_dir">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.log_dir">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.log_dir">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.log_diri">log_diri (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.log_diri">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.log_diri">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.log_diri">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.log_diri">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.log_diri">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.lotus_dir">lotus_dir (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.lotus_dir">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.lotus_dir">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.lotus_dir">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.lotus_dir">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.lotus_dir">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li>
+    lotus_scripts
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/index.html#module-lotus_scripts">module</a>
+</li>
+      </ul></li>
+      <li>
+    lotus_scripts.array_output_hdlr
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#module-lotus_scripts.array_output_hdlr">module</a>
+</li>
+      </ul></li>
+      <li>
+    lotus_scripts.level1a_slurm
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#module-lotus_scripts.level1a_slurm">module</a>
+</li>
+      </ul></li>
+      <li>
+    lotus_scripts.level1b_slurm
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#module-lotus_scripts.level1b_slurm">module</a>
+</li>
+      </ul></li>
+      <li>
+    lotus_scripts.level1c_slurm
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#module-lotus_scripts.level1c_slurm">module</a>
+</li>
+      </ul></li>
+      <li>
+    lotus_scripts.level1d_slurm
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#module-lotus_scripts.level1d_slurm">module</a>
+</li>
+      </ul></li>
+      <li>
+    lotus_scripts.level1e_slurm
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#module-lotus_scripts.level1e_slurm">module</a>
+</li>
+      </ul></li>
+      <li>
+    lotus_scripts.level2_slurm
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#module-lotus_scripts.level2_slurm">module</a>
+</li>
+      </ul></li>
+      <li>
+    lotus_scripts.lotus_paths
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/lotus_paths/index.html#module-lotus_scripts.lotus_paths">module</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/lotus_paths/index.html#lotus_scripts.lotus_paths.lotus_scripts_directory">lotus_scripts_directory (in module lotus_scripts.lotus_paths)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    make_release_source_tree
+
+      <ul>
+        <li><a href="autoapi/make_release_source_tree/index.html#module-make_release_source_tree">module</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1d/index.html#level1d.map_to_cdm">map_to_cdm() (in module level1d)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.mask">mask (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.mask_df">mask_df (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.masked_columns">masked_columns (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1d/index.html#level1d.md_avail">md_avail (in module level1d)</a>
+</li>
+      <li><a href="autoapi/level1d/index.html#level1d.md_delimiter">md_delimiter (in module level1d)</a>
+</li>
+      <li><a href="autoapi/level1d/index.html#level1d.md_path">md_path (in module level1d)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.mem">mem (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.mem">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.mem">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.mem">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.mem">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1d/index.html#level1d.merge">merge (in module level1d)</a>
+</li>
+      <li><a href="autoapi/noc_duplicates_merge/index.html#id0">merge2 (in module noc_duplicates_merge)</a>, <a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.merge2">[1]</a>
+</li>
+      <li><a href="autoapi/level1d/index.html#level1d.meta_cdm">meta_cdm (in module level1d)</a>
+</li>
+      <li><a href="autoapi/level1d/index.html#id1">meta_df (in module level1d)</a>, <a href="autoapi/level1d/index.html#level1d.meta_df">[1]</a>
+</li>
+      <li><a href="autoapi/level1d/index.html#level1d.meta_dict">meta_dict (in module level1d)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.mm">mm (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="autoapi/level1a/index.html#module-level1a">level1a</a>
+</li>
+        <li><a href="autoapi/level1b/index.html#module-level1b">level1b</a>
+</li>
+        <li><a href="autoapi/level1c/index.html#module-level1c">level1c</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#module-level1d">level1d</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#module-level1e">level1e</a>
+</li>
+        <li><a href="autoapi/level2/index.html#module-level2">level2</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/index.html#module-lotus_scripts">lotus_scripts</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#module-lotus_scripts.array_output_hdlr">lotus_scripts.array_output_hdlr</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#module-lotus_scripts.level1a_slurm">lotus_scripts.level1a_slurm</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#module-lotus_scripts.level1b_slurm">lotus_scripts.level1b_slurm</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#module-lotus_scripts.level1c_slurm">lotus_scripts.level1c_slurm</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#module-lotus_scripts.level1d_slurm">lotus_scripts.level1d_slurm</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#module-lotus_scripts.level1e_slurm">lotus_scripts.level1e_slurm</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#module-lotus_scripts.level2_slurm">lotus_scripts.level2_slurm</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/lotus_paths/index.html#module-lotus_scripts.lotus_paths">lotus_scripts.lotus_paths</a>
+</li>
+        <li><a href="autoapi/make_release_source_tree/index.html#module-make_release_source_tree">make_release_source_tree</a>
+</li>
+        <li><a href="autoapi/noc_duplicates_merge/index.html#module-noc_duplicates_merge">noc_duplicates_merge</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1a/index.html#level1a.newmask_buffer">newmask_buffer (in module level1a)</a>
+</li>
+      <li>
+    noc_duplicates_merge
+
+      <ul>
+        <li><a href="autoapi/noc_duplicates_merge/index.html#module-noc_duplicates_merge">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.nocallsigns">nocallsigns (in module level1c)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.obs_tables">obs_tables (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.obs_tables">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.obs_tables">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.obs_tables">(in module level2)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.output_file">output_file (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.output_path">output_path (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1a/index.html#level1a.params">params (in module level1a)</a>
+
+      <ul>
+        <li><a href="autoapi/level1b/index.html#level1b.params">(in module level1b)</a>
+</li>
+        <li><a href="autoapi/level1c/index.html#level1c.params">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.params">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.params">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.params">(in module level2)</a>
+</li>
+        <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.params">(in module noc_duplicates_merge)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.parser">parser (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.parser">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.parser">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.parser">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.parser">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.PERIODS_FILE">PERIODS_FILE (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.PERIODS_FILE">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.PERIODS_FILE">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.PERIODS_FILE">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.PERIODS_FILE">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.PERIODS_FILE">(in module make_release_source_tree)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1c/index.html#level1c.prev_level_filename">prev_level_filename (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.prev_level_filename">(in module level1d)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1c/index.html#level1c.prev_level_path">prev_level_path (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.prev_level_path">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.prev_level_path">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.prev_level_path">(in module level2)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1a/index.html#id2">process (in module level1a)</a>, <a href="autoapi/level1a/index.html#level1a.process">[1]</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.process_list">process_list (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.process_list">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.process_list">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.process_list">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.process_list">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.process_list">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.process_list_file">process_list_file (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.process_list_file">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.process_list_file">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.process_list_file">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.process_list_file">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.process_list_file">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.process_table">process_table() (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.process_table">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.process_table">(in module level1e)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.py_clean_path">py_clean_path (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.py_clean_path">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.py_clean_path">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.py_clean_path">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.py_clean_path">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.py_path">py_path (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.py_path">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.py_path">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.py_path">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.py_path">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.py_path">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.PYCLEAN">PYCLEAN (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.PYCLEAN">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.PYCLEAN">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.PYCLEAN">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.PYCLEAN">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.pycommand">pycommand (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.pycommand">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.pycommand">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.pycommand">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.pycommand">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.pycommand">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.PYSCRIPT">PYSCRIPT (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.PYSCRIPT">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.PYSCRIPT">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.PYSCRIPT">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.PYSCRIPT">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.PYSCRIPT">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1e/index.html#level1e.qc_avail">qc_avail (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.qc_cdm">qc_cdm (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.qc_columns">qc_columns (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.qc_delimiter">qc_delimiter (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.qc_df">qc_df (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.qc_dict">qc_dict (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.qc_dtype">qc_dtype (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.qc_list">qc_list (in module level1e)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1e/index.html#level1e.qc_path">qc_path (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.qc_pos_filename">qc_pos_filename (in module level1e)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.QUEUE">QUEUE (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.QUEUE">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.QUEUE">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.QUEUE">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.QUEUE">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.QUEUE">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1a/index.html#level1a.read_kwargs">read_kwargs (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.read_table_files">read_table_files() (in module level1c)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.release">release (in module lotus_scripts.array_output_hdlr)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.release">(in module lotus_scripts.level1a_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.release">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.release">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.release">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.release">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.release">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1a/index.html#level1a.release_id">release_id (in module level1a)</a>
+
+      <ul>
+        <li><a href="autoapi/level1b/index.html#level1b.release_id">(in module level1b)</a>
+</li>
+        <li><a href="autoapi/level1c/index.html#level1c.release_id">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.release_id">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.release_id">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.release_id">(in module level2)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1a/index.html#level1a.release_path">release_path (in module level1a)</a>
+
+      <ul>
+        <li><a href="autoapi/level1b/index.html#level1b.release_path">(in module level1b)</a>
+</li>
+        <li><a href="autoapi/level1c/index.html#level1c.release_path">(in module level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.release_path">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.release_path">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.release_path">(in module level2)</a>
+</li>
+        <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.release_path">(in module make_release_source_tree)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.release_periods">release_periods (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.release_periods">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.release_periods">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.release_periods">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.release_periods">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.release_periods_file">release_periods_file (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.release_periods_file">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.release_periods_file">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.release_periods_file">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.release_periods_file">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.release_periods_file">(in module make_release_source_tree)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.release_tag">release_tag (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.release_tag">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.release_tag">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.release_tag">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.release_tag">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.release_tag">(in module lotus_scripts.level2_slurm)</a>
+</li>
+        <li><a href="autoapi/make_release_source_tree/index.html#id0">(in module make_release_source_tree)</a>, <a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.release_tag">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1c/index.html#level1c.relist">relist (in module level1c)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.remove_source">remove_source (in module lotus_scripts.level1c_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.remove_source">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.remove_source">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level2/index.html#level2.right_max_period">right_max_period (in module level2)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.rm_input">rm_input (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.scratch_dir">scratch_dir (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.scratch_dir">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.scratch_dir">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.scratch_dir">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.scratch_dir">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.scratch_dir">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/lotus_paths/index.html#lotus_scripts.lotus_paths.scratch_directory">scratch_directory (in module lotus_scripts.lotus_paths)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.script_config">script_config (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.script_config">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.script_config">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.script_config">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.script_config">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.script_config_file">script_config_file (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.script_config_file">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.script_config_file">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.script_config_file">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.script_config_file">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.script_config_file">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1a/index.html#level1a.script_setup">script_setup (class in level1a)</a>
+
+      <ul>
+        <li><a href="autoapi/level1b/index.html#level1b.script_setup">(class in level1b)</a>
+</li>
+        <li><a href="autoapi/level1c/index.html#level1c.script_setup">(class in level1c)</a>
+</li>
+        <li><a href="autoapi/level1d/index.html#level1d.script_setup">(class in level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.script_setup">(class in level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.script_setup">(class in level2)</a>
+</li>
+        <li><a href="autoapi/noc_duplicates_merge/index.html#noc_duplicates_merge.script_setup">(class in noc_duplicates_merge)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.scripts_dir">scripts_dir (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.scripts_dir">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.scripts_dir">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.scripts_dir">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.scripts_dir">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.scripts_dir">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/lotus_paths/index.html#lotus_scripts.lotus_paths.scripts_directory">scripts_directory (in module lotus_scripts.lotus_paths)</a>
+</li>
+      <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.sid_dck_dict">sid_dck_dict (in module make_release_source_tree)</a>
+</li>
+      <li><a href="autoapi/make_release_source_tree/index.html#make_release_source_tree.source_path">source_path (in module make_release_source_tree)</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#id0">SOURCE_PATTERN (in module lotus_scripts.level1a_slurm)</a>, <a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.SOURCE_PATTERN">[1]</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.SOURCE_PATTERN">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.SOURCE_PATTERN">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.SOURCE_PATTERN">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.SOURCE_PATTERN">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.status">status (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.status">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.status">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.status">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.status">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.t">t (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.t">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.t">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.t">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.t">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.t_hh">t_hh (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.t_hh">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.t_hh">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.t_hh">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.t_hh">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.t_mm">t_mm (in module lotus_scripts.level1a_slurm)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.t_mm">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.t_mm">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.t_mm">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.t_mm">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.table">table (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#id2">(in module level1d)</a>, <a href="autoapi/level1d/index.html#level1d.table">[1]</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.table">(in module level1e)</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/level1c/index.html#level1c.table_df">table_df (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.table_filename">table_filename (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.table_pattern">table_pattern (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.table_qc">table_qc (in module level1e)</a>
+</li>
+      <li><a href="autoapi/level1a/index.html#level1a.tables">tables (in module level1a)</a>
+</li>
+      <li><a href="autoapi/level1e/index.html#level1e.tables_in">tables_in (in module level1e)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.update">update (in module lotus_scripts.array_output_hdlr)</a>
+
+      <ul>
+        <li><a href="autoapi/lotus_scripts/level1a_slurm/index.html#lotus_scripts.level1a_slurm.update">(in module lotus_scripts.level1a_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1b_slurm/index.html#lotus_scripts.level1b_slurm.update">(in module lotus_scripts.level1b_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.update">(in module lotus_scripts.level1c_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1d_slurm/index.html#lotus_scripts.level1d_slurm.update">(in module lotus_scripts.level1d_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level1e_slurm/index.html#lotus_scripts.level1e_slurm.update">(in module lotus_scripts.level1e_slurm)</a>
+</li>
+        <li><a href="autoapi/lotus_scripts/level2_slurm/index.html#lotus_scripts.level2_slurm.update">(in module lotus_scripts.level2_slurm)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.validate_id">validate_id() (in module level1c)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.validated">validated (in module level1c)</a>
+</li>
+      <li><a href="autoapi/level1c/index.html#level1c.validation_dict">validation_dict (in module level1c)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1c/index.html#level1c.wmode">wmode (in module level1c)</a>
+
+      <ul>
+        <li><a href="autoapi/level1d/index.html#level1d.wmode">(in module level1d)</a>
+</li>
+        <li><a href="autoapi/level1e/index.html#level1e.wmode">(in module level1e)</a>
+</li>
+        <li><a href="autoapi/level2/index.html#level2.wmode">(in module level2)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level1a/index.html#level1a.write_out_junk">write_out_junk() (in module level1a)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level2/index.html#id1">year_end (in module level2)</a>, <a href="autoapi/level2/index.html#level2.year_end">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/level2/index.html#id0">year_init (in module level2)</a>, <a href="autoapi/level2/index.html#level2.year_init">[1]</a>
+</li>
+      <li><a href="autoapi/lotus_scripts/array_output_hdlr/index.html#lotus_scripts.array_output_hdlr.yyyy">yyyy (in module lotus_scripts.array_output_hdlr)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

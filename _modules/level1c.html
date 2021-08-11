@@ -1,0 +1,730 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>level1c &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../adding-new-data-models.html">Adding new data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../build-new-schema.html">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1c/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1c/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1c/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>level1c</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for level1c</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Mon Jun 17 14:24:10 2019</span>
+
+<span class="sd">Script to generate the C3S CDM Marine level1c data.</span>
+
+<span class="sd">The output files of this script will contain reports from level1b that have been further validated following corrections</span>
+<span class="sd">to the ``date/time``, location and station ID. Those failing validation are rejected and archived for future analysis.</span>
+<span class="sd">Additionally, datetime corrections applied previously in level1b, can potentially result in reports being relocated to a different month.</span>
+<span class="sd">These reports are moved to their correct monthly file in this level. Validates ``header.report_timestamp`` and ``header.primary_station_id``</span>
+<span class="sd">and apply this outcome to rest of tables, rejecting reports not valid in any of these two fields.</span>
+
+<span class="sd">Workflow:</span>
+<span class="sd"> - Read header data</span>
+<span class="sd"> - Initialized mask for id and datetime to True</span>
+<span class="sd"> - Validate header.report_timestamp (see Notes below)</span>
+<span class="sd"> - Validate header.primary_station_id (see Notes below)</span>
+
+<span class="sd">Output all reports not validating timestamp to:</span>
+<span class="sd">  - ``/level1c/invalid/sid-dck/header-fileID-report_timsetamp.psv``</span>
+
+<span class="sd">Output all reports not validating primary_station_id to:</span>
+<span class="sd">  - ``/level1c/invalid/sid-dck/header-fileID-primary_station_id.psv``</span>
+<span class="sd">    </span>
+<span class="sd">  - Merge report_timestamp and primary_station_id in a single validation rule (fail if any fails)</span>
+<span class="sd">  - Drop corresponding records from all tables</span>
+<span class="sd">  - Log to json dropped per table per validated field and final number of records in the resulting tables</span>
+<span class="sd">  - Log to json unique primary_station_id counts</span>
+<span class="sd">  - Log to json primary_station_id validation rules numbers:</span>
+<span class="sd">    1. callsings</span>
+<span class="sd">    2. rest</span>
+<span class="sd">    3. restored because output from Liz&#39;s process</span>
+
+<span class="sd">The processing unit is the source-deck monthly set of CDM tables.</span>
+
+<span class="sd">On reading the table files from the source level (1b), it read:</span>
+<span class="sd"> 1. master table file (``table-yyyy-mm-release-update.psv``)</span>
+<span class="sd"> 2. datetime leak files (``table-yyyy-mm-release-update-YYYY-MM.psv``), where ``YYYY-MM`` indicates the initial ``yyyy-mm`` stamp of the reports contained in that leak file upon arrival to level1b.</span>
+
+<span class="sd">Outputs data to:</span>
+<span class="sd"> - ``/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1c/&lt;sid-dck&gt;/table[i]-fileID.psv``</span>
+
+<span class="sd">Outputs invalid data to:</span>
+<span class="sd"> - ``/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1c/invalid/&lt;sid-dck&gt;/header-fileID-&lt;element&gt;.psv``</span>
+
+<span class="sd">Outputs quicklook info to:</span>
+<span class="sd"> - ``/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1c/quicklooks/&lt;sid-dck&gt;/fileID.json`` where fileID is yyyy-mm-release-update</span>
+
+<span class="sd">Before processing starts:</span>
+<span class="sd"> - checks the existence of all io subdirectories in level1b|c -&gt; exits if fails</span>
+<span class="sd"> - checks the existence of the source table to be converted (header only) -&gt; exits if fails</span>
+<span class="sd"> - removes all level1c products on input file resulting from previous runs</span>
+
+<span class="sd">Inargs:</span>
+<span class="sd">-------</span>
+<span class="sd">- data_path: marine data path in file system</span>
+<span class="sd">- release: release tag</span>
+<span class="sd">- update: udpate tag</span>
+<span class="sd">- dataset: dataset tag</span>
+<span class="sd">- config_path: configuration file path</span>
+<span class="sd">- sid_dck: source-deck data partition (optional, from config_file otherwise)</span>
+<span class="sd">- year: data file year (yyyy) (optional, from config_file otherwise)</span>
+<span class="sd">- month: data file month (mm) (optional, from config_file otherwise)</span>
+
+<span class="sd">Notes on validations:</span>
+<span class="sd">---------------------</span>
+
+<span class="sd">* HEADER.REPORT_TIMESTAMP VALIDATION:</span>
+<span class="sd">    This validation is just trying to convert to a datetime object the content of the field.</span>
+<span class="sd">    Where empty, this conversion (and validation) will fail.</span>
+<span class="sd">    And will be empty if during the mapping in level1a the report_timestamp could not be built from the source data,</span>
+<span class="sd">    or if there was any kind of messing in level1b datetime corrections...</span>
+
+<span class="sd">* HEADER.PRIMARY_STATION_ID VALIDATION:</span>
+<span class="sd">    Due to various reasons, the validation is done in 3 stages and using different methods:</span>
+<span class="sd">    1. Callsign IDs: use set of validation patterns harcoded here</span>
+<span class="sd">    2. Rest of IDs: use set of valid patterns per dck in NOC_ANC_INFO json files</span>
+<span class="sd">    3. All: set all that Liz&#39;s ID linkage modified to True. We are parsing the history field for a &quot;Corrected primary_station_id&quot; text...</span>
+<span class="sd">    maybe it should read this from the level1b config file? But then we need to give this file as an argument...</span>
+
+<span class="sd">Dev notes:</span>
+<span class="sd">----------</span>
+
+<span class="sd">1. This script is fully tailored to the idea of how validation and cleaning should be at the time of developing it. It is not parameterized and is hardly flexible.</span>
+<span class="sd">2. Why don&#39;t we just pick the NaN dates as invalid, instead of looking where conversion fails?</span>
+
+<span class="sd">@author: iregon</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">simplejson</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">cdm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">imp</span> <span class="kn">import</span> <span class="n">reload</span>
+<span class="n">reload</span><span class="p">(</span><span class="n">logging</span><span class="p">)</span>  <span class="c1"># This is to override potential previous config of logging</span>
+
+<span class="c1"># FUNCTIONS -------------------------------------------------------------------</span>
+<div class="viewcode-block" id="script_setup"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.script_setup">[docs]</a><span class="k">class</span> <span class="nc">script_setup</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">release</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configfile</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileObj</span><span class="p">:</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fileObj</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Opening configuration file :</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configfile</span><span class="p">),</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span> 
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>    
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sid_dck&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;yyyy&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">)</span> 
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Parsing configuration from file :</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configfile</span><span class="p">),</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">dck</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<span class="c1"># This is for json to handle dates</span>
+<div class="viewcode-block" id="date_handler"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.date_handler">[docs]</a><span class="n">date_handler</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="p">(</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">))</span>
+    <span class="k">else</span> <span class="kc">None</span></div>
+<span class="p">)</span>
+
+<div class="viewcode-block" id="validate_id"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.validate_id">[docs]</a><span class="k">def</span> <span class="nf">validate_id</span><span class="p">(</span><span class="n">idSeries</span><span class="p">):</span>
+    <span class="n">json_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">id_validation_path</span><span class="p">,</span><span class="s1">&#39;dck&#39;</span> <span class="o">+</span> <span class="n">params</span><span class="o">.</span><span class="n">dck</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;NO noc ancillary info file </span><span class="si">{}</span><span class="s1"> available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json_file</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Adding match-all regex to validation patterns&#39;</span><span class="p">)</span>
+        <span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.*?&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reading ID validation patterns from NOC ANC FILE </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json_file</span><span class="p">))</span>    
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">fO</span><span class="p">:</span>
+                <span class="n">jDict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fO</span><span class="p">)</span>
+                
+            <span class="n">valid_patterns</span> <span class="o">=</span> <span class="n">jDict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;patterns&#39;</span><span class="p">)</span>
+            <span class="n">patterns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">valid_patterns</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> 
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Error reading NOC ANC FILE </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json_file</span><span class="p">),</span><span class="n">exc_info</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># At some point we might expect acceptance of no IDs as valid to be</span>
+    <span class="c1"># configurable...    </span>
+    <span class="n">patterns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;^$&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;NaN values will validate to True&#39;</span><span class="p">)</span>
+
+    <span class="n">na_values</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="s1">&#39;^$&#39;</span> <span class="ow">in</span> <span class="n">patterns</span> <span class="k">else</span> <span class="kc">False</span>
+    <span class="n">combined_compiled</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">patterns</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">idSeries</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">combined_compiled</span><span class="p">,</span><span class="n">na</span> <span class="o">=</span> <span class="n">na_values</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="read_table_files"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.read_table_files">[docs]</a><span class="k">def</span> <span class="nf">read_table_files</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reading data from </span><span class="si">{}</span><span class="s1"> table files&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+    <span class="n">table_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="c1"># First read the master file, if any, then append leaks</span>
+    <span class="c1"># If no yyyy-mm master file, can still have reports from datetime leaks</span>
+    <span class="c1"># On reading &#39;header&#39; read null as NaN so that we can validate null ids as NaN easily</span>
+    <span class="n">table_df</span> <span class="o">=</span> <span class="n">cdm</span><span class="o">.</span><span class="n">read_tables</span><span class="p">(</span><span class="n">prev_level_path</span><span class="p">,</span><span class="n">fileID</span><span class="p">,</span><span class="n">cdm_subset</span><span class="o">=</span><span class="p">[</span><span class="n">table</span><span class="p">],</span><span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;null&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+    	<span class="nb">len</span><span class="p">(</span><span class="n">table_df</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Empty or non-existing master </span><span class="si">{}</span><span class="s1"> table. Attempting </span><span class="se">\</span>
+<span class="s1">                        to read datetime leak files&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+    <span class="n">leak_pattern</span> <span class="o">=</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">table</span><span class="p">,</span><span class="n">fileID</span><span class="p">,</span><span class="s1">&#39;????&#39;</span> <span class="o">+</span> <span class="n">FFS</span> <span class="o">+</span> <span class="s1">&#39;??.psv&#39;</span><span class="p">])</span>
+    <span class="n">leak_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prev_level_path</span><span class="p">,</span><span class="n">leak_pattern</span><span class="p">))</span>
+    <span class="n">leaks_in</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">leak_files</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">leak_file</span> <span class="ow">in</span> <span class="n">leak_files</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reading datetime leak file </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">leak_file</span><span class="p">))</span>
+            <span class="n">file_base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">leak_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">fileIDi</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_base</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">6</span><span class="p">:])</span>
+            <span class="n">table_dfi</span> <span class="o">=</span> <span class="n">cdm</span><span class="o">.</span><span class="n">read_tables</span><span class="p">(</span><span class="n">prev_level_path</span><span class="p">,</span><span class="n">fileIDi</span><span class="p">,</span><span class="n">cdm_subset</span><span class="o">=</span><span class="p">[</span><span class="n">table</span><span class="p">],</span><span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;null&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_dfi</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Could not read leak file or is empty </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">leak_file</span><span class="p">))</span> 
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">leaks_in</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_dfi</span><span class="p">)</span>
+            <span class="n">table_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">table_df</span> <span class="p">,</span><span class="n">table_dfi</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_df</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">validation_dict</span><span class="p">[</span><span class="n">table</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;leaks_in&#39;</span><span class="p">:</span><span class="n">leaks_in</span><span class="p">}</span>        
+    <span class="k">return</span> <span class="n">table_df</span></div>
+  
+<div class="viewcode-block" id="process_table"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.process_table">[docs]</a><span class="k">def</span> <span class="nf">process_table</span><span class="p">(</span><span class="n">table_df</span><span class="p">,</span><span class="n">table_name</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">table_df</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># Open table and reindex</span>
+        <span class="n">table_df</span> <span class="o">=</span> <span class="n">read_table_files</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">table_df</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Empty or non existing table </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">))</span>
+            <span class="k">return</span>
+        <span class="n">table_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;report_id&#39;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">drop</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+     
+    <span class="n">odata_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_path</span><span class="p">,</span><span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">table_name</span><span class="p">,</span><span class="n">fileID</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;.psv&#39;</span><span class="p">)</span>
+    <span class="n">cdm_columns</span> <span class="o">=</span> <span class="n">cdm_tables</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="n">table_mask</span> <span class="o">=</span> <span class="n">mask_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">table_df</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">table_name</span> <span class="o">==</span> <span class="s1">&#39;header&#39;</span><span class="p">:</span>
+            <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;history&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;history&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;;</span><span class="si">{0}</span><span class="s1">. </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">history_tstmp</span><span class="p">,</span><span class="n">history</span><span class="p">)</span>
+            <span class="n">validation_dict</span><span class="p">[</span><span class="s1">&#39;unique_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">table_mask</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">],</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_df</span><span class="p">[</span><span class="n">table_mask</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">table_df</span><span class="p">[</span><span class="n">table_mask</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">odata_filename</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="n">delimiter</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cdm_columns</span>
+                     <span class="p">,</span><span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">wmode</span><span class="p">,</span> <span class="n">na_rep</span> <span class="o">=</span> <span class="s1">&#39;null&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Table </span><span class="si">{}</span><span class="s1"> is empty. No file will be produced&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">))</span>
+     
+    <span class="n">validation_dict</span><span class="p">[</span><span class="n">table_name</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_df</span><span class="p">[</span><span class="n">table_mask</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]])</span>
+    <span class="k">return</span></div>
+
+<div class="viewcode-block" id="clean_level"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.clean_level">[docs]</a><span class="k">def</span> <span class="nf">clean_level</span><span class="p">(</span><span class="n">file_id</span><span class="p">):</span>
+    <span class="n">level_prods</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_path</span><span class="p">,</span><span class="s1">&#39;*&#39;</span> <span class="o">+</span> <span class="n">FFS</span> <span class="o">+</span> <span class="n">file_id</span> <span class="o">+</span> <span class="s1">&#39;.psv&#39;</span><span class="p">))</span>
+    <span class="n">level_ql</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_ql_path</span><span class="p">,</span> <span class="n">file_id</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">))</span>
+    <span class="n">level_invalid</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_invalid_path</span><span class="p">,</span><span class="s1">&#39;*&#39;</span> <span class="o">+</span> <span class="n">FFS</span> <span class="o">+</span> <span class="n">file_id</span> <span class="o">+</span> <span class="s1">&#39;.*&#39;</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">level_prods</span> <span class="o">+</span> <span class="n">level_ql</span> <span class="o">+</span> <span class="n">level_invalid</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Removing previous file: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+
+<span class="c1"># MAIN ------------------------------------------------------------------------</span>
+
+<span class="c1"># Process input and set up some things and make sure we can do something-------</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="se">\t</span><span class="s1">[</span><span class="si">%(asctime)s</span><span class="s1">](</span><span class="si">%(filename)s</span><span class="s1">)</span><span class="se">\t</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span><span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reading command line arguments&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="args"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.args">[docs]</a>    <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span></div>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Need arguments to run!&#39;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="params"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.params">[docs]</a><span class="n">params</span> <span class="o">=</span> <span class="n">script_setup</span><span class="p">(</span><span class="n">args</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FFS"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.FFS">[docs]</a><span class="n">FFS</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span></div>
+<div class="viewcode-block" id="delimiter"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.delimiter">[docs]</a><span class="n">delimiter</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span></div>
+<div class="viewcode-block" id="level"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.level">[docs]</a><span class="n">level</span> <span class="o">=</span> <span class="s1">&#39;level1c&#39;</span></div>
+<div class="viewcode-block" id="level_prev"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.level_prev">[docs]</a><span class="n">level_prev</span> <span class="o">=</span> <span class="s1">&#39;level1b&#39;</span></div>
+<div class="viewcode-block" id="header"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.header">[docs]</a><span class="n">header</span> <span class="o">=</span> <span class="kc">True</span> </div>
+<div class="viewcode-block" id="wmode"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.wmode">[docs]</a><span class="n">wmode</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span></div>
+    
+<div class="viewcode-block" id="release_path"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.release_path">[docs]</a><span class="n">release_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">release</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span></div>
+<div class="viewcode-block" id="release_id"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.release_id">[docs]</a><span class="n">release_id</span> <span class="o">=</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">params</span><span class="o">.</span><span class="n">release</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">update</span> <span class="p">])</span> </div>
+<div class="viewcode-block" id="fileID"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.fileID">[docs]</a><span class="n">fileID</span> <span class="o">=</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">release_id</span> <span class="p">])</span></div>
+<div class="viewcode-block" id="fileID_date"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.fileID_date">[docs]</a><span class="n">fileID_date</span> <span class="o">=</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">month</span><span class="p">)])</span></div>
+
+<div class="viewcode-block" id="prev_level_path"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.prev_level_path">[docs]</a><span class="n">prev_level_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="n">level_prev</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span>  </div>
+<div class="viewcode-block" id="level_path"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.level_path">[docs]</a><span class="n">level_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="n">level</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+<div class="viewcode-block" id="level_ql_path"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.level_ql_path">[docs]</a><span class="n">level_ql_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="n">level</span><span class="p">,</span><span class="s1">&#39;quicklooks&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+<div class="viewcode-block" id="level_invalid_path"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.level_invalid_path">[docs]</a><span class="n">level_invalid_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="n">level</span><span class="p">,</span><span class="s1">&#39;invalid&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="id_validation_path"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.id_validation_path">[docs]</a><span class="n">id_validation_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span><span class="s1">&#39;datasets&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span><span class="s1">&#39;NOC_ANC_INFO&#39;</span><span class="p">,</span><span class="s1">&#39;json_files&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="data_paths"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.data_paths">[docs]</a><span class="n">data_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">prev_level_path</span><span class="p">,</span> <span class="n">level_path</span><span class="p">,</span> <span class="n">level_ql_path</span><span class="p">,</span> <span class="n">level_invalid_path</span><span class="p">,</span> <span class="n">id_validation_path</span><span class="p">]</span></div>
+<span class="k">if</span> <span class="nb">any</span><span class="p">([</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_paths</span> <span class="p">]):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Could not find data paths: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_paths</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">x</span><span class="p">)])))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="prev_level_filename"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.prev_level_filename">[docs]</a><span class="n">prev_level_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prev_level_path</span><span class="p">,</span> <span class="s1">&#39;header-*&#39;</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">month</span><span class="p">)])</span> <span class="o">+</span> <span class="s1">&#39;*.psv&#39;</span><span class="p">)</span></div>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">prev_level_filename</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;L1b header files not found: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prev_level_filename</span><span class="p">))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+ 
+<span class="c1"># Clean previous L1c products and side files ----------------------------------</span>
+<span class="n">clean_level</span><span class="p">(</span><span class="n">fileID</span><span class="p">)</span>
+<div class="viewcode-block" id="validation_dict"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.validation_dict">[docs]</a><span class="n">validation_dict</span> <span class="o">=</span> <span class="p">{</span> <span class="n">table</span><span class="p">:{}</span> <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">cdm</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cdm_tables</span><span class="p">}</span></div>
+
+<span class="c1"># DO THE DATA PROCESSING ------------------------------------------------------</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Settings in configuration file</span>
+<div class="viewcode-block" id="dataset_id"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.dataset_id">[docs]</a><span class="n">dataset_id</span> <span class="o">=</span> <span class="s1">&#39;icoads_r3000&#39;</span></div>
+<div class="viewcode-block" id="validated"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.validated">[docs]</a><span class="n">validated</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;report_timestamp&#39;</span><span class="p">,</span><span class="s1">&#39;primary_station_id&#39;</span><span class="p">]</span></div>
+<div class="viewcode-block" id="history"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.history">[docs]</a><span class="n">history</span> <span class="o">=</span> <span class="s1">&#39;Performed report_timestamp (date_time) and primary_station_id validation&#39;</span></div>
+<div class="viewcode-block" id="history_tstmp"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.history_tstmp">[docs]</a><span class="n">history_tstmp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span></div>
+<div class="viewcode-block" id="cdm_tables"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.cdm_tables">[docs]</a><span class="n">cdm_tables</span> <span class="o">=</span> <span class="n">cdm</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">tables_hdlr</span><span class="o">.</span><span class="n">load_tables</span><span class="p">()</span></div>
+
+<span class="c1"># 1. READ THE DATA-------------------------------------------------------------</span>
+
+<span class="c1"># Read the header table file(s) and init the mask to True</span>
+<span class="c1"># Table files can be multiple for a yyyy-mm if datetime corrections</span>
+<span class="c1"># in level1b resulted in a change in the month</span>
+<div class="viewcode-block" id="table"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.table">[docs]</a><span class="n">table</span> <span class="o">=</span> <span class="s1">&#39;header&#39;</span></div>
+<div class="viewcode-block" id="table_df"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.table_df">[docs]</a><span class="n">table_df</span> <span class="o">=</span> <span class="n">read_table_files</span><span class="p">(</span><span class="n">table</span><span class="p">)</span></div>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;No data could be read for file partition </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fileID</span><span class="p">))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            
+<span class="n">table_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;report_id&#39;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">drop</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Initialize mask</span>
+<div class="viewcode-block" id="mask_df"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.mask_df">[docs]</a><span class="n">mask_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="n">table_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="n">validated</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">])</span></div>
+<span class="n">mask_df</span><span class="p">[</span><span class="n">validated</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># 2. VALIDATE THE FIELDS-------------------------------------------------------</span>
+<span class="c1"># 2.1. Validate datetime</span>
+<span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;report_timestamp&#39;</span>
+<span class="n">mask_df</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">table_df</span><span class="p">[</span><span class="n">field</span><span class="p">],</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span>
+
+<span class="c1"># 2.2. Validate primary_station_id</span>
+<div class="viewcode-block" id="field"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.field">[docs]</a><span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;primary_station_id&#39;</span></div>
+<span class="n">validation_dict</span><span class="p">[</span><span class="s1">&#39;id_validation_rules&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># First get callsigns:</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Applying callsign id validation&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="callsigns"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.callsigns">[docs]</a><span class="n">callsigns</span> <span class="o">=</span> <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;primary_station_id_scheme&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;5&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;platform_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;33&#39;</span><span class="p">])</span></div>
+<div class="viewcode-block" id="nocallsigns"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.nocallsigns">[docs]</a><span class="n">nocallsigns</span> <span class="o">=</span> <span class="o">~</span><span class="n">callsigns</span></div>
+<div class="viewcode-block" id="relist"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.relist">[docs]</a><span class="n">relist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;^([0-9]</span><span class="si">{1}</span><span class="s1">[A-Z]</span><span class="si">{1}</span><span class="s1">|^[A-Z]</span><span class="si">{1}</span><span class="s1">[0-9]</span><span class="si">{1}</span><span class="s1">|^[A-Z]</span><span class="si">{2}</span><span class="s1">)[A-Z0-9]{1,}$&#39;</span><span class="p">,</span><span class="s1">&#39;^[0-9]</span><span class="si">{5}</span><span class="s1">$&#39;</span><span class="p">]</span></div>
+<div class="viewcode-block" id="callre"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.callre">[docs]</a><span class="n">callre</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relist</span><span class="p">))</span></div>
+<span class="n">mask_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">callsigns</span><span class="p">,</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">table_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">callsigns</span><span class="p">,</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">callre</span><span class="p">,</span><span class="n">na</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Then the rest according to general validation rules</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Applying general id validation&#39;</span><span class="p">)</span>
+<span class="n">mask_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nocallsigns</span><span class="p">,</span><span class="n">field</span><span class="p">]</span>  <span class="o">=</span> <span class="n">validate_id</span><span class="p">(</span><span class="n">table_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nocallsigns</span><span class="p">,</span><span class="n">field</span><span class="p">])</span> 
+
+<span class="c1"># And now set back to True all that the linkage provided</span>
+<span class="c1"># Instead, read in the header history field and check if it contains</span>
+<span class="c1"># &#39;Corrected primary_station_id&#39;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Restoring linked IDs&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="linked_history"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.linked_history">[docs]</a><span class="n">linked_history</span> <span class="o">=</span> <span class="s1">&#39;Corrected primary_station_id&#39;</span></div>
+<div class="viewcode-block" id="linked_IDs"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.linked_IDs">[docs]</a><span class="n">linked_IDs</span> <span class="o">=</span> <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;history&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">linked_history</span><span class="p">)</span> <span class="o">&amp;</span> \
+    <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;history&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;ID identification&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="linked_IDs_no"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.linked_IDs_no">[docs]</a><span class="n">linked_IDs_no</span> <span class="o">=</span> <span class="p">(</span><span class="n">linked_IDs</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></div>
+
+<span class="k">if</span> <span class="n">linked_IDs_no</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">mask_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">linked_IDs</span><span class="p">,</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">validation_dict</span><span class="p">[</span><span class="s1">&#39;id_validation_rules&#39;</span><span class="p">][</span><span class="s1">&#39;idcorrected&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">linked_IDs_no</span>
+
+<span class="n">validation_dict</span><span class="p">[</span><span class="s1">&#39;id_validation_rules&#39;</span><span class="p">][</span><span class="s1">&#39;callsign&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">callsigns</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">validation_dict</span><span class="p">[</span><span class="s1">&#39;id_validation_rules&#39;</span><span class="p">][</span><span class="s1">&#39;noncallsign&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="n">callsigns</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># 3. OUTPUT INVALID REPORTS - HEADER ------------------------------------------</span>
+<div class="viewcode-block" id="cdm_columns"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.cdm_columns">[docs]</a><span class="n">cdm_columns</span> <span class="o">=</span> <span class="n">cdm_tables</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">table</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
+<span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">validated</span><span class="p">:</span>
+    <span class="k">if</span> <span class="kc">False</span> <span class="ow">in</span> <span class="n">mask_df</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+<div class="viewcode-block" id="idata_filename"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.idata_filename">[docs]</a>        <span class="n">idata_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_invalid_path</span><span class="p">,</span><span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;header&#39;</span><span class="p">,</span><span class="n">fileID</span><span class="p">,</span><span class="n">field</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;.psv&#39;</span><span class="p">)</span></div>
+        <span class="n">table_df</span><span class="p">[</span><span class="o">~</span><span class="n">mask_df</span><span class="p">[</span><span class="n">field</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">idata_filename</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="n">delimiter</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cdm_columns</span>
+                 <span class="p">,</span><span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">wmode</span><span class="p">,</span> <span class="n">na_rep</span> <span class="o">=</span> <span class="s1">&#39;null&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># 4. REPORT INVALIDS PER FIELD  -----------------------------------------------    </span>
+<span class="c1"># Now clean, keep only all valid:</span>
+<span class="n">mask_df</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask_df</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="c1"># Report invalids</span>
+<span class="n">validation_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span> 
+<span class="n">validation_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_df</span><span class="p">[</span><span class="o">~</span><span class="n">mask_df</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]])</span>
+<span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">validated</span><span class="p">:</span>
+    <span class="n">validation_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mask_df</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">mask_df</span><span class="p">[</span><span class="n">field</span><span class="p">]])</span>
+
+<span class="c1"># 5. CLEAN AND OUTPUT TABLES  -------------------------------------------------</span>
+<span class="c1"># Now process tables and log final numbers and some specifics in header table</span>
+<span class="c1"># First header table, already open</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Cleaning table header&#39;</span><span class="p">)</span> 
+<span class="n">process_table</span><span class="p">(</span><span class="n">table_df</span><span class="p">,</span><span class="n">table</span><span class="p">)</span>
+<div class="viewcode-block" id="obs_tables"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.obs_tables">[docs]</a><span class="n">obs_tables</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cdm_tables</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;header&#39;</span> <span class="p">]</span></div>
+<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">obs_tables</span><span class="p">:</span>
+<div class="viewcode-block" id="table_pattern"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.table_pattern">[docs]</a>    <span class="n">table_pattern</span> <span class="o">=</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">table</span><span class="p">,</span><span class="n">fileID</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;*.psv&#39;</span></div>
+    <span class="n">table_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prev_level_path</span><span class="p">,</span><span class="n">table_pattern</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Cleaning table </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>   
+        <span class="n">process_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span><span class="n">table</span><span class="p">)</span>
+    
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Saving json quicklook&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="L1b_io_filename"><a class="viewcode-back" href="../autoapi/level1c/index.html#level1c.L1b_io_filename">[docs]</a><span class="n">L1b_io_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_ql_path</span><span class="p">,</span><span class="n">fileID</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">)</span></div>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">L1b_io_filename</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileObj</span><span class="p">:</span>
+    <span class="n">simplejson</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">month</span><span class="p">]):</span><span class="n">validation_dict</span><span class="p">},</span><span class="n">fileObj</span><span class="p">,</span>
+                     <span class="n">default</span> <span class="o">=</span> <span class="n">date_handler</span><span class="p">,</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">ignore_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

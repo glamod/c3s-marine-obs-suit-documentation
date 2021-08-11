@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>lotus_scripts.level1c_slurm &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../adding-new-data-models.html">Adding new data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../build-new-schema.html">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1c/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1c/index.html#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1c/index.html#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1c/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1c/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1c/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1c/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>lotus_scripts.level1c_slurm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for lotus_scripts.level1c_slurm</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Wed Jul 22 09:09:41 2020</span>
+
+<span class="sd">@author: iregou</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="kn">import</span> <span class="nn">lotus_paths</span>
+<span class="kn">import</span> <span class="nn">config_array</span>
+
+
+<span class="c1"># Set process params-----------------------------------------------------------</span>
+<div class="viewcode-block" id="LEVEL"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.LEVEL">[docs]</a><span class="n">LEVEL</span> <span class="o">=</span> <span class="s1">&#39;level1c&#39;</span></div>
+<div class="viewcode-block" id="LEVEL_SOURCE"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.LEVEL_SOURCE">[docs]</a><span class="n">LEVEL_SOURCE</span> <span class="o">=</span> <span class="s1">&#39;level1b&#39;</span></div>
+<div class="viewcode-block" id="SOURCE_PATTERN"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.SOURCE_PATTERN">[docs]</a><span class="n">SOURCE_PATTERN</span> <span class="o">=</span> <span class="s1">&#39;header-????-??-*.psv&#39;</span></div>
+<div class="viewcode-block" id="PYSCRIPT"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.PYSCRIPT">[docs]</a><span class="n">PYSCRIPT</span> <span class="o">=</span> <span class="s1">&#39;level1c.py&#39;</span></div>
+<div class="viewcode-block" id="CONFIG_FILE"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.CONFIG_FILE">[docs]</a><span class="n">CONFIG_FILE</span> <span class="o">=</span> <span class="s1">&#39;level1c.json&#39;</span></div>
+<div class="viewcode-block" id="PERIODS_FILE"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.PERIODS_FILE">[docs]</a><span class="n">PERIODS_FILE</span> <span class="o">=</span> <span class="s1">&#39;source_deck_periods.json&#39;</span></div>
+<div class="viewcode-block" id="PYCLEAN"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.PYCLEAN">[docs]</a><span class="n">PYCLEAN</span> <span class="o">=</span> <span class="s1">&#39;array_output_hdlr.py&#39;</span></div>
+<div class="viewcode-block" id="BSH_REMOVE_FILES"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.BSH_REMOVE_FILES">[docs]</a><span class="n">BSH_REMOVE_FILES</span> <span class="o">=</span> <span class="s1">&#39;remove_level_data.sh&#39;</span></div>
+<div class="viewcode-block" id="QUEUE"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.QUEUE">[docs]</a><span class="n">QUEUE</span> <span class="o">=</span> <span class="s1">&#39;short-serial&#39;</span></div>
+<span class="c1">#------------------------------------------------------------------------------</span>
+
+<span class="c1">#------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="check_file_exit"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.check_file_exit">[docs]</a><span class="k">def</span> <span class="nf">check_file_exit</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">files</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">files</span>
+    <span class="k">for</span> <span class="n">filei</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filei</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;File </span><span class="si">{}</span><span class="s1"> does not exist. Exiting&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filei</span><span class="p">))</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span></div>
+
+<div class="viewcode-block" id="check_dir_exit"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.check_dir_exit">[docs]</a><span class="k">def</span> <span class="nf">check_dir_exit</span><span class="p">(</span><span class="n">dirs</span><span class="p">):</span>
+    <span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span><span class="n">dirs</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dirs</span><span class="p">,</span><span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">dirs</span>
+    <span class="k">for</span> <span class="n">diri</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">diri</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Directory </span><span class="si">{}</span><span class="s1"> does not exist. Exiting&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">diri</span><span class="p">))</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span></div>
+
+<div class="viewcode-block" id="launch_process"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.launch_process">[docs]</a><span class="k">def</span> <span class="nf">launch_process</span><span class="p">(</span><span class="n">process</span><span class="p">):</span>
+
+    <span class="n">proc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="n">process</span><span class="p">],</span><span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+    <span class="n">jid_by</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Error launching process. Exiting&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Error is: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">jid</span> <span class="o">=</span> <span class="n">jid_by</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">jid</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+<span class="c1">#------------------------------------------------------------------------------</span>
+
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="se">\t</span><span class="s1">[</span><span class="si">%(asctime)s</span><span class="s1">](</span><span class="si">%(filename)s</span><span class="s1">)</span><span class="se">\t</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span><span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># Get process coordinates and build paths -------------------------------------</span>
+<div class="viewcode-block" id="release"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.release">[docs]</a><span class="n">release</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+<div class="viewcode-block" id="update"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.update">[docs]</a><span class="n">update</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span></div>
+<div class="viewcode-block" id="dataset"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.dataset">[docs]</a><span class="n">dataset</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span></div>
+<div class="viewcode-block" id="config_path"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.config_path">[docs]</a><span class="n">config_path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span></div>
+<div class="viewcode-block" id="process_list_file"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.process_list_file">[docs]</a><span class="n">process_list_file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parser"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.parser">[docs]</a><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span></div>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;positional&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--failed_only&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--remove_source&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="args"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.args">[docs]</a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span></div>
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">failed_only</span><span class="p">:</span>
+<div class="viewcode-block" id="failed_only"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.failed_only">[docs]</a>    <span class="n">failed_only</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">failed_only</span><span class="o">==</span> <span class="s1">&#39;yes&#39;</span> <span class="k">else</span> <span class="kc">False</span></div>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">failed_only</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">remove_source</span><span class="p">:</span>
+<div class="viewcode-block" id="remove_source"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.remove_source">[docs]</a>    <span class="n">remove_source</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">remove_source</span><span class="o">==</span> <span class="s1">&#39;yes&#39;</span> <span class="k">else</span> <span class="kc">False</span></div>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">remove_source</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># Get lotus paths</span>
+<div class="viewcode-block" id="lotus_dir"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.lotus_dir">[docs]</a><span class="n">lotus_dir</span> <span class="o">=</span> <span class="n">lotus_paths</span><span class="o">.</span><span class="n">lotus_scripts_directory</span></div>
+<div class="viewcode-block" id="scripts_dir"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.scripts_dir">[docs]</a><span class="n">scripts_dir</span> <span class="o">=</span> <span class="n">lotus_paths</span><span class="o">.</span><span class="n">scripts_directory</span></div>
+<div class="viewcode-block" id="data_dir"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.data_dir">[docs]</a><span class="n">data_dir</span> <span class="o">=</span> <span class="n">lotus_paths</span><span class="o">.</span><span class="n">data_directory</span></div>
+<div class="viewcode-block" id="scratch_dir"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.scratch_dir">[docs]</a><span class="n">scratch_dir</span> <span class="o">=</span> <span class="n">lotus_paths</span><span class="o">.</span><span class="n">scratch_directory</span></div>
+
+<span class="c1"># Build process specific paths</span>
+<div class="viewcode-block" id="release_tag"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.release_tag">[docs]</a><span class="n">release_tag</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">release</span><span class="p">,</span><span class="n">update</span><span class="p">])</span></div>
+<div class="viewcode-block" id="script_config_file"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.script_config_file">[docs]</a><span class="n">script_config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span><span class="n">release_tag</span><span class="p">,</span><span class="n">dataset</span><span class="p">,</span><span class="n">CONFIG_FILE</span><span class="p">)</span></div>
+<div class="viewcode-block" id="release_periods_file"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.release_periods_file">[docs]</a><span class="n">release_periods_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span><span class="n">release_tag</span><span class="p">,</span><span class="n">dataset</span><span class="p">,</span><span class="n">PERIODS_FILE</span><span class="p">)</span></div>
+<div class="viewcode-block" id="level_dir"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.level_dir">[docs]</a><span class="n">level_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="n">release</span><span class="p">,</span><span class="n">dataset</span><span class="p">,</span><span class="n">LEVEL</span><span class="p">)</span></div>
+<div class="viewcode-block" id="level_source_dir"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.level_source_dir">[docs]</a><span class="n">level_source_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="n">release</span><span class="p">,</span><span class="n">dataset</span><span class="p">,</span><span class="n">LEVEL_SOURCE</span><span class="p">)</span></div>
+<div class="viewcode-block" id="log_dir"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.log_dir">[docs]</a><span class="n">log_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_dir</span><span class="p">,</span><span class="s1">&#39;log&#39;</span><span class="p">)</span></div>
+
+<span class="c1"># Check paths</span>
+<span class="n">check_file_exit</span><span class="p">([</span><span class="n">script_config_file</span><span class="p">,</span><span class="n">release_periods_file</span><span class="p">,</span><span class="n">process_list_file</span><span class="p">])</span>
+<span class="n">check_dir_exit</span><span class="p">([</span><span class="n">level_dir</span><span class="p">,</span><span class="n">level_source_dir</span><span class="p">,</span><span class="n">log_dir</span><span class="p">])</span>
+
+<span class="c1"># Get configuration -----------------------------------------------------------</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">script_config_file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fO</span><span class="p">:</span>
+<div class="viewcode-block" id="script_config"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.script_config">[docs]</a>    <span class="n">script_config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fO</span><span class="p">)</span></div>
+    
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">process_list_file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fO</span><span class="p">:</span>
+<div class="viewcode-block" id="process_list"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.process_list">[docs]</a>    <span class="n">process_list</span> <span class="o">=</span> <span class="n">fO</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span></div>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">release_periods_file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fO</span><span class="p">:</span>
+<div class="viewcode-block" id="release_periods"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.release_periods">[docs]</a>    <span class="n">release_periods</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fO</span><span class="p">)</span></div>
+    
+<span class="c1"># Build array input files -----------------------------------------------------</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;CONFIGURING JOB ARRAYS...&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="status"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.status">[docs]</a><span class="n">status</span> <span class="o">=</span> <span class="n">config_array</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">level_source_dir</span><span class="p">,</span><span class="n">SOURCE_PATTERN</span><span class="p">,</span><span class="n">log_dir</span><span class="p">,</span>
+                           <span class="n">script_config</span><span class="p">,</span><span class="n">release_periods</span><span class="p">,</span><span class="n">process_list</span><span class="p">,</span>
+                           <span class="n">failed_only</span> <span class="o">=</span> <span class="n">failed_only</span><span class="p">)</span> </div>
+<span class="k">if</span> <span class="n">status</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Creating array inputs&#39;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+<span class="c1"># Build jobs ------------------------------------------------------------------    </span>
+<div class="viewcode-block" id="py_path"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.py_path">[docs]</a><span class="n">py_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">scripts_dir</span><span class="p">,</span><span class="n">PYSCRIPT</span><span class="p">)</span></div>
+<div class="viewcode-block" id="py_clean_path"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.py_clean_path">[docs]</a><span class="n">py_clean_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lotus_dir</span><span class="p">,</span><span class="n">PYCLEAN</span><span class="p">)</span></div>
+<div class="viewcode-block" id="bsh_remove_path"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.bsh_remove_path">[docs]</a><span class="n">bsh_remove_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">scripts_dir</span><span class="p">,</span><span class="n">BSH_REMOVE_FILES</span><span class="p">)</span></div>
+<div class="viewcode-block" id="pycommand"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.pycommand">[docs]</a><span class="n">pycommand</span><span class="o">=</span><span class="s1">&#39;python </span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1"> </span><span class="si">{2}</span><span class="s1"> </span><span class="si">{3}</span><span class="s1"> </span><span class="si">{4}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">py_path</span><span class="p">,</span><span class="n">data_dir</span><span class="p">,</span><span class="n">release</span><span class="p">,</span><span class="n">update</span><span class="p">,</span>
+                  <span class="n">dataset</span><span class="p">)</span></div>
+
+<span class="c1"># Set default job params</span>
+<div class="viewcode-block" id="mem"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.mem">[docs]</a><span class="n">mem</span> <span class="o">=</span> <span class="n">script_config</span><span class="p">[</span><span class="s1">&#39;job_memo_mb&#39;</span><span class="p">]</span></div>
+<div class="viewcode-block" id="t_hh"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.t_hh">[docs]</a><span class="n">t_hh</span> <span class="o">=</span> <span class="n">script_config</span><span class="p">[</span><span class="s1">&#39;job_time_hr&#39;</span><span class="p">]</span></div>
+<div class="viewcode-block" id="t_mm"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.t_mm">[docs]</a><span class="n">t_mm</span> <span class="o">=</span> <span class="n">script_config</span><span class="p">[</span><span class="s1">&#39;job_time_min&#39;</span><span class="p">]</span></div>
+<div class="viewcode-block" id="t"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.t">[docs]</a><span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t_hh</span><span class="p">,</span><span class="n">t_mm</span><span class="p">,</span><span class="s1">&#39;00&#39;</span><span class="p">])</span></div>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;SUBMITTING ARRAYS...&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">sid_dck</span> <span class="ow">in</span> <span class="n">process_list</span><span class="p">:</span>
+<div class="viewcode-block" id="log_diri"><a class="viewcode-back" href="../../autoapi/lotus_scripts/level1c_slurm/index.html#lotus_scripts.level1c_slurm.log_diri">[docs]</a>    <span class="n">log_diri</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span><span class="n">sid_dck</span><span class="p">)</span></div>
+    <span class="n">array_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_diri</span><span class="p">,</span><span class="s1">&#39;*.input&#39;</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">array_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">: no jobs for partition&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sid_dck</span><span class="p">))</span>
+        <span class="k">continue</span>
+    
+    <span class="n">job_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_diri</span><span class="p">,</span><span class="n">sid_dck</span> <span class="o">+</span> <span class="s1">&#39;.slurm&#39;</span><span class="p">)</span>
+    
+    <span class="n">memi</span> <span class="o">=</span> <span class="n">script_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sid_dck</span><span class="p">,{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;job_memo_mb&#39;</span><span class="p">)</span>
+    <span class="n">memi</span> <span class="o">=</span> <span class="n">mem</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">memi</span> <span class="k">else</span> <span class="n">memi</span>
+    
+    <span class="n">t_hhi</span> <span class="o">=</span> <span class="n">script_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sid_dck</span><span class="p">,{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;job_time_hr&#39;</span><span class="p">)</span>
+    <span class="n">t_mmi</span> <span class="o">=</span> <span class="n">script_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sid_dck</span><span class="p">,{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;job_time_min&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">t_hhi</span> <span class="ow">and</span> <span class="n">t_mmi</span><span class="p">:</span>
+        <span class="n">ti</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t_hhi</span><span class="p">,</span><span class="n">t_mmi</span><span class="p">,</span><span class="s1">&#39;00&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ti</span> <span class="o">=</span> <span class="n">t</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">job_file</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s1">&#39;#!/bin/bash</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s1">&#39;#SBATCH --job-name=</span><span class="si">{}</span><span class="s1">.job</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sid_dck</span><span class="p">))</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s1">&#39;#SBATCH --array=1-</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">array_size</span><span class="p">)))</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s1">&#39;#SBATCH --partition=</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">QUEUE</span><span class="p">))</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s1">&#39;#SBATCH --output=</span><span class="si">{}</span><span class="s1">/</span><span class="si">%a</span><span class="s1">.out</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">log_diri</span><span class="p">))</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s1">&#39;#SBATCH --error=</span><span class="si">{}</span><span class="s1">/</span><span class="si">%a</span><span class="s1">.out</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">log_diri</span><span class="p">))</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s1">&#39;#SBATCH --time=</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ti</span><span class="p">))</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s1">&#39;#SBATCH --mem=</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">memi</span><span class="p">))</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s1">&#39;#SBATCH --open-mode=truncate</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1">/$SLURM_ARRAY_TASK_ID.input</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pycommand</span><span class="p">,</span><span class="n">log_diri</span><span class="p">))</span>
+    
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">: launching array&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sid_dck</span><span class="p">))</span> 
+    <span class="n">process</span> <span class="o">=</span> <span class="s2">&quot;jid=$(sbatch </span><span class="si">{}</span><span class="s2"> | cut -f 4 -d&#39; &#39;) &amp;&amp; echo $jid&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_file</span><span class="p">)</span>
+    <span class="n">jid</span> <span class="o">=</span> <span class="n">launch_process</span><span class="p">(</span><span class="n">process</span><span class="p">)</span>
+
+    <span class="c1"># Rename logs and clean inputs</span>
+    <span class="c1"># First rename with aftercorr succesfull array elements: aftercorr work on an element by element basis, if exit 0</span>
+    <span class="n">clean_ok</span> <span class="o">=</span> <span class="s2">&quot;sbatch --dependency=aftercorr:</span><span class="si">{0}</span><span class="s2"> --kill-on-invalid-dep=yes --array=1-</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jid</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">array_size</span><span class="p">))</span>
+    <span class="n">clean_ok</span> <span class="o">+=</span> <span class="s2">&quot; -p </span><span class="si">{0}</span><span class="s2"> --output=/dev/null --time=00:02:00 --mem=2&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">QUEUE</span><span class="p">)</span>
+    <span class="n">clean_ok</span> <span class="o">+=</span> <span class="s2">&quot; --wrap=&#39;python </span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2"> </span><span class="si">{2}</span><span class="s2"> </span><span class="si">{3}</span><span class="s2">/$SLURM_ARRAY_TASK_ID.input 0 0&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">py_clean_path</span><span class="p">,</span><span class="n">release</span><span class="p">,</span><span class="n">update</span><span class="p">,</span><span class="n">log_diri</span><span class="p">)</span>
+    <span class="n">ok_jid</span> <span class="o">=</span> <span class="n">launch_process</span><span class="p">(</span><span class="n">clean_ok</span><span class="p">)</span>
+    <span class="c1"># There is no aftercorr&quot;notok&quot;, so after successfull are renamed to ok, rename the rest to *.failed</span>
+    <span class="n">clean_failed</span> <span class="o">=</span> <span class="s2">&quot;sbatch --dependency=afterany:</span><span class="si">{0}</span><span class="s2"> --kill-on-invalid-dep=yes --array=1-</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ok_jid</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">array_size</span><span class="p">))</span>
+    <span class="n">clean_failed</span> <span class="o">+=</span> <span class="s2">&quot; -p </span><span class="si">{0}</span><span class="s2"> --output=/dev/null --time=00:02:00 --mem=2&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">QUEUE</span><span class="p">)</span>
+    <span class="n">clean_failed</span> <span class="o">+=</span> <span class="s2">&quot; --wrap=&#39;python </span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2"> </span><span class="si">{2}</span><span class="s2"> </span><span class="si">{3}</span><span class="s2">/$SLURM_ARRAY_TASK_ID.input 1 0&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">py_clean_path</span><span class="p">,</span><span class="n">release</span><span class="p">,</span><span class="n">update</span><span class="p">,</span><span class="n">log_diri</span><span class="p">)</span>
+    <span class="n">_jid</span> <span class="o">=</span> <span class="n">launch_process</span><span class="p">(</span><span class="n">clean_failed</span><span class="p">)</span>
+
+    
+    <span class="c1"># Remove source level if all OK and requested:</span>
+    <span class="k">if</span> <span class="n">remove_source</span><span class="p">:</span>
+        <span class="n">remove</span> <span class="o">=</span> <span class="s2">&quot;sbatch --dependency=afterok:</span><span class="si">{0}</span><span class="s2"> --kill-on-invalid-dep=yes -p </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jid</span><span class="p">,</span><span class="n">QUEUE</span><span class="p">)</span> 
+        <span class="n">remove</span> <span class="o">+=</span> <span class="s2">&quot; --time=00:10:00 --mem=2&quot;</span>
+        <span class="n">remove</span> <span class="o">+=</span> <span class="s2">&quot; --output=</span><span class="si">{0}</span><span class="s2">/remove_source.out --error=</span><span class="si">{0}</span><span class="s2">/remove_source.out --open-mode=truncate&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">log_diri</span><span class="p">)</span>
+        <span class="n">remove</span> <span class="o">+=</span> <span class="s2">&quot; --wrap=&#39;</span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2"> </span><span class="si">{2}</span><span class="s2"> </span><span class="si">{3}</span><span class="s2"> </span><span class="si">{4}</span><span class="s2"> </span><span class="si">{5}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bsh_remove_path</span><span class="p">,</span><span class="n">sid_dck</span><span class="p">,</span><span class="n">release</span><span class="p">,</span><span class="n">update</span><span class="p">,</span><span class="n">dataset</span><span class="p">,</span><span class="n">LEVEL_SOURCE</span><span class="p">)</span>
+        <span class="n">_jid</span> <span class="o">=</span> <span class="n">launch_process</span><span class="p">(</span><span class="n">remove</span><span class="p">)</span>    
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

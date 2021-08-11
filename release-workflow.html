@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Release workflow &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Adding new data models" href="adding-new-data-models.html" />
+    <link rel="prev" title="Observation suite set up and directories overview" href="obs-suite-set-up.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding-new-data-models.html">Adding new data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build-new-schema.html">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Release workflow</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/release-workflow.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="release-workflow">
+<span id="id1"></span><h1>Release workflow<a class="headerlink" href="#release-workflow" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="configuration-directory-set-up">
+<h2>Configuration directory set up<a class="headerlink" href="#configuration-directory-set-up" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">$config_directory</span></code> is where we define all the name and configuration details of each release or test. At the moment this directory in JASMIN correspond to the path: <code class="docutils literal notranslate"><span class="pre">/gws/smf/j04/c3s311a_lot2/code/marine_code/glamod-marine-config/obs-suite</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This might change in the future and is always good to verify if all paths in <code class="docutils literal notranslate"><span class="pre">setpaths.sh</span></code> are correct.</p>
+</div>
+<p>To make a release you must follow the following syntax’s to create a release tree directory:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 23%" />
+<col style="width: 27%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Data release name examples</p></td>
+<td><p>Tag</p></td>
+<td><p>Data set name</p></td>
+</tr>
+<tr class="row-even"><td><p>release_demo, release_4.0</p></td>
+<td><p>000000</p></td>
+<td><p>ICOADS_R3.0.0T</p></td>
+</tr>
+</tbody>
+</table>
+<p>Under the <code class="docutils literal notranslate"><span class="pre">$config_directory</span></code> path you need to create the following directory tree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd $data_directory
+$ mkdir release_demo-000000
+$ cd release_demo-000000
+$ mkdir ICOADS_R3.0.0T
+$ cd ICOADS_R3.0.0T
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure there is <code class="docutils literal notranslate"><span class="pre">hyphen:</span> <span class="pre">-</span></code> between the release name and the tag.</p>
+</div>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">ICOADS_R3.0.0T</span></code> or data set name directory you will create the following configuration files (<code class="docutils literal notranslate"><span class="pre">.json</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[ICOADS_R3.0.0T]$ ls
+  level1a.json  source_deck_list.txt  source_deck_periods.json
+</pre></div>
+</div>
+<p>Each file is describe below.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">source_deck_periods.json</span></code>:</p></li>
+</ol>
+<p>This file is a json file with each of the source-deck partitions to be included in the release, and the associated periods (year resolution) to process. The code below shows an example of this file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s2">&quot;096-702&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;year_init&quot;</span><span class="p">:</span> <span class="mi">1867</span><span class="p">,</span>
+        <span class="s2">&quot;year_end&quot;</span><span class="p">:</span> <span class="mi">1889</span>
+    <span class="p">},</span>
+<span class="s2">&quot;143-781&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;year_init&quot;</span><span class="p">:</span> <span class="mi">1968</span><span class="p">,</span>
+        <span class="s2">&quot;year_end&quot;</span><span class="p">:</span> <span class="mi">1993</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example we will be running the sdi-deck: 096-702 and 143-781. For the last deck “781” we want to run the default configuration applied to all sources and decks from ICOADS but for the deck “702” we want to read in metadata information form the c99 column and we will be applying a specific data model to do that.</p>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">source_deck_list.txt</span></code>:</p></li>
+</ol>
+<p>This is a simple ascii file with the list of source-deck partitions to process. Create the master list with the keys of file source_deck_periods.json. This file can later be subsetted if a given process is to be run in batches. The code below shows a sample of this file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">096</span><span class="o">-</span><span class="mi">702</span>
+<span class="mi">143</span><span class="o">-</span><span class="mi">781</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">level1a.json</span></code>:</p></li>
+</ol>
+<p>The upper part of the configuration file corresponds to a default run, meaning that you will run this type of configuration for the majority of decks in ICOADS using an “standard” <code class="docutils literal notranslate"><span class="pre">.imma</span></code> based schema (<code class="docutils literal notranslate"><span class="pre">imma1</span></code>) and common data model mapper (<code class="docutils literal notranslate"><span class="pre">icoads_r3000</span></code>). The second part of the file (yellow circle) corresponds to a configuration that is “source-deck” specific and for which you will apply a specific data schema and common data model mapper specially modified to document extra metadata information from that specific collection (e.g. <code class="docutils literal notranslate"><span class="pre">imma1_d702</span></code> and <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d702</span></code>) and map that information to the Common Data Model format.</p>
+<div class="figure align-default" id="id4">
+<a class="reference internal image-reference" href="_images/level1ajson.png"><img alt="_images/level1ajson.png" src="_images/level1ajson.png" style="width: 45%;" /></a>
+<p class="caption"><span class="caption-text">Level1 configuration file example</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>You can copy and paste also the lines below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;job_memo_mb&quot;</span><span class="p">:</span> <span class="mi">16000</span><span class="p">,</span>
+    <span class="s2">&quot;job_time_hr&quot;</span><span class="p">:</span> <span class="s2">&quot;03&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;job_time_min&quot;</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data_model&quot;</span><span class="p">:</span> <span class="s2">&quot;imma1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;read_sections&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;core&quot;</span><span class="p">,</span><span class="s2">&quot;c1&quot;</span><span class="p">,</span><span class="s2">&quot;c98&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;filter_reports_by&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;c1.PT&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;cdm_map&quot;</span><span class="p">:</span> <span class="s2">&quot;icoads_r3000&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;source_pattern&quot;</span><span class="p">:</span><span class="s2">&quot;IMMA1_R3.0.0T_????-??&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;096-702&quot;</span><span class="p">:</span>
+        <span class="p">{</span>
+        <span class="s2">&quot;job_memo_mb&quot;</span><span class="p">:</span> <span class="mi">4000</span><span class="p">,</span>
+        <span class="s2">&quot;job_time_hr&quot;</span><span class="p">:</span> <span class="s2">&quot;01&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;job_time_min&quot;</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;data_model&quot;</span><span class="p">:</span> <span class="s2">&quot;imma1_d702&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;read_sections&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;core&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;c1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;c98&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;c99_data&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;filter_reports_by&quot;</span><span class="p">:</span>
+        <span class="p">{</span>
+         <span class="s2">&quot;c1.PT&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;cdm_map&quot;</span><span class="p">:</span> <span class="s2">&quot;icoads_r3000_d702&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;source_pattern&quot;</span><span class="p">:</span><span class="s2">&quot;IMMA1_R3.0.0T_????-??&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the following table we describe what each parameter in the <code class="docutils literal notranslate"><span class="pre">level1a.json</span></code> file mean:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 89%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>json variable</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">job_memo_mb</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Memory in MB needed to run the job. This is part of the SLURM set up</div>
+<div class="line">defined in the following script: <a class="reference external" href="https://glamod.github.io/c3s-marine-obs-suite-documentation/_modules/lotus_scripts/level1a_slurm.html#log_diri">lotus_scripts.level1a_slurm</a>.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">job_time_hr</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Hours needed to run the job. This is part of the SLURM set up</div>
+<div class="line">defined in the following script: <a class="reference external" href="https://glamod.github.io/c3s-marine-obs-suite-documentation/_modules/lotus_scripts/level1a_slurm.html#log_diri">lotus_scripts.level1a_slurm</a>.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">job_time_min</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Minutes needed to run the job. This is part of the SLURM set up</div>
+<div class="line">defined in the following script: <a class="reference external" href="https://glamod.github.io/c3s-marine-obs-suite-documentation/_modules/lotus_scripts/level1a_slurm.html#log_diri">lotus_scripts.level1a_slurm</a>.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">data_model</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Data model or schema use to read the input data (e.g. <code class="docutils literal notranslate"><span class="pre">imma</span></code>).</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">read_sections</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Specifies sections to read from the original data that are &lt;br&gt;</div>
+<div class="line">require by the common data model mapper (e.g. <code class="docutils literal notranslate"><span class="pre">icoads_r3000</span></code>)</div>
+<div class="line"><strong>Tip</strong>: for ICOADS always check in the <code class="docutils literal notranslate"><span class="pre">.json</span></code> files of</div>
+<div class="line">the cdm mapper what sections from the <code class="docutils literal notranslate"><span class="pre">.imma</span></code> format are</div>
+<div class="line">being map, so don’t read all sections when is not necessary</div>
+<div class="line">this variable is important when mapping data from section c99</div>
+<div class="line">the name of the c99 section is specific to each deck.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">filter_reports_by</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Applies a filter to the input data based on a specific</div>
+<div class="line">variable. e.g. the most common among ICOADS is the platform</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">c1.PT</span></code> since in most of the processing we only want to</div>
+<div class="line">include data collected by ships <code class="docutils literal notranslate"><span class="pre">c1.PT</span></code> from 0-5</div>
+<div class="line"><strong>Note</strong>: for deck 701 we added an extra filter based on the</div>
+<div class="line">log form type since we have a different cdm mapper for each log</div>
+<div class="line">type. Read more in <a class="reference internal" href="issues-with-data-models.html#issues-with-data-models"><span class="std std-ref">Issues with data models</span></a>.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cdm_map</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Data model mapper use to map and validate the data to the C3s</div>
+<div class="line">CDM format (e.g. <code class="docutils literal notranslate"><span class="pre">icoads_r3000</span></code>).</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">source_pattern</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Common pattern in the string of the data input file name</div>
+<div class="line"><strong>tip</strong>: yyyy-mm in the file name will correspond to</div>
+<div class="line">the ????-?? symbols.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="make-release-source-tree">
+<h2>Make release source tree<a class="headerlink" href="#make-release-source-tree" title="Permalink to this headline">¶</a></h2>
+<p>After finishing with the <code class="docutils literal notranslate"><span class="pre">$config_directory</span></code> files you can go back to the <code class="docutils literal notranslate"><span class="pre">$code_directory</span></code> and follow the commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd $code_directory/scripts
+$ python make_release_source_tree.py $data_directory $config_directory release_demo 000000 ICOADS_R3.0.0T
+</pre></div>
+</div>
+<p>If you now go to the <code class="docutils literal notranslate"><span class="pre">$data_directory</span></code> you will then see an output directory with the name of the release.</p>
+</div>
+<div class="section" id="run-level1a">
+<h2>Run level1a<a class="headerlink" href="#run-level1a" title="Permalink to this headline">¶</a></h2>
+<p>For this you have two options running the level in the command line (for just one source-deck and single data input file) or by submitting a job with the SLURM scheduler.</p>
+<ol class="arabic">
+<li><p>In the command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(env0)$ cd $code_directory/scripts
+(env0)$ export level1a_config=$config_directory/release_demo-000000/ICOADS_R3.0.0T/level1a.json
+(env0)$ python level1a.py $data_directory release_demo 000000 ICOADS_R3.0.0T level1a_config 096-702 1867 12
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>level1a_config</strong> is the path to the <code class="docutils literal notranslate"><span class="pre">level1a.json</span></code> configuration file.</p>
+</div>
+<ol class="arabic" start="2">
+<li><p>Submitting a job to SLURM:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(env0)$ cd $code_directory/lotus_scripts
+(env0)$ export process_list=$config_directory/release_demo-000000/ICOADS_R3.0.0T/source_deck_list.txt
+(env0)$ python level1a_slurm.py release_demo 000000 ICOADS_R3.0.0T $config_directory $process_list
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>process_list</strong> is the path to the <code class="docutils literal notranslate"><span class="pre">source_deck_list.txt</span></code> defined in the <code class="docutils literal notranslate"><span class="pre">$config_directory</span></code></p>
+</div>
+<p>If you are running a lot of years and several decks the scheduler might take a while starting the jobs. Patience is key!</p>
+<p>Once your jobs have been submitted, you can verify that your run is going well by checking the logs. The logging of each job should be printed in the following directory: <code class="docutils literal notranslate"><span class="pre">$data_directory/release_demo/ICOADS_R3.0.0T/level1a/log</span></code></p>
+<p>Go to <a class="reference internal" href="issues-with-data-models.html#issues-with-data-models"><span class="std std-ref">Issues with data models</span></a> to asses the output of your run.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="adding-new-data-models.html" class="btn btn-neutral float-right" title="Adding new data models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="obs-suite-set-up.html" class="btn btn-neutral float-left" title="Observation suite set up and directories overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

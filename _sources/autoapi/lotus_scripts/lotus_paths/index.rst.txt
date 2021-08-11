@@ -1,0 +1,29 @@
+:mod:`lotus_scripts.lotus_paths`
+================================
+
+.. py:module:: lotus_scripts.lotus_paths
+
+
+Module Contents
+---------------
+
+.. data:: lotus_scripts_directory
+   
+
+   
+
+.. data:: scripts_directory
+   
+
+   
+
+.. data:: data_directory
+   
+
+   
+
+.. data:: scratch_directory
+   
+
+   
+

@@ -1,0 +1,769 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Issues with data models &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="3. Commit and push changes" href="last-steps.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding-new-data-models.html">Adding new data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build-new-schema.html">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Issues with data models</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/issues-with-data-models.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="issues-with-data-models">
+<span id="id1"></span><h1>Issues with data models<a class="headerlink" href="#issues-with-data-models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="missing-code-tables">
+<h2>Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code><a class="headerlink" href="#missing-code-tables" title="Permalink to this headline">¶</a></h2>
+<p>Documenting supplemental data from ICOADS is not an easy task since the metadata information format (stored in the imma <code class="docutils literal notranslate"><span class="pre">c99</span></code> section) vary from deck to deck and is often incomplete for several collections. You might be able to find all the information about the <code class="docutils literal notranslate"><span class="pre">c99</span></code> string separation, but you might be missing the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> to <em>decode</em> what the value of that variable means (e.g. Temperature units are said to be recorded as 1, 2 and 3, but there isn’t a clue of what that number means in terms of temperature units 1=C, F or K?).</p>
+<p>In the case that we can put together a <strong>schema</strong>, but we are missing some of the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> or the ICOADS information is incomplete, we can use the <strong>mdf_reader</strong> as tool for generating <strong>missing code_tables</strong>.</p>
+<p>An example of how to address this particular issue can be found in the script below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Gather missing air temperature from deck 701 c99</span>
+<span class="sd">US Maury Collection of historical ships&#39; weather logs</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="c1"># Defined your working directory where you have the mdf_reader folder stored!</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;working_dir&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">mdf_reader</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">mdf_reader</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="n">funPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+<span class="c1"># This directory should be the raw level0 files from ICOADS.</span>
+<span class="c1"># Need to be modify if such files have change location</span>
+<span class="n">data_jasmin</span> <span class="o">=</span> <span class="s1">&#39;/gws/nopw/j04/glamod_marine/data/datasets/ICOADS_R3.0.0T/level0/069-701&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_jasmin</span><span class="p">)</span>
+
+<span class="c1"># Year array of the years cover by the deck 701 time series.</span>
+<span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1784</span><span class="p">,</span> <span class="mi">1863</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">years</span><span class="p">)</span>
+
+<span class="c1"># Make sure you change this and working_dir to the path of your convenience</span>
+<span class="n">output_path</span> <span class="o">=</span> <span class="s1">&#39;working_dir/069-701/&#39;</span>
+
+<span class="c1"># This variable corresponds to the $SLURM_ARRAY_TASK_ID</span>
+<span class="c1"># and indicates what index of the year array should be run</span>
+<span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">year</span> <span class="o">=</span> <span class="n">years</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+
+<span class="c1"># Here we make sure we iterate over months for each year of data</span>
+<span class="n">months</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;01&#39;</span><span class="p">,</span> <span class="s1">&#39;02&#39;</span><span class="p">,</span> <span class="s1">&#39;03&#39;</span><span class="p">,</span> <span class="s1">&#39;04&#39;</span><span class="p">,</span> <span class="s1">&#39;05&#39;</span><span class="p">,</span> <span class="s1">&#39;06&#39;</span><span class="p">,</span> <span class="s1">&#39;07&#39;</span><span class="p">,</span> <span class="s1">&#39;08&#39;</span><span class="p">,</span> <span class="s1">&#39;09&#39;</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="s1">&#39;12&#39;</span><span class="p">]</span>
+
+<span class="n">paths_files</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">months</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_jasmin</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">m</span><span class="o">+</span><span class="s1">&#39;.imma&#39;</span><span class="p">)</span>
+    <span class="c1">#print(path)</span>
+    <span class="c1"># Here we check if that data file MM-YYYY</span>
+    <span class="c1"># exist for deck 069-701 and we store the file paths that exist</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">paths_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">paths_files</span><span class="p">)</span>
+
+<span class="c1"># We get the schema from the mdf_reader library for that deck</span>
+<span class="n">schema_lib</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">funPath</span><span class="p">),</span><span class="s1">&#39;data_models&#39;</span><span class="p">,</span><span class="s1">&#39;lib&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">schema_lib</span><span class="p">)</span>
+
+<span class="n">schema_name</span> <span class="o">=</span> <span class="s1">&#39;imma1_d701&#39;</span>
+
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">schema_lib</span><span class="p">,</span> <span class="n">schema_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="n">at_units</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">path</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">paths_files</span><span class="p">,</span> <span class="n">months</span><span class="p">):</span>
+    <span class="c1"># We apply the schema and read the data</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">mdf_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data_model_path</span><span class="o">=</span> <span class="n">model_path</span><span class="p">)</span>
+    <span class="c1"># We store the name of the file only... to name out output later</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">path</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span>
+    <span class="c1"># We find out for each imma file the type of values stored in temp_ind variable</span>
+    <span class="n">at_unit</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">[[</span><span class="s2">&quot;c99_data&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">c99_data</span><span class="o">.</span><span class="n">temp_ind</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+    <span class="n">at_units</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">at_unit</span><span class="p">)</span>
+
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;at_units&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">at_units</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;at_units.pkl&#39;</span><span class="p">)</span>
+<span class="c1">#print(fp)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above script runs in JASMIN via SLURM:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#SBATCH --partition=short-serial-4hr
+#SBATCH --array=1-78
+#SBATCH --job-name=maury_atunits
+#SBATCH --output=slurm_log_output/maury_atunits_%A_%a.out
+#SBATCH --error=slurm_log_output/maury_atunits_%A_%a.err
+#SBATCH --mem=4000
+#SBATCH --time=00:29:00
+
+module load jaspy
+
+source /home/users/brecinos/c3s_work/env0/bin/activate
+
+echo &quot;starting from year number $SLURM_ARRAY_TASK_ID&quot;
+
+python /home/users/brecinos/c3s_work/mdf_reader/tests/at_units_overview_c99.py $SLURM_ARRAY_TASK_ID
+
+echo &quot;Done slurm task ID = $SLURM_ARRAY_TASK_ID&quot;
+</pre></div>
+</div>
+<p>The output of this run is a series of <a class="reference external" href="https://www.datacamp.com/community/tutorials/pickle-python-tutorial">pickle files</a> for each year in the data set <code class="docutils literal notranslate"><span class="pre">1792.pkl</span></code> and they store the value assigned to the temperature unit and how many times this value repeats in a month and year over the entire time series of the data. You can modify this extension easily if you want.</p>
+<p>The script below explains how to read the output files and make a bar plot of the data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+
+<span class="c1"># Plot details</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="k">as</span> <span class="nn">mdates</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;legend.fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;legend.title_fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span>
+
+<span class="c1"># FUNCTIONS TO READ IN THE DATA</span>
+<span class="c1"># -----------------------------</span>
+<span class="k">def</span> <span class="nf">get_values</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Get individual sets of values from the pickle dataframe</span>
+<span class="sd">Params:</span>
+<span class="sd">------</span>
+<span class="sd">dic: python dictionary containing all variables stats per year</span>
+<span class="sd">key: variable name</span>
+<span class="sd">year: year to extract</span>
+<span class="sd">Returns:</span>
+<span class="sd">--------</span>
+<span class="sd">indexes: these are the variable types</span>
+<span class="sd">         (e.g. 1 or 2 for air temperature units)</span>
+<span class="sd">series.values: these are the counts of how many that</span>
+<span class="sd">               variable gets repeated over the time series</span>
+<span class="sd">year: year to sample</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">series</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<span class="n">indexes</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+<span class="n">year</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">indexes</span><span class="p">))</span>
+<span class="k">return</span> <span class="n">indexes</span><span class="p">,</span> <span class="n">series</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">year</span>
+
+
+<span class="k">def</span> <span class="nf">extract_year_arrays</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Reads pickle file and extracts the variable arrays per year</span>
+<span class="sd">Params:</span>
+<span class="sd">-------</span>
+<span class="sd">path_to_file: path to the pickle file</span>
+<span class="sd">key: variable to extract</span>
+<span class="sd">Returns:</span>
+<span class="sd">--------</span>
+<span class="sd">df: dataframe from get_df</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">)</span>
+    <span class="n">year</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">base</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dic_pickle</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">get_values</span><span class="p">(</span><span class="n">dic_pickle</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+
+<span class="k">def</span> <span class="nf">make_data_frame</span><span class="p">(</span><span class="n">list_of_files</span><span class="p">,</span> <span class="n">main_directory</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">From pickle to a time series data frame of all possible values</span>
+<span class="sd">for the specific variable that is missing</span>
+<span class="sd">Params:</span>
+<span class="sd">-------</span>
+<span class="sd">list_of_files: all pkl file names</span>
+<span class="sd">main_directory: main path where the files are saved</span>
+<span class="sd">key: name of the variable to extract as saved in</span>
+<span class="sd">     the production script of the pickle files</span>
+<span class="sd">     e.g. at_units</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Define empty arrays to store the data</span>
+<span class="n">years</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="n">types_of_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span> <span class="c1">#possible values of that missing variable</span>
+<span class="n">counts_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span> <span class="c1"># how many times that value repeats</span>
+
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">list_of_files</span><span class="p">:</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">main_directory</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+    <span class="c1">#print(extract_year_arrays(full_path, key))</span>
+    <span class="n">var_type</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">year_f</span> <span class="o">=</span> <span class="n">extract_year_arrays</span><span class="p">(</span><span class="n">full_path</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">years</span><span class="p">,</span> <span class="n">year_f</span><span class="p">])</span>
+    <span class="n">types_of_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">types_of_var</span><span class="p">,</span> <span class="n">var_type</span><span class="p">])</span>
+    <span class="n">counts_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">counts_var</span><span class="p">,</span> <span class="n">count</span><span class="p">])</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Year&#39;</span><span class="p">:</span> <span class="n">years</span><span class="p">,</span>
+                        <span class="n">key</span><span class="p">:</span> <span class="n">types_of_var</span><span class="p">,</span> <span class="s1">&#39;Count&#39;</span><span class="p">:</span> <span class="n">counts_var</span><span class="p">})</span>
+<span class="k">return</span> <span class="n">dataset</span>
+
+<span class="c1"># ----- Applying the functions defined above ----------</span>
+
+<span class="n">dirs</span> <span class="o">=</span> <span class="s1">&#39;working_dir/069-701/*.pkl&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dirs</span><span class="p">)</span>
+<span class="n">file_names</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">dirs</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">file_names</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># List of variables names stored in the pickle files</span>
+<span class="n">dic_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;at_units&#39;</span><span class="p">]</span>
+
+<span class="c1"># All the information stored in one data frame</span>
+<span class="n">df_at_units</span> <span class="o">=</span> <span class="n">make_data_frame</span><span class="p">(</span><span class="n">file_names</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">dic_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df_at_units</span><span class="o">.</span><span class="n">at_units</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="c1"># --- Plot the data with seaborn ----------------------</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_at_units</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;at_units&quot;</span><span class="p">,</span>
+                 <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;AT units&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now we have an idea of what are the values for the air temperature:</p>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="_images/at_units.png"><img alt="_images/at_units.png" src="_images/at_units.png" style="width: 120%;" /></a>
+<p class="caption"><span class="caption-text">Air temperature units entry for deck 701.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>And by looking at the data values for the respective years where there is only 1 or 2, we can infer that the air temperature has values of <code class="docutils literal notranslate"><span class="pre">1:Fahrenheit</span></code> and <code class="docutils literal notranslate"><span class="pre">2:Celcius</span></code>.</p>
+</div>
+<div class="section" id="exclusion-of-data">
+<h2>Exclusion of data<a class="headerlink" href="#exclusion-of-data" title="Permalink to this headline">¶</a></h2>
+<p>Deck 701 (again!) is a good example of how some times we require more than one data model <strong>mapper</strong> per collection. In this case we need to filter measurements coming from a specific logging form type and assign to <code class="docutils literal notranslate"><span class="pre">form</span> <span class="pre">type</span> <span class="pre">==</span> <span class="pre">2</span></code>, sampling hours from <code class="docutils literal notranslate"><span class="pre">ICOADS.core.hr</span></code> section and to <code class="docutils literal notranslate"><span class="pre">form</span> <span class="pre">type</span> <span class="pre">==</span> <span class="pre">1</span></code>, set the sampling hour of each measurement to 12:00HR local time.</p>
+<dl class="simple">
+<dt>To achieve this we generate first two different cdm mappers:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">icoads_r3000_d701_type1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">icoads_r3000_d701_type2</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p>You can explore the difference between these mappers by looking at the files files under: <code class="docutils literal notranslate"><span class="pre">../cdm-mapper/lib/mappings</span></code>, and you will find the main differences in the fields</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">report_timestamp</span></code> for form 1 in <code class="docutils literal notranslate"><span class="pre">header.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;report_timestamp&quot;</span><span class="p">:</span> <span class="p">{</span>
+   <span class="s2">&quot;sections&quot;</span><span class="p">:</span> <span class="s2">&quot;core&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;YR&quot;</span><span class="p">,</span><span class="s2">&quot;MO&quot;</span><span class="p">,</span><span class="s2">&quot;DY&quot;</span><span class="p">,</span> <span class="s2">&quot;LON&quot;</span><span class="p">,</span> <span class="s2">&quot;LAT&quot;</span><span class="p">],</span>
+   <span class="s2">&quot;transform&quot;</span><span class="p">:</span> <span class="s2">&quot;datetime_to_cdm_time&quot;</span>
+   <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">report_timestamp</span></code> for form 2 in <code class="docutils literal notranslate"><span class="pre">header.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;report_timestamp&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;sections&quot;</span><span class="p">:</span> <span class="s2">&quot;core&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;YR&quot;</span><span class="p">,</span><span class="s2">&quot;MO&quot;</span><span class="p">,</span><span class="s2">&quot;DY&quot;</span><span class="p">,</span><span class="s2">&quot;HR&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;transform&quot;</span><span class="p">:</span> <span class="s2">&quot;datetime_imma1&quot;</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Basically we use two different functions to record each measurement time stamp. To look at these functions check the <code class="docutils literal notranslate"><span class="pre">imodel.py</span></code> file for each mapper: <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d701_type1.py</span></code> and <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d701_type2.py</span></code></p>
+<p>Now when we run <strong>level1a</strong>, we will need to set up two different runs and to each run, we will apply a different common data model mapper:</p>
+<ul>
+<li><p>Configuration of <code class="docutils literal notranslate"><span class="pre">level1a.json</span></code> for form 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;job_memo_mb&quot;</span><span class="p">:</span> <span class="mi">16000</span><span class="p">,</span>
+  <span class="s2">&quot;job_time_hr&quot;</span><span class="p">:</span> <span class="s2">&quot;03&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;job_time_min&quot;</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;data_model&quot;</span><span class="p">:</span> <span class="s2">&quot;imma1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;read_sections&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;core&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;c1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;c98&quot;</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;filter_reports_by&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;c1.PT&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;cdm_map&quot;</span><span class="p">:</span> <span class="s2">&quot;icoads_r3000&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;source_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMA1_R3.0.0T_????-??&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;069-701&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;job_memo_mb&quot;</span><span class="p">:</span> <span class="mi">4000</span><span class="p">,</span>
+        <span class="s2">&quot;job_time_hr&quot;</span><span class="p">:</span> <span class="s2">&quot;01&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;job_time_min&quot;</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;data_model&quot;</span><span class="p">:</span> <span class="s2">&quot;imma1_d701&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;read_sections&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;core&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;c1&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;c98&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;c99_data&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;c99_header&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;filter_reports_by&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;c1.PT&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;5&quot;</span>
+          <span class="p">],</span>
+          <span class="s2">&quot;c99_header.form_type&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot; 1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;1 &quot;</span><span class="p">,</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;01&quot;</span>
+          <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;cdm_map&quot;</span><span class="p">:</span> <span class="s2">&quot;icoads_r3000_d701_type1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;source_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMA1_R3.0.0T_????-??&quot;</span>
+      <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Configuration of <code class="docutils literal notranslate"><span class="pre">level1a.json</span></code> for form 2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="s2">&quot;job_memo_mb&quot;</span><span class="p">:</span> <span class="mi">16000</span><span class="p">,</span>
+     <span class="s2">&quot;job_time_hr&quot;</span><span class="p">:</span> <span class="s2">&quot;03&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;job_time_min&quot;</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;data_model&quot;</span><span class="p">:</span> <span class="s2">&quot;imma1&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;read_sections&quot;</span><span class="p">:</span> <span class="p">[</span>
+       <span class="s2">&quot;core&quot;</span><span class="p">,</span>
+       <span class="s2">&quot;c1&quot;</span><span class="p">,</span>
+       <span class="s2">&quot;c98&quot;</span>
+     <span class="p">],</span>
+     <span class="s2">&quot;filter_reports_by&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="s2">&quot;c1.PT&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">]</span>
+     <span class="p">},</span>
+     <span class="s2">&quot;cdm_map&quot;</span><span class="p">:</span> <span class="s2">&quot;icoads_r3000&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;source_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMA1_R3.0.0T_????-??&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;069-701&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;job_memo_mb&quot;</span><span class="p">:</span> <span class="mi">4000</span><span class="p">,</span>
+           <span class="s2">&quot;job_time_hr&quot;</span><span class="p">:</span> <span class="s2">&quot;01&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;job_time_min&quot;</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;data_model&quot;</span><span class="p">:</span> <span class="s2">&quot;imma1_d701&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;read_sections&quot;</span><span class="p">:</span> <span class="p">[</span>
+             <span class="s2">&quot;core&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;c1&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;c98&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;c99_data&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;c99_header&quot;</span>
+           <span class="p">],</span>
+           <span class="s2">&quot;filter_reports_by&quot;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="s2">&quot;c1.PT&quot;</span><span class="p">:</span> <span class="p">[</span>
+               <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;5&quot;</span>
+             <span class="p">],</span>
+             <span class="s2">&quot;c99_header.form_type&quot;</span><span class="p">:</span> <span class="p">[</span>
+               <span class="s2">&quot; 2&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;2 &quot;</span><span class="p">,</span>
+               <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;02&quot;</span>
+             <span class="p">]</span>
+           <span class="p">},</span>
+           <span class="s2">&quot;cdm_map&quot;</span><span class="p">:</span> <span class="s2">&quot;icoads_r3000_d701_type2&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;source_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMA1_R3.0.0T_????-??&quot;</span>
+         <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>On each run we will be able to find the excluded files under: <code class="docutils literal notranslate"><span class="pre">$data_directory/release_demo/ICOADS_R3.0.0T/level1a/excluded</span></code></p>
+</div>
+<div class="section" id="invalid-data">
+<h2>Invalid data<a class="headerlink" href="#invalid-data" title="Permalink to this headline">¶</a></h2>
+<p>After running <strong>level1a</strong> some measurements might not be mapped to the C3S CDM format. This can be for several reasons, but the main reason is that they did not pass the validation after the <strong>mdf_reader</strong> read the data with the specified schema.</p>
+<p>For a value to be map it has to match the element properties specified in the <strong>schema</strong> (e.g. encoding, be between a valid range, be a value contemplated in a code_table, etc). Such files will be stored under: <code class="docutils literal notranslate"><span class="pre">$data_directory/release_demo/ICOADS_R3.0.0T/level1a/invalid</span></code>.</p>
+<p>In the <strong>invalid</strong> directory, you will find invalid data stored per <code class="docutils literal notranslate"><span class="pre">sid-dck</span></code> as <code class="docutils literal notranslate"><span class="pre">.psv</span></code> files. This directory contains two types of files:</p>
+<ul class="simple">
+<li><p>The data frame with the original invalid data file: <code class="docutils literal notranslate"><span class="pre">YYYY-MM-release_demo-000000-data.psv</span></code></p></li>
+<li><p>The mask for the entire file, showing invalid data as <code class="docutils literal notranslate"><span class="pre">False</span></code>: <code class="docutils literal notranslate"><span class="pre">YYYY-MM-release_demo-000000-data.psv</span></code></p></li>
+</ul>
+<p>In the program of your choice, you can identify what variable field is not passing the code validation by looking at which column you find the most <code class="docutils literal notranslate"><span class="pre">False</span></code>’s and look at the original data values that were recorded. An example of such problem is illustrated below for deck 701:</p>
+<ul>
+<li><p>ICOADS website information for this deck states that the <code class="docutils literal notranslate"><span class="pre">form_type</span></code> consist of two strings and the entry can be 01 or 02:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s2">&quot;01&quot;</span><span class="p">:</span> <span class="s2">&quot;daily&quot;</span><span class="p">,</span>
+<span class="s2">&quot;02&quot;</span><span class="p">:</span> <span class="s2">&quot;reports more than once a day&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Therefore, in our schema for this deck we defined a <code class="docutils literal notranslate"><span class="pre">code_table</span></code> as stated above.</p></li>
+<li><p>But when we ran <strong>level1a</strong>, several files were saved in the invalid data folder, because the original data from that field was actually ingested by using several types of key-number-combinations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s2">&quot; 1&quot;</span><span class="p">:</span> <span class="s2">&quot;daily&quot;</span><span class="p">,</span>
+<span class="s2">&quot; 2&quot;</span><span class="p">:</span> <span class="s2">&quot;reports more than once a day&quot;</span><span class="p">,</span>
+<span class="s2">&quot;1 &quot;</span><span class="p">:</span> <span class="s2">&quot;daily&quot;</span><span class="p">,</span>
+<span class="s2">&quot;2 &quot;</span><span class="p">:</span> <span class="s2">&quot;reports more than once a day&quot;</span><span class="p">,</span>
+<span class="s2">&quot;01&quot;</span><span class="p">:</span> <span class="s2">&quot;daily&quot;</span><span class="p">,</span>
+<span class="s2">&quot;02&quot;</span><span class="p">:</span> <span class="s2">&quot;reports more than once a day&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>If a value on a field is not contemplated in a <code class="docutils literal notranslate"><span class="pre">code_table</span></code>, the entire row of the data measurement can be classified as invalid and we can lose information of other important variables that we are more interested in mapping e.g., original air temperature units or platform subtypes.</p>
+<p>Make sure that when you construct <code class="docutils literal notranslate"><span class="pre">code_tables</span></code>, you are taking into account all possible entries for that particular variable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Check that we took into account this issue when we define the <code class="docutils literal notranslate"><span class="pre">filter_reports_by</span></code> variable, in the <code class="docutils literal notranslate"><span class="pre">level1a.json</span></code> file written above (see exclusion of data).</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="last-steps.html" class="btn btn-neutral float-left" title="3. Commit and push changes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

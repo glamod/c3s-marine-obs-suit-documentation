@@ -1,0 +1,550 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>2. Build and add a cdm-mapper &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Commit and push changes" href="last-steps.html" />
+    <link rel="prev" title="1. Build and add a mdf_reader schema" href="build-new-schema.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="adding-new-data-models.html">Adding new data models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="build-new-schema.html">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-schema.html#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="adding-new-data-models.html">Adding new data models</a> &raquo;</li>
+        
+      <li>2. Build and add a cdm-mapper</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/build-new-cdm-mapper.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="build-and-add-a-cdm-mapper">
+<span id="build-new-cdm-mapper"></span><h1>2. Build and add a cdm-mapper<a class="headerlink" href="#build-and-add-a-cdm-mapper" title="Permalink to this headline">¶</a></h1>
+<p>Detail instructions on how to build and add a new cdm-mapper for any type of data can be found in the <a class="reference external" href="https://glamod.github.io/cdm_mapper_documentation/how-to-register-a-new-data-model-mapping.html">cdm_mapper docs</a>. However, the process to create a <strong>mapper</strong> for a data collection from ICOADS can be simplified by copying an <strong>already built in</strong> cdm_mapper i.e., <code class="docutils literal notranslate"><span class="pre">icoads_r3000</span></code>.</p>
+<div class="section" id="set-up-your-script">
+<h2>2.1 Set up your script<a class="headerlink" href="#set-up-your-script" title="Permalink to this headline">¶</a></h2>
+<p>After activating the correct python environment, you can start a new python console and create the following script by typing the commands below. Don’t forget to change your working directory path first:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">working_dir</span> <span class="o">=</span> <span class="s1">&#39;/to_your_designated_folder_where_you_installed_mdf_reader_and_cdm/&#39;</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">working_dir</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">mdf_reader</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">cdm</span>
+</pre></div>
+</div>
+<p>To get familiar with the cdm tool you can read a raw <cite>.imma</cite> file from dck 704 as an example, for a subset of the data collected in 1878/10 and apply the existing <code class="docutils literal notranslate"><span class="pre">icoads_r3000</span></code> data model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="s1">&#39;mdf_reader/tests/data/125-704_1878-10_subset.imma&#39;</span><span class="p">)</span>
+<span class="n">schema_new</span> <span class="o">=</span> <span class="s1">&#39;imma1_d704&#39;</span>
+<span class="n">data_new</span> <span class="o">=</span> <span class="n">mdf_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_file_path</span><span class="p">,</span> <span class="n">data_model</span> <span class="o">=</span> <span class="n">schema_new</span><span class="p">)</span>
+
+<span class="n">attributes</span> <span class="o">=</span> <span class="n">data_new</span><span class="o">.</span><span class="n">atts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">name_of_model</span> <span class="o">=</span> <span class="s1">&#39;icoads_r3000&#39;</span>
+
+<span class="n">cdm_dict</span> <span class="o">=</span> <span class="n">cdm</span><span class="o">.</span><span class="n">map_model</span><span class="p">(</span><span class="n">name_of_model</span><span class="p">,</span> <span class="n">data_new</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">attributes</span><span class="p">,</span> <span class="n">cdm_subset</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can explore each table inside the <code class="docutils literal notranslate"><span class="pre">cdm_dict</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdm_dict</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">cdm_dict</span><span class="p">[</span><span class="s1">&#39;observations-at&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="copy-files-from-a-pre-existent-data-model-mapper">
+<h2>2.2 Copy files from a pre-existent data model mapper<a class="headerlink" href="#copy-files-from-a-pre-existent-data-model-mapper" title="Permalink to this headline">¶</a></h2>
+<p>To construct the cdm-mapper for deck 704 you can copy a the default <code class="docutils literal notranslate"><span class="pre">icoads_3000</span></code> mapper and modify the necessary tables, python script and <code class="docutils literal notranslate"><span class="pre">code_tables</span></code>. Open a shell and do the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd ../cdm/lib/mappings
+$ cp -r icoads_r3000 icoads_r3000_d704
+$ cd icoads_r3000_d704
+$ ls
+    __init__.py            icoads_r3000.py        observations-sst.json
+    __pycache__/           observations-at.json   observations-wbt.json
+    code_tables/           observations-dpt.json  observations-wd.json
+    header.json            observations-slp.json  observations-ws.json
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is important that you change the <code class="docutils literal notranslate"><span class="pre">icoads_r3000.py</span></code> file name to the corresponding deck number (in this case <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code>). The main folder of the data model and the <code class="docutils literal notranslate"><span class="pre">.py</span></code> script need to have the same name, so the cdm tool is able to recognize it.</p>
+</div>
+<p>Make sure you do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mv icoads_r3000.py icoads_r3000_d704.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="modify-the-header-table">
+<h2>2.3 Modify the header table<a class="headerlink" href="#modify-the-header-table" title="Permalink to this headline">¶</a></h2>
+<p>For this deck we wont be changing much, we have very few data in the <code class="docutils literal notranslate"><span class="pre">c99</span></code> supplement that is useful. For future decks this might be very different and you might be able to extract more valuable information from the <code class="docutils literal notranslate"><span class="pre">c99</span></code> string. The following <a class="reference external" href="https://glamod.github.io/cdm_mapper_documentation/cdm-tables-mapping-files-and-descriptors.html#">documentation website</a> gives you a detail overview of all the descriptors that you might needed to successfully declare an element in a header/observation table.</p>
+<ul>
+<li><p>In the file <code class="docutils literal notranslate"><span class="pre">header.json</span></code> (after line 18) add the station name that it will be read from the <code class="docutils literal notranslate"><span class="pre">c99_journal</span></code> section of the supplemental data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;station_name&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;sections&quot;</span><span class="p">:</span> <span class="s2">&quot;c99_journal&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="s2">&quot;ship_name&quot;</span>
+    <span class="p">},</span>
+</pre></div>
+</div>
+</li>
+<li><p>For this deck we will also change the fields <code class="docutils literal notranslate"><span class="pre">platform_sub_type</span></code> and <code class="docutils literal notranslate"><span class="pre">primary_station_id</span></code> to add extra information from the supplemental data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;platform_sub_type&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;sections&quot;</span><span class="p">:</span> <span class="s2">&quot;c99_journal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="s2">&quot;rig&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;code_table&quot;</span><span class="p">:</span> <span class="s2">&quot;platform_sub_type&quot;</span>
+<span class="p">},</span>
+<span class="s2">&quot;primary_station_id&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;sections&quot;</span><span class="p">:</span> <span class="s2">&quot;c99_journal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="s2">&quot;ship_name&quot;</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</li>
+<li><p>After modifying the header make sure you still have a valid json file, check this via an <a class="reference external" href="https://jsonlint.com/">online tool</a> or just make sure you use a json editor.</p></li>
+</ul>
+</div>
+<div class="section" id="modify-the-observations-tables">
+<h2>2.4 Modify the observations tables<a class="headerlink" href="#modify-the-observations-tables" title="Permalink to this headline">¶</a></h2>
+<p>For this deck we will only add extra information to the sea-level-pressure observation table. You will need to modify only the file with the name <code class="docutils literal notranslate"><span class="pre">observations-slp.json</span></code>.</p>
+<ul>
+<li><p>In the editor of your choice add the following lines after the <code class="docutils literal notranslate"><span class="pre">crs</span></code> (~ line 41), so your file looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;crs&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">},</span>
+<span class="s2">&quot;z_coordinate&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;sections&quot;</span><span class="p">:</span> <span class="s2">&quot;c99_journal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="s2">&quot;baro_height&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;transform&quot;</span><span class="p">:</span> <span class="s2">&quot;feet_to_m&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;decimal_places&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</li>
+<li><p>And the following after <code class="docutils literal notranslate"><span class="pre">z_coordinate_type</span></code>, so it looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;z_coordinate_type&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+<span class="s2">&quot;observation_height_above_station_surface&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;sections&quot;</span><span class="p">:</span> <span class="s2">&quot;c99_journal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="s2">&quot;baro_height&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;transform&quot;</span><span class="p">:</span> <span class="s2">&quot;feet_to_m&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;decimal_places&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Here we are reading information about the barometer height. The argument <code class="docutils literal notranslate"><span class="pre">&quot;transform&quot;:</span> <span class="pre">&quot;feet_to_m&quot;</span></code> means that the code will look for this <code class="docutils literal notranslate"><span class="pre">feet_to_m</span></code> function inside the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code> (imodel.py) script that we will modify in step 2.6.</p>
+<ul>
+<li><p>We will also read in the original units for these measurements <strong>by replacing</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;original_units&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="mi">530</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>With the following</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;original_units&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;sections&quot;</span><span class="p">:</span> <span class="s2">&quot;c99_journal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="s2">&quot;baro_units&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;code_table&quot;</span><span class="p">:</span> <span class="s2">&quot;baro_units&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fill_value&quot;</span><span class="p">:</span> <span class="mi">9999</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>To implement this modification we will need to add a <code class="docutils literal notranslate"><span class="pre">code_table</span></code> named <code class="docutils literal notranslate"><span class="pre">baro_units</span></code>, in order to transform the original units code, to the C3S CDM corresponding key-code for such units. We will do this in the following step.</p>
+</div>
+<div class="section" id="add-code-tables-needed">
+<h2>2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed<a class="headerlink" href="#add-code-tables-needed" title="Permalink to this headline">¶</a></h2>
+<p>In our <code class="docutils literal notranslate"><span class="pre">header.json</span></code> and <code class="docutils literal notranslate"><span class="pre">observations-slp.json</span></code> we are reading information about the type of rig (<code class="docutils literal notranslate"><span class="pre">platform_sub_type</span></code>) and barometer units (<code class="docutils literal notranslate"><span class="pre">baro_units</span></code>). For such information we need to add a <code class="docutils literal notranslate"><span class="pre">code_table</span></code> that can translate the original key code from <code class="docutils literal notranslate"><span class="pre">c99</span></code>, to the C3S CDM code for that specific element. We need to add two files under <code class="docutils literal notranslate"><span class="pre">../cdm/lib/mappings/icoads_r3000_d704/code_tables</span></code>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">platform_sub_type.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+ <span class="s2">&quot;01&quot;</span><span class="p">:</span><span class="mi">26</span><span class="p">,</span>
+ <span class="s2">&quot;02&quot;</span><span class="p">:</span><span class="mi">105</span><span class="p">,</span>
+ <span class="s2">&quot;03&quot;</span><span class="p">:</span><span class="mi">106</span><span class="p">,</span>
+ <span class="s2">&quot;04&quot;</span><span class="p">:</span><span class="mi">107</span><span class="p">,</span>
+ <span class="s2">&quot;05&quot;</span><span class="p">:</span><span class="mi">108</span><span class="p">,</span>
+ <span class="s2">&quot;06&quot;</span><span class="p">:</span><span class="mi">109</span><span class="p">,</span>
+ <span class="s2">&quot;99&quot;</span><span class="p">:</span><span class="mi">26</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">baro_units.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="mi">1001</span><span class="p">,</span>
+  <span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="mi">1002</span><span class="p">,</span>
+  <span class="s2">&quot;3&quot;</span><span class="p">:</span><span class="mi">1003</span><span class="p">,</span>
+  <span class="s2">&quot;4&quot;</span><span class="p">:</span><span class="mi">9999</span><span class="p">,</span>
+  <span class="s2">&quot;5&quot;</span><span class="p">:</span><span class="mi">1004</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>When we declare these elements in the header/observation table, we are passing to the mapper function the name of these files, by using the descriptor <code class="docutils literal notranslate"><span class="pre">code_table</span></code>. For an overview of all elements descriptors, please refer to the <a class="reference external" href="https://glamod.github.io/cdm_mapper_documentation/cdm-tables-mapping-files-and-descriptors.html#">cdm-mapper documentation</a></p>
+</div>
+<div class="section" id="add-the-functions-needed-to-the-icoads-r3000-d704-py">
+<h2>2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code><a class="headerlink" href="#add-the-functions-needed-to-the-icoads-r3000-d704-py" title="Permalink to this headline">¶</a></h2>
+<p>In our <code class="docutils literal notranslate"><span class="pre">observations-slp.json</span></code> we are also reading information about the height of the barometer. These measurements were originally made in feet but the C3S CDM format require that they are in meters. So we have to modify each measurement value by creating a conversion function <code class="docutils literal notranslate"><span class="pre">feet_to_m</span></code>, that we will store in the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code> python script. This script will host all conversion functions or any other function needed to modify the original data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In our <a class="reference external" href="https://glamod.github.io/cdm_mapper_documentation/cdm-tables-mapping-files-and-descriptors.html#">cdm-mapper documentation</a> this script is called the <code class="docutils literal notranslate"><span class="pre">imodel.py</span></code> script. For more information on the <code class="docutils literal notranslate"><span class="pre">imodel.py</span></code> check out <a class="reference external" href="https://glamod.github.io/cdm_mapper_documentation/cdm-tables-mapping-files-and-descriptors.html#defining-mapping-functions">this section</a> of the cdm_mapper docs.</p>
+</div>
+<p>Lets now add the function <code class="docutils literal notranslate"><span class="pre">feet_to_m</span></code> to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code> python script after the line 161:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">feet_to_m</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">float_type</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">):</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">float_type</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ds</span><span class="o">/</span><span class="mf">3.2808</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is important that all functions are place under the <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">mapping_functions():</span></code> line so they can be recognize by the mapping tool box.</p>
+</div>
+<div class="section" id="test-your-new-cdm-mapper">
+<h2>2.7 Test your new CDM mapper<a class="headerlink" href="#test-your-new-cdm-mapper" title="Permalink to this headline">¶</a></h2>
+<p>To test that you have added the files corrected. Re-start your python environment and python console and run the following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="s1">&#39;mdf_reader/tests/data/125-704_1878-10_subset.imma&#39;</span><span class="p">)</span>
+<span class="n">schema_new</span> <span class="o">=</span> <span class="s1">&#39;imma1_d704&#39;</span>
+<span class="n">data_new</span> <span class="o">=</span> <span class="n">mdf_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_file_path</span><span class="p">,</span> <span class="n">data_model</span> <span class="o">=</span> <span class="n">schema_new</span><span class="p">)</span>
+
+<span class="n">attributes</span> <span class="o">=</span> <span class="n">data_new</span><span class="o">.</span><span class="n">atts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">name_of_model</span> <span class="o">=</span> <span class="s1">&#39;icoads_r3000_d704&#39;</span>
+
+<span class="n">cdm_dict</span> <span class="o">=</span> <span class="n">cdm</span><span class="o">.</span><span class="n">map_model</span><span class="p">(</span><span class="n">name_of_model</span><span class="p">,</span> <span class="n">data_new</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">attributes</span><span class="p">,</span> <span class="n">cdm_subset</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can explore each table inside the <code class="docutils literal notranslate"><span class="pre">cdm_dict</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdm_dict</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">platform_sub_type</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">cdm_dict</span><span class="p">[</span><span class="s1">&#39;observations-slp&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">observation_height_above_station_surface</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="last-steps.html" class="btn btn-neutral float-right" title="3. Commit and push changes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="build-new-schema.html" class="btn btn-neutral float-left" title="1. Build and add a mdf_reader schema" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

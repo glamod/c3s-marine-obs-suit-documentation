@@ -1,0 +1,864 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>level1c &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../adding-new-data-models.html">Adding new data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../build-new-schema.html">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-schema.html#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../build-new-cdm-mapper.html#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/autoapi/level1c/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-level1c">
+<span id="level1c"></span><h1><a class="reference internal" href="#module-level1c" title="level1c"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><a class="headerlink" href="#module-level1c" title="Permalink to this headline">¶</a></h1>
+<p>Created on Mon Jun 17 14:24:10 2019</p>
+<p>Script to generate the C3S CDM Marine level1c data.</p>
+<p>The output files of this script will contain reports from level1b that have been further validated following corrections
+to the <code class="docutils literal notranslate"><span class="pre">date/time</span></code>, location and station ID. Those failing validation are rejected and archived for future analysis.
+Additionally, datetime corrections applied previously in level1b, can potentially result in reports being relocated to a different month.
+These reports are moved to their correct monthly file in this level. Validates <code class="docutils literal notranslate"><span class="pre">header.report_timestamp</span></code> and <code class="docutils literal notranslate"><span class="pre">header.primary_station_id</span></code>
+and apply this outcome to rest of tables, rejecting reports not valid in any of these two fields.</p>
+<dl class="simple">
+<dt>Workflow:</dt><dd><ul class="simple">
+<li><p>Read header data</p></li>
+<li><p>Initialized mask for id and datetime to True</p></li>
+<li><p>Validate header.report_timestamp (see Notes below)</p></li>
+<li><p>Validate header.primary_station_id (see Notes below)</p></li>
+</ul>
+</dd>
+<dt>Output all reports not validating timestamp to:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/level1c/invalid/sid-dck/header-fileID-report_timsetamp.psv</span></code></p></li>
+</ul>
+</dd>
+<dt>Output all reports not validating primary_station_id to:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/level1c/invalid/sid-dck/header-fileID-primary_station_id.psv</span></code></p></li>
+<li><p>Merge report_timestamp and primary_station_id in a single validation rule (fail if any fails)</p></li>
+<li><p>Drop corresponding records from all tables</p></li>
+<li><p>Log to json dropped per table per validated field and final number of records in the resulting tables</p></li>
+<li><p>Log to json unique primary_station_id counts</p></li>
+<li><p>Log to json primary_station_id validation rules numbers:
+1. callsings
+2. rest
+3. restored because output from Liz’s process</p></li>
+</ul>
+</dd>
+</dl>
+<p>The processing unit is the source-deck monthly set of CDM tables.</p>
+<dl class="simple">
+<dt>On reading the table files from the source level (1b), it read:</dt><dd><ol class="arabic simple">
+<li><p>master table file (<code class="docutils literal notranslate"><span class="pre">table-yyyy-mm-release-update.psv</span></code>)</p></li>
+<li><p>datetime leak files (<code class="docutils literal notranslate"><span class="pre">table-yyyy-mm-release-update-YYYY-MM.psv</span></code>), where <code class="docutils literal notranslate"><span class="pre">YYYY-MM</span></code> indicates the initial <code class="docutils literal notranslate"><span class="pre">yyyy-mm</span></code> stamp of the reports contained in that leak file upon arrival to level1b.</p></li>
+</ol>
+</dd>
+<dt>Outputs data to:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1c/&lt;sid-dck&gt;/table[i]-fileID.psv</span></code></p></li>
+</ul>
+</dd>
+<dt>Outputs invalid data to:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1c/invalid/&lt;sid-dck&gt;/header-fileID-&lt;element&gt;.psv</span></code></p></li>
+</ul>
+</dd>
+<dt>Outputs quicklook info to:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1c/quicklooks/&lt;sid-dck&gt;/fileID.json</span></code> where fileID is yyyy-mm-release-update</p></li>
+</ul>
+</dd>
+<dt>Before processing starts:</dt><dd><ul class="simple">
+<li><p>checks the existence of all io subdirectories in level1b|c -&gt; exits if fails</p></li>
+<li><p>checks the existence of the source table to be converted (header only) -&gt; exits if fails</p></li>
+<li><p>removes all level1c products on input file resulting from previous runs</p></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="inargs">
+<h2>Inargs:<a class="headerlink" href="#inargs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>data_path: marine data path in file system</p></li>
+<li><p>release: release tag</p></li>
+<li><p>update: udpate tag</p></li>
+<li><p>dataset: dataset tag</p></li>
+<li><p>config_path: configuration file path</p></li>
+<li><p>sid_dck: source-deck data partition (optional, from config_file otherwise)</p></li>
+<li><p>year: data file year (yyyy) (optional, from config_file otherwise)</p></li>
+<li><p>month: data file month (mm) (optional, from config_file otherwise)</p></li>
+</ul>
+</div>
+<div class="section" id="notes-on-validations">
+<h2>Notes on validations:<a class="headerlink" href="#notes-on-validations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>HEADER.REPORT_TIMESTAMP VALIDATION:</dt><dd><p>This validation is just trying to convert to a datetime object the content of the field.
+Where empty, this conversion (and validation) will fail.
+And will be empty if during the mapping in level1a the report_timestamp could not be built from the source data,
+or if there was any kind of messing in level1b datetime corrections…</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>HEADER.PRIMARY_STATION_ID VALIDATION:</dt><dd><p>Due to various reasons, the validation is done in 3 stages and using different methods:
+1. Callsign IDs: use set of validation patterns harcoded here
+2. Rest of IDs: use set of valid patterns per dck in NOC_ANC_INFO json files
+3. All: set all that Liz’s ID linkage modified to True. We are parsing the history field for a “Corrected primary_station_id” text…
+maybe it should read this from the level1b config file? But then we need to give this file as an argument…</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="dev-notes">
+<h2>Dev notes:<a class="headerlink" href="#dev-notes" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>This script is fully tailored to the idea of how validation and cleaning should be at the time of developing it. It is not parameterized and is hardly flexible.</p></li>
+<li><p>Why don’t we just pick the NaN dates as invalid, instead of looking where conversion fails?</p></li>
+</ol>
+<p>&#64;author: iregon</p>
+</div>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.script_setup" title="level1c.script_setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">script_setup</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.validate_id" title="level1c.validate_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_id</span></code></a>(idSeries)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.read_table_files" title="level1c.read_table_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_table_files</span></code></a>(table)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.process_table" title="level1c.process_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_table</span></code></a>(table_df, table_name)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.clean_level" title="level1c.clean_level"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clean_level</span></code></a>(file_id)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.date_handler" title="level1c.date_handler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">date_handler</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.args" title="level1c.args"><code class="xref py py-obj docutils literal notranslate"><span class="pre">args</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.params" title="level1c.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.FFS" title="level1c.FFS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FFS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.delimiter" title="level1c.delimiter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delimiter</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.level" title="level1c.level"><code class="xref py py-obj docutils literal notranslate"><span class="pre">level</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.level_prev" title="level1c.level_prev"><code class="xref py py-obj docutils literal notranslate"><span class="pre">level_prev</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.header" title="level1c.header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">header</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.wmode" title="level1c.wmode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wmode</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.release_path" title="level1c.release_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">release_path</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.release_id" title="level1c.release_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">release_id</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.fileID" title="level1c.fileID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fileID</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.fileID_date" title="level1c.fileID_date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fileID_date</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.prev_level_path" title="level1c.prev_level_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prev_level_path</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.level_path" title="level1c.level_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">level_path</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.level_ql_path" title="level1c.level_ql_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">level_ql_path</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.level_invalid_path" title="level1c.level_invalid_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">level_invalid_path</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.id_validation_path" title="level1c.id_validation_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">id_validation_path</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.data_paths" title="level1c.data_paths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data_paths</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.prev_level_filename" title="level1c.prev_level_filename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prev_level_filename</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.validation_dict" title="level1c.validation_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validation_dict</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.dataset_id" title="level1c.dataset_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dataset_id</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.validated" title="level1c.validated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validated</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.history" title="level1c.history"><code class="xref py py-obj docutils literal notranslate"><span class="pre">history</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.history_tstmp" title="level1c.history_tstmp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">history_tstmp</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.cdm_tables" title="level1c.cdm_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdm_tables</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.table" title="level1c.table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">table</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.table_df" title="level1c.table_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">table_df</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.mask_df" title="level1c.mask_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mask_df</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id0" title="level1c.field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">field</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id0" title="level1c.field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">field</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.callsigns" title="level1c.callsigns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">callsigns</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.nocallsigns" title="level1c.nocallsigns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nocallsigns</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.relist" title="level1c.relist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">relist</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.callre" title="level1c.callre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">callre</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.linked_history" title="level1c.linked_history"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linked_history</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.linked_IDs" title="level1c.linked_IDs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linked_IDs</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.linked_IDs_no" title="level1c.linked_IDs_no"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linked_IDs_no</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.cdm_columns" title="level1c.cdm_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdm_columns</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.idata_filename" title="level1c.idata_filename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idata_filename</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.obs_tables" title="level1c.obs_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">obs_tables</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#level1c.table_pattern" title="level1c.table_pattern"><code class="xref py py-obj docutils literal notranslate"><span class="pre">table_pattern</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#level1c.L1b_io_filename" title="level1c.L1b_io_filename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">L1b_io_filename</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="level1c.script_setup">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">script_setup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/level1c.html#script_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.script_setup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.date_handler">
+<code class="sig-name descname"><span class="pre">date_handler</span></code><a class="reference internal" href="../../_modules/level1c.html#date_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.date_handler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="level1c.validate_id">
+<code class="sig-name descname"><span class="pre">validate_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idSeries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/level1c.html#validate_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.validate_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="level1c.read_table_files">
+<code class="sig-name descname"><span class="pre">read_table_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/level1c.html#read_table_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.read_table_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="level1c.process_table">
+<code class="sig-name descname"><span class="pre">process_table</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/level1c.html#process_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.process_table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="level1c.clean_level">
+<code class="sig-name descname"><span class="pre">clean_level</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/level1c.html#clean_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.clean_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.args">
+<code class="sig-name descname"><span class="pre">args</span></code><a class="reference internal" href="../../_modules/level1c.html#args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.params">
+<code class="sig-name descname"><span class="pre">params</span></code><a class="reference internal" href="../../_modules/level1c.html#params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.FFS">
+<code class="sig-name descname"><span class="pre">FFS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">-</span></em><a class="reference internal" href="../../_modules/level1c.html#FFS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.FFS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.delimiter">
+<code class="sig-name descname"><span class="pre">delimiter</span></code><em class="property"> <span class="pre">=</span> <span class="pre">|</span></em><a class="reference internal" href="../../_modules/level1c.html#delimiter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.delimiter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.level">
+<code class="sig-name descname"><span class="pre">level</span></code><em class="property"> <span class="pre">=</span> <span class="pre">level1c</span></em><a class="reference internal" href="../../_modules/level1c.html#level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.level_prev">
+<code class="sig-name descname"><span class="pre">level_prev</span></code><em class="property"> <span class="pre">=</span> <span class="pre">level1b</span></em><a class="reference internal" href="../../_modules/level1c.html#level_prev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.level_prev" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.header">
+<code class="sig-name descname"><span class="pre">header</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="reference internal" href="../../_modules/level1c.html#header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.wmode">
+<code class="sig-name descname"><span class="pre">wmode</span></code><em class="property"> <span class="pre">=</span> <span class="pre">w</span></em><a class="reference internal" href="../../_modules/level1c.html#wmode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.wmode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.release_path">
+<code class="sig-name descname"><span class="pre">release_path</span></code><a class="reference internal" href="../../_modules/level1c.html#release_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.release_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.release_id">
+<code class="sig-name descname"><span class="pre">release_id</span></code><a class="reference internal" href="../../_modules/level1c.html#release_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.release_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.fileID">
+<code class="sig-name descname"><span class="pre">fileID</span></code><a class="reference internal" href="../../_modules/level1c.html#fileID"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.fileID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.fileID_date">
+<code class="sig-name descname"><span class="pre">fileID_date</span></code><a class="reference internal" href="../../_modules/level1c.html#fileID_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.fileID_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.prev_level_path">
+<code class="sig-name descname"><span class="pre">prev_level_path</span></code><a class="reference internal" href="../../_modules/level1c.html#prev_level_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.prev_level_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.level_path">
+<code class="sig-name descname"><span class="pre">level_path</span></code><a class="reference internal" href="../../_modules/level1c.html#level_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.level_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.level_ql_path">
+<code class="sig-name descname"><span class="pre">level_ql_path</span></code><a class="reference internal" href="../../_modules/level1c.html#level_ql_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.level_ql_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.level_invalid_path">
+<code class="sig-name descname"><span class="pre">level_invalid_path</span></code><a class="reference internal" href="../../_modules/level1c.html#level_invalid_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.level_invalid_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.id_validation_path">
+<code class="sig-name descname"><span class="pre">id_validation_path</span></code><a class="reference internal" href="../../_modules/level1c.html#id_validation_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.id_validation_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.data_paths">
+<code class="sig-name descname"><span class="pre">data_paths</span></code><a class="reference internal" href="../../_modules/level1c.html#data_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.data_paths" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.prev_level_filename">
+<code class="sig-name descname"><span class="pre">prev_level_filename</span></code><a class="reference internal" href="../../_modules/level1c.html#prev_level_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.prev_level_filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.validation_dict">
+<code class="sig-name descname"><span class="pre">validation_dict</span></code><a class="reference internal" href="../../_modules/level1c.html#validation_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.validation_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.dataset_id">
+<code class="sig-name descname"><span class="pre">dataset_id</span></code><em class="property"> <span class="pre">=</span> <span class="pre">icoads_r3000</span></em><a class="reference internal" href="../../_modules/level1c.html#dataset_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.dataset_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.validated">
+<code class="sig-name descname"><span class="pre">validated</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['report_timestamp',</span> <span class="pre">'primary_station_id']</span></em><a class="reference internal" href="../../_modules/level1c.html#validated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.validated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.history">
+<code class="sig-name descname"><span class="pre">history</span></code><em class="property"> <span class="pre">=</span> <span class="pre">Performed</span> <span class="pre">report_timestamp</span> <span class="pre">(date_time)</span> <span class="pre">and</span> <span class="pre">primary_station_id</span> <span class="pre">validation</span></em><a class="reference internal" href="../../_modules/level1c.html#history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.history" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.history_tstmp">
+<code class="sig-name descname"><span class="pre">history_tstmp</span></code><a class="reference internal" href="../../_modules/level1c.html#history_tstmp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.history_tstmp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.cdm_tables">
+<code class="sig-name descname"><span class="pre">cdm_tables</span></code><a class="reference internal" href="../../_modules/level1c.html#cdm_tables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.cdm_tables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.table">
+<code class="sig-name descname"><span class="pre">table</span></code><em class="property"> <span class="pre">=</span> <span class="pre">header</span></em><a class="reference internal" href="../../_modules/level1c.html#table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.table_df">
+<code class="sig-name descname"><span class="pre">table_df</span></code><a class="reference internal" href="../../_modules/level1c.html#table_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.table_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.mask_df">
+<code class="sig-name descname"><span class="pre">mask_df</span></code><a class="reference internal" href="../../_modules/level1c.html#mask_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.mask_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.field">
+<code class="sig-name descname"><span class="pre">field</span></code><em class="property"> <span class="pre">=</span> <span class="pre">report_timestamp</span></em><a class="reference internal" href="../../_modules/level1c.html#field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="id0">
+<code class="sig-name descname"><span class="pre">field</span></code><em class="property"> <span class="pre">=</span> <span class="pre">primary_station_id</span></em><a class="reference internal" href="../../_modules/level1c.html#field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.callsigns">
+<code class="sig-name descname"><span class="pre">callsigns</span></code><a class="reference internal" href="../../_modules/level1c.html#callsigns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.callsigns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.nocallsigns">
+<code class="sig-name descname"><span class="pre">nocallsigns</span></code><a class="reference internal" href="../../_modules/level1c.html#nocallsigns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.nocallsigns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.relist">
+<code class="sig-name descname"><span class="pre">relist</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['^([0-9]{1}[A-Z]{1}|^[A-Z]{1}[0-9]{1}|^[A-Z]{2})[A-Z0-9]{1,}$',</span> <span class="pre">'^[0-9]{5}$']</span></em><a class="reference internal" href="../../_modules/level1c.html#relist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.relist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.callre">
+<code class="sig-name descname"><span class="pre">callre</span></code><a class="reference internal" href="../../_modules/level1c.html#callre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.callre" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.linked_history">
+<code class="sig-name descname"><span class="pre">linked_history</span></code><em class="property"> <span class="pre">=</span> <span class="pre">Corrected</span> <span class="pre">primary_station_id</span></em><a class="reference internal" href="../../_modules/level1c.html#linked_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.linked_history" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.linked_IDs">
+<code class="sig-name descname"><span class="pre">linked_IDs</span></code><a class="reference internal" href="../../_modules/level1c.html#linked_IDs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.linked_IDs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.linked_IDs_no">
+<code class="sig-name descname"><span class="pre">linked_IDs_no</span></code><a class="reference internal" href="../../_modules/level1c.html#linked_IDs_no"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.linked_IDs_no" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.cdm_columns">
+<code class="sig-name descname"><span class="pre">cdm_columns</span></code><a class="reference internal" href="../../_modules/level1c.html#cdm_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.cdm_columns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.idata_filename">
+<code class="sig-name descname"><span class="pre">idata_filename</span></code><a class="reference internal" href="../../_modules/level1c.html#idata_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.idata_filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.obs_tables">
+<code class="sig-name descname"><span class="pre">obs_tables</span></code><a class="reference internal" href="../../_modules/level1c.html#obs_tables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.obs_tables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.table_pattern">
+<code class="sig-name descname"><span class="pre">table_pattern</span></code><a class="reference internal" href="../../_modules/level1c.html#table_pattern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.table_pattern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="level1c.L1b_io_filename">
+<code class="sig-name descname"><span class="pre">L1b_io_filename</span></code><a class="reference internal" href="../../_modules/level1c.html#L1b_io_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#level1c.L1b_io_filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

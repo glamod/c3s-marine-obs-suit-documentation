@@ -1,0 +1,118 @@
+:mod:`make_release_source_tree`
+===============================
+
+.. py:module:: make_release_source_tree
+
+.. autoapi-nested-parse::
+
+   Created on Mon Jul  8 12:29:06 2019
+
+   Creates the directory tree for a new C3S data release and source or for a new source in a pre-existing release
+
+   Inargs:
+   -------
+   - data_path: parent directory where tree is to be created
+   - config_path: path to the obs-suite config directory
+   - release: name for release directory
+   - update_tag: tag for the release update
+   - dataset: name for data source in directory tree
+
+   @author: iregon
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   make_release_source_tree.create_subdir
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   make_release_source_tree.PERIODS_FILE
+   make_release_source_tree.data_path
+   make_release_source_tree.levels
+   make_release_source_tree.level_subdirs
+   make_release_source_tree.deep_sublevels
+   make_release_source_tree.release_tag
+   make_release_source_tree.release_periods_file
+   make_release_source_tree.sid_dck_dict
+   make_release_source_tree.release_tag
+   make_release_source_tree.release_path
+   make_release_source_tree.source_path
+   make_release_source_tree.level_subdir
+
+
+.. data:: PERIODS_FILE
+   :annotation: = source_deck_periods.json
+
+   
+
+.. data:: data_path
+   
+
+   
+
+.. function:: create_subdir(lpath, subdir_list)
+
+
+.. data:: levels
+   :annotation: = ['level1a', 'level1b', 'level1c', 'level1d', 'level1e', 'level1f', 'level2']
+
+   
+
+.. data:: level_subdirs
+   
+
+   
+
+.. data:: deep_sublevels
+   :annotation: = ['log', 'quicklooks', 'invalid', 'excluded', 'reports']
+
+   
+
+.. data:: release_tag
+   
+
+   
+
+.. data:: release_periods_file
+   
+
+   
+
+.. data:: sid_dck_dict
+   
+
+   
+
+.. data:: release_tag
+   
+
+   
+
+.. data:: release_path
+   
+
+   
+
+.. data:: source_path
+   
+
+   
+
+.. data:: level_subdir
+   
+
+   
+

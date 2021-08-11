@@ -1,0 +1,233 @@
+:mod:`level1b`
+==============
+
+.. py:module:: level1b
+
+.. autoapi-nested-parse::
+
+   Created on Mon Jun 17 14:24:10 2019
+
+   Script to generate the C3S CDM Marine level1b data:
+   - read linkage and duplicate identification output (previously pre-processed)
+   - merge with CDM tables on record_id
+   - re-assign dates
+   - save tables to ascii
+
+   Uses modules cdm and pandas_operations to read CDM tables and handle corrections.
+   The processing unit is the source-deck monthly set of CDM observation tables (header + observations-variable).
+
+   Outputs data to:
+       - ``/<data_path>/<release>/<dataset>/level1b/<sid-dck>/table[i]-fileID.psv``
+
+   Outputs quicklook info to:
+       - ``/<data_path>/<release>/<dataset>/level1b/quicklooks/<sid-dck>/fileID.json``
+
+   Where `fileID` is `yyyy-mm-release_tag-update_tag`.
+
+   If any data in dataset `yyyy-mm` is identified to be in a different `yyyy-mm` (mainly after datetime corrections), outputs data to:
+       - ``/<data_path>/<release>/<dataset>/level1b/<sid-dck>/table[i]-fileLeakID.psv``
+
+   Where fileLeakID is yyyy-mm(real)-release_tag-update_tag-yyyy-mm(dataset)
+
+   Before processing starts:
+       - checks the existence of all io subdirectories in level1a|b -> exits if fails
+       - checks the existence of the dataset table to be converted (header only) -> exits if fails
+       - removes all level1b products on input file resulting from previous runs
+
+   Inargs:
+   -------
+   - data_path: marine data path in file system
+   - release: release tag
+   - update: udpate tag
+   - dataset: dataset tag
+   - config_path: configuration file path
+   - sid_dck: source-deck data partition (optional, from config_file otherwise)
+   - year: data file year (yyyy) (optional, from config_file otherwise)
+   - month: data file month (mm) (optional, from config_file otherwise)
+
+
+   configfile includes:
+   --------------------
+   - NOC_corrections version
+   - CDM tables elements with subdirectory prefix where corrections are in release/NOC_corrections/version
+   - subdirectory prefix with history event to append to history field
+
+   .....
+
+   @author: iregon
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   level1b.script_setup
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   level1b.clean_L1b
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   level1b.date_handler
+   level1b.args
+   level1b.params
+   level1b.filename_field_sep
+   level1b.delimiter
+   level1b.cor_ext
+   level1b.release_path
+   level1b.release_id
+   level1b.fileID
+   level1b.fileID_date
+   level1b.L1a_path
+   level1b.L1b_path
+   level1b.L1b_ql_path
+   level1b.L1b_main_corrections
+   level1b.data_paths
+   level1b.L1a_filename
+   level1b.correction_dict
+   level1b.isChange
+   level1b.dupNotEval
+   level1b.cdm_tables
+   level1b.history_tstmp
+   level1b.datetime_col
+   level1b.L1b_io_filename
+
+
+.. class:: script_setup(inargs)
+
+
+
+.. data:: date_handler
+   
+
+   
+
+.. function:: clean_L1b(L1b_id)
+
+
+.. data:: args
+   
+
+   
+
+.. data:: params
+   
+
+   
+
+.. data:: filename_field_sep
+   :annotation: = -
+
+   
+
+.. data:: delimiter
+   :annotation: = |
+
+   
+
+.. data:: cor_ext
+   :annotation: = .txt.gz
+
+   
+
+.. data:: release_path
+   
+
+   
+
+.. data:: release_id
+   
+
+   
+
+.. data:: fileID
+   
+
+   
+
+.. data:: fileID_date
+   
+
+   
+
+.. data:: L1a_path
+   
+
+   
+
+.. data:: L1b_path
+   
+
+   
+
+.. data:: L1b_ql_path
+   
+
+   
+
+.. data:: L1b_main_corrections
+   
+
+   
+
+.. data:: data_paths
+   
+
+   
+
+.. data:: L1a_filename
+   
+
+   
+
+.. data:: correction_dict
+   
+
+   
+
+.. data:: isChange
+   :annotation: = 1
+
+   
+
+.. data:: dupNotEval
+   :annotation: = 4
+
+   
+
+.. data:: cdm_tables
+   
+
+   
+
+.. data:: history_tstmp
+   
+
+   
+
+.. data:: datetime_col
+   
+
+   
+
+.. data:: L1b_io_filename
+   
+
+   
+

@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>level1a &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../adding-new-data-models.html">Adding new data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../build-new-schema.html">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-schema.html#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build-new-cdm-mapper.html#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1c/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1c/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1c/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1c/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>level1a</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for level1a</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Mon Jun 17 14:24:10 2019</span>
+
+<span class="sd">Script to generate the C3S CDM Marine level1a data. </span>
+
+<span class="sd">- Reads dataset data (and supp if avail) file with module mdf_reader. This includes a data model validation mask.</span>
+<span class="sd">- Fixes known PT type errors in source dataset with module metmetpy</span>
+<span class="sd">- Selects data reports according to filtering requests</span>
+<span class="sd">- Rejects data reports not validiting against its data model</span>
+<span class="sd">- Maps to the C3S CDM header and observations tables if there is data left after cleaning (table[i].psv CDM table-like files)</span>
+
+<span class="sd">The processing unit is the source-deck monthly file.</span>
+
+<span class="sd">- Outputs data to: `/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1a/&lt;sid-dck&gt;/table[i]-fileID.psv`</span>
+<span class="sd">- Outputs invalid data to: `/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1a/invalid/&lt;sid-dck&gt;/fileID-data|mask.psv`</span>
+<span class="sd">- Outputs exluded data to: `/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1a/excluded/&lt;sid-dck&gt;/fileID-&lt;element&gt;.psv`</span>
+<span class="sd">- Outputs quicklook info to: `/&lt;data_path&gt;/&lt;release&gt;/&lt;dataset&gt;/level1a/quicklooks/&lt;sid-dck&gt;/fileID.json`</span>
+
+<span class="sd">Where fileID is year-month-release-update</span>
+
+<span class="sd">Before processing starts:</span>
+
+<span class="sd">- Checks the existence of all output subdirectories in level1a -&gt; exits if fails</span>
+<span class="sd">- Checks the existence of the source file to be converted -&gt; exits if fails</span>
+<span class="sd">- Removes all level1a products on input file resulting from previous runs</span>
+
+<span class="sd">On input data:</span>
+<span class="sd">--------------</span>
+
+<span class="sd">Records of input data assumed to be in sid-dck monthly partitions which imply:</span>
+
+<span class="sd">- Data for same month-year period</span>
+<span class="sd">- Data from a unique data model</span>
+<span class="sd">    </span>
+<span class="sd">Inargs:</span>
+<span class="sd">-------</span>
+
+<span class="sd">- data_path: marine data path in file system</span>
+<span class="sd">- release: release tag</span>
+<span class="sd">- update: udpate tag</span>
+<span class="sd">- dataset: dataset tag</span>
+<span class="sd">- config_path: configuration file path</span>
+<span class="sd">- sid_dck: source-deck data partition (optional, from config_file otherwise)</span>
+<span class="sd">- year: data file year (yyyy) (optional, from config_file otherwise)</span>
+<span class="sd">- month: data file month (mm) (optional, from config_file otherwise)</span>
+
+<span class="sd">configfile:</span>
+<span class="sd">-----------</span>
+
+<span class="sd">To specify processing options that may be shared in different processing settings:</span>
+
+<span class="sd">- main data model</span>
+<span class="sd">- supplemental data model</span>
+<span class="sd">- processing options: supplemental replacements, record selection/filtering by field (i.e. PT....)</span>
+
+<span class="sd">@author: iregon</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="kn">import</span> <span class="nn">simplejson</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">mdf_reader</span>
+<span class="kn">import</span> <span class="nn">cdm</span>
+<span class="kn">import</span> <span class="nn">metmetpy</span>
+<span class="kn">from</span> <span class="nn">pandas_operations</span> <span class="kn">import</span> <span class="n">select</span><span class="p">,</span><span class="n">inspect</span>
+<span class="kn">from</span> <span class="nn">pandas_operations.common</span> <span class="kn">import</span> <span class="n">TextParser_hdlr</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">imp</span> <span class="kn">import</span> <span class="n">reload</span>
+<span class="n">reload</span><span class="p">(</span><span class="n">logging</span><span class="p">)</span>  <span class="c1"># This is to override potential previous config of logging</span>
+
+
+<span class="n">FFS</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span>
+<span class="c1"># FUNCTIONS -------------------------------------------------------------------</span>
+<div class="viewcode-block" id="script_setup"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.script_setup">[docs]</a><span class="k">class</span> <span class="nc">script_setup</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">release</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configfile</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileObj</span><span class="p">:</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fileObj</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Opening configuration file :</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configfile</span><span class="p">),</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span> 
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">inargs</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>    
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sid_dck&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;yyyy&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">)</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>            
+        <span class="bp">self</span><span class="o">.</span><span class="n">dck</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="n">process_options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data_model&#39;</span><span class="p">,</span> <span class="s1">&#39;read_sections&#39;</span><span class="p">,</span><span class="s1">&#39;filter_reports_by&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;cdm_map&#39;</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>            
+            <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">process_options</span><span class="p">:</span> 
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">,{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Parsing configuration from file :</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configfile</span><span class="p">),</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<span class="c1"># This is for json to handle dates</span>
+<div class="viewcode-block" id="date_handler"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.date_handler">[docs]</a><span class="n">date_handler</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="p">(</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">))</span>
+    <span class="k">else</span> <span class="kc">None</span></div>
+<span class="p">)</span>
+
+<div class="viewcode-block" id="clean_L1a"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.clean_L1a">[docs]</a><span class="k">def</span> <span class="nf">clean_L1a</span><span class="p">(</span><span class="n">L1a_id</span><span class="p">):</span>
+    <span class="n">L1a_prods</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">L1a_path</span><span class="p">,</span><span class="s1">&#39;*&#39;</span> <span class="o">+</span> <span class="n">FFS</span> <span class="o">+</span> <span class="n">L1a_id</span> <span class="o">+</span> <span class="s1">&#39;.psv&#39;</span><span class="p">))</span>
+    <span class="n">L1a_ql</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">L1a_ql_path</span><span class="p">,</span> <span class="n">L1a_id</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">))</span>
+    <span class="n">L1a_excluded</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">L1a_excluded_path</span><span class="p">,</span> <span class="n">L1a_id</span> <span class="o">+</span> <span class="n">FFS</span> <span class="o">+</span> <span class="s1">&#39;*.psv&#39;</span><span class="p">))</span>
+    <span class="n">L1a_invalid</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">L1a_invalid_path</span><span class="p">,</span> <span class="n">L1a_id</span> <span class="o">+</span> <span class="n">FFS</span> <span class="o">+</span> <span class="s1">&#39;*.psv&#39;</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">L1a_prods</span> <span class="o">+</span> <span class="n">L1a_ql</span> <span class="o">+</span> <span class="n">L1a_excluded</span> <span class="o">+</span> <span class="n">L1a_invalid</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Removing previous file: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="write_out_junk"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.write_out_junk">[docs]</a><span class="k">def</span> <span class="nf">write_out_junk</span><span class="p">(</span><span class="n">dataObj</span><span class="p">,</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataObj</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">read_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;chunksize&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">dataObj</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+        <span class="n">wmode</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span> <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;w&#39;</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="kc">False</span> <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">True</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">wmode</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>  </div>
+<span class="c1"># MAIN ------------------------------------------------------------------------</span>
+
+<span class="c1"># PROCESS INPUT AND MAKE SOME CHECKS ------------------------------------------</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="se">\t</span><span class="s1">[</span><span class="si">%(asctime)s</span><span class="s1">](</span><span class="si">%(filename)s</span><span class="s1">)</span><span class="se">\t</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span><span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reading command line arguments&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="args"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.args">[docs]</a>    <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span></div>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Need arguments to run!&#39;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="params"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.params">[docs]</a><span class="n">params</span> <span class="o">=</span> <span class="n">script_setup</span><span class="p">(</span><span class="n">args</span><span class="p">)</span></div>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">params</span><span class="o">.</span><span class="n">flag</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Error parsing initial configuration&#39;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="release_path"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.release_path">[docs]</a><span class="n">release_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">release</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FFS"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.FFS">[docs]</a><span class="n">FFS</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span>    </div>
+<div class="viewcode-block" id="L0_path"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.L0_path">[docs]</a><span class="n">L0_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span><span class="s1">&#39;datasets&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span><span class="s1">&#39;level0&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span>   </div>
+<div class="viewcode-block" id="L1a_path"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.L1a_path">[docs]</a><span class="n">L1a_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="s1">&#39;level1a&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+<div class="viewcode-block" id="L1a_ql_path"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.L1a_ql_path">[docs]</a><span class="n">L1a_ql_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="s1">&#39;level1a&#39;</span><span class="p">,</span><span class="s1">&#39;quicklooks&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+<div class="viewcode-block" id="L1a_excluded_path"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.L1a_excluded_path">[docs]</a><span class="n">L1a_excluded_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="s1">&#39;level1a&#39;</span><span class="p">,</span><span class="s1">&#39;excluded&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+<div class="viewcode-block" id="L1a_invalid_path"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.L1a_invalid_path">[docs]</a><span class="n">L1a_invalid_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_path</span><span class="p">,</span><span class="s1">&#39;level1a&#39;</span><span class="p">,</span><span class="s1">&#39;invalid&#39;</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">sid_dck</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="data_paths"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.data_paths">[docs]</a><span class="n">data_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">L0_path</span><span class="p">,</span> <span class="n">L1a_path</span><span class="p">,</span> <span class="n">L1a_ql_path</span><span class="p">,</span> <span class="n">L1a_excluded_path</span><span class="p">,</span> <span class="n">L1a_invalid_path</span><span class="p">]</span></div>
+<span class="k">if</span> <span class="nb">any</span><span class="p">([</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_paths</span> <span class="p">]):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Could not find data paths: &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_paths</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">x</span><span class="p">)])))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#L0_filename = os.path.join(L0_path,FFS.join([params.year,params.month]) + &#39;.imma&#39;)</span>
+<div class="viewcode-block" id="L0_filename"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.L0_filename">[docs]</a><span class="n">L0_filename</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">filename</span></div>
+
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">L0_filename</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;L0 file not found: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">L0_filename</span><span class="p">))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="release_id"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.release_id">[docs]</a><span class="n">release_id</span> <span class="o">=</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">params</span><span class="o">.</span><span class="n">release</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">update</span> <span class="p">])</span>   </div>
+<div class="viewcode-block" id="L1a_id"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.L1a_id">[docs]</a><span class="n">L1a_id</span> <span class="o">=</span> <span class="n">FFS</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">release_id</span> <span class="p">])</span></div>
+
+<span class="c1"># CLEAN PREVIOUS L1A PRODUCTS AND SIDE FILES ----------------------------------</span>
+<span class="n">clean_L1a</span><span class="p">(</span><span class="n">L1a_id</span><span class="p">)</span>
+
+<span class="c1"># DO THE DATA PROCESSING ------------------------------------------------------</span>
+<div class="viewcode-block" id="data_model"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.data_model">[docs]</a><span class="n">data_model</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">data_model</span></div>
+<div class="viewcode-block" id="dataset"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.dataset">[docs]</a><span class="n">dataset</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">dataset</span></div>
+<div class="viewcode-block" id="io_dict"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.io_dict">[docs]</a><span class="n">io_dict</span> <span class="o">=</span> <span class="p">{}</span></div>
+
+<span class="c1">#1. Read input file to dataframe</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reading dataset data&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="read_kwargs"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.read_kwargs">[docs]</a><span class="n">read_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data_model&#39;</span><span class="p">:</span><span class="n">params</span><span class="o">.</span><span class="n">data_model</span><span class="p">,</span>
+                  <span class="s1">&#39;sections&#39;</span><span class="p">:</span><span class="n">params</span><span class="o">.</span><span class="n">read_sections</span><span class="p">,</span>
+                  <span class="s1">&#39;chunksize&#39;</span><span class="p">:</span><span class="mi">200000</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="data_in"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.data_in">[docs]</a><span class="n">data_in</span> <span class="o">=</span> <span class="n">mdf_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">L0_filename</span><span class="p">,</span> <span class="o">**</span><span class="n">read_kwargs</span><span class="p">)</span></div>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data_in</span><span class="p">)</span>
+
+<span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;total&#39;</span><span class="p">:</span><span class="n">inspect</span><span class="o">.</span><span class="n">get_length</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">)}</span>
+
+<span class="c1"># 2. PT fixing, filtering and invalid rejection</span>
+<span class="c1"># 2.1. Fix platform type</span>
+
+<span class="c1"># dataset = ICOADS_R3.0.0T is not &quot;registered&quot; in metmetpy, but icoads_r3000</span>
+<span class="c1"># Modify metmetpy so that it maps ICOADS_R3.0.0T to its own alliaeses</span>
+<span class="c1"># we now do the dirty trick here: dataset_metmetpy = icoads_r3000</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Applying platform type fixtures&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="dataset_metmetpy"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.dataset_metmetpy">[docs]</a><span class="n">dataset_metmetpy</span> <span class="o">=</span> <span class="s1">&#39;icoads_r3000&#39;</span></div>
+<div class="viewcode-block" id="data_model_metmetpy"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.data_model_metmetpy">[docs]</a><span class="n">data_model_metmetpy</span> <span class="o">=</span> <span class="s1">&#39;imma1&#39;</span></div>
+<span class="n">data_in</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">metmetpy</span><span class="o">.</span><span class="n">correct_pt</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">dataset_metmetpy</span><span class="p">,</span><span class="n">data_model_metmetpy</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">dck</span><span class="p">)</span>
+
+<span class="c1"># 2.2. Apply record selection (filter by) criteria: PT types.....</span>
+<span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="s1">&#39;filter_reports_by&#39;</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Applying selection filters&#39;</span><span class="p">)</span>
+    <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;not_selected&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="viewcode-block" id="data_excluded"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.data_excluded">[docs]</a>    <span class="n">data_excluded</span> <span class="o">=</span> <span class="p">{}</span></div>
+    <span class="n">data_excluded</span><span class="p">[</span><span class="s1">&#39;atts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_in</span><span class="o">.</span><span class="n">atts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">data_excluded</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># 3.1. Select by report_filters options</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">filter_reports_by</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;not_selected&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Selecting </span><span class="si">{0}</span><span class="s1"> values: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+        <span class="n">filter_location</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">filter_location</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filter_location</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">filter_location</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">selection</span><span class="o">=</span><span class="p">{</span><span class="n">col</span><span class="p">:</span><span class="n">values</span><span class="p">}</span>
+        <span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">data_excluded</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">],</span><span class="n">index</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">select_from_list</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">selection</span><span class="p">,</span><span class="n">out_rejected</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">in_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">data_in</span><span class="o">.</span><span class="n">mask</span><span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">select_from_index</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;not_selected&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">get_length</span><span class="p">(</span><span class="n">data_excluded</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;not_selected&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">data_in</span><span class="o">.</span><span class="n">atts</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s1">&#39;column_type&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;str&#39;</span><span class="p">,</span><span class="s1">&#39;object&#39;</span><span class="p">,</span><span class="s1">&#39;key&#39;</span><span class="p">]:</span>
+                <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;not_selected&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">count_by_cat</span><span class="p">(</span><span class="n">data_excluded</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">],</span><span class="n">col</span><span class="p">))</span>
+    <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;not_selected&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;total&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;not_selected&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+
+<span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;pre_selected&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;total&#39;</span><span class="p">:</span><span class="n">inspect</span><span class="o">.</span><span class="n">get_length</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">)}</span>    
+
+
+<span class="c1"># 2.3. Keep track of invalid data </span>
+<span class="c1"># First create a global mask and count failure occurrences</span>
+<div class="viewcode-block" id="newmask_buffer"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.newmask_buffer">[docs]</a><span class="n">newmask_buffer</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span></div>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Removing invalid data&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">data</span><span class="p">,</span><span class="n">mask</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">data_in</span><span class="o">.</span><span class="n">mask</span><span class="p">):</span>
+    <span class="c1"># 2.3.1. Global mask</span>
+    <span class="n">mask</span><span class="p">[</span><span class="s1">&#39;global_mask&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">mask</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">newmask_buffer</span><span class="p">,</span><span class="n">header</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    
+    <span class="c1"># 2.3.2. Invalid reports counts and values</span>
+    <span class="c1"># Initialize counters if first chunk</span>
+<div class="viewcode-block" id="masked_columns"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.masked_columns">[docs]</a>    <span class="n">masked_columns</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mask</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">mask</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span> <span class="ow">and</span> <span class="n">x</span><span class="o">!=</span><span class="p">(</span><span class="s1">&#39;global_mask&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">]</span></div>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">io_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;invalid&#39;</span><span class="p">):</span>
+        <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">k</span><span class="p">):{</span><span class="s1">&#39;total&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;values&#39;</span><span class="p">:[]}</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">masked_columns</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">masked_columns</span><span class="p">:</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mask</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">[</span><span class="n">col</span><span class="p">]])</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span> <span class="c1"># cause some masks are not in data (datetime....)</span>
+            <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">[</span><span class="n">col</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">newmask_buffer</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   
+<div class="viewcode-block" id="chunksize"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.chunksize">[docs]</a><span class="n">chunksize</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="k">else</span> <span class="n">data_in</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">orig_options</span><span class="p">[</span><span class="s1">&#39;chunksize&#39;</span><span class="p">]</span></div>
+<div class="viewcode-block" id="mask"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.mask">[docs]</a><span class="n">data_in</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">newmask_buffer</span><span class="p">,</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mask</span> <span class="p">],</span> <span class="n">chunksize</span> <span class="o">=</span> <span class="n">chunksize</span><span class="p">)</span>    </div>
+<div class="viewcode-block" id="data"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.data">[docs]</a><span class="n">data_in</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">TextParser_hdlr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
+<span class="c1"># Now see what fails</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">masked_columns</span><span class="p">:</span>
+<div class="viewcode-block" id="k"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.k">[docs]</a>    <span class="n">k</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span></div>
+    <span class="k">if</span> <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">data_in</span><span class="o">.</span><span class="n">atts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;column_type&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mdf_reader</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">object_types</span><span class="p">:</span>
+            <span class="n">ivalues</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;values&#39;</span><span class="p">]))</span>
+            <span class="c1"># This is because sorting fails on strings if nan</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="ow">in</span> <span class="n">ivalues</span><span class="p">:</span>
+                <span class="n">ivalues</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+                <span class="n">ivalues</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                <span class="n">ivalues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ivalues</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">i</span><span class="p">:</span><span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ivalues</span><span class="p">})</span>
+            <span class="n">sush</span> <span class="o">=</span> <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;values&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">data_in</span><span class="o">.</span><span class="n">atts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;column_type&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mdf_reader</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">numeric_types</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;values&#39;</span><span class="p">]</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">)[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">))]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+                <span class="p">[</span><span class="n">counts</span><span class="p">,</span><span class="n">edges</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+                <span class="c1"># Following binning approach only if at most 1 sign digit!</span>
+                <span class="n">bins</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">{:.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="s2">&quot;</span><span class="si">{:.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+                <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">b</span><span class="p">:</span><span class="n">counts</span> <span class="k">for</span> <span class="n">b</span><span class="p">,</span><span class="n">counts</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span><span class="n">counts</span><span class="p">)})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;nan?&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;values&#39;</span><span class="p">])})</span>
+            <span class="n">sush</span> <span class="o">=</span> <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;values&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sush</span> <span class="o">=</span> <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># 2.4. Discard invalid data. </span>
+<div class="viewcode-block" id="data_invalid"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.data_invalid">[docs]</a><span class="n">data_invalid</span> <span class="o">=</span> <span class="p">{}</span></div>
+<span class="n">data_invalid</span><span class="p">[</span><span class="s1">&#39;atts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_in</span><span class="o">.</span><span class="n">atts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="viewcode-block" id="col"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.col">[docs]</a><span class="n">col</span> <span class="o">=</span> <span class="s1">&#39;global_mask&#39;</span>            </div>
+<span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">data_invalid</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">select_true</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">data_in</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span><span class="n">col</span><span class="p">,</span><span class="n">out_rejected</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">data_in</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span><span class="n">data_invalid</span><span class="p">[</span><span class="s1">&#39;valid_mask&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">select_true</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span><span class="n">data_in</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span><span class="n">col</span><span class="p">,</span><span class="n">out_rejected</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+            
+<span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">get_length</span><span class="p">(</span><span class="n">data_invalid</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>         
+<span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;processed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;total&#39;</span><span class="p">:</span><span class="n">inspect</span><span class="o">.</span><span class="n">get_length</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">)}</span>
+
+<span class="n">process</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">if</span> <span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;processed&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<div class="viewcode-block" id="process"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.process">[docs]</a>    <span class="n">process</span> <span class="o">=</span> <span class="kc">False</span></div>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;No data to map to CDM after selection and cleaning&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># 2.9. Let&#39;s save reports with no observations...</span>
+<span class="c1">#OBS_VALUES = [ (&#39;core&#39;,x) for x in [&#39;AT&#39;,&#39;SST&#39;,&#39;SLP&#39;,&#39;D&#39;,&#39;W&#39;,&#39;WBT&#39;,&#39;DPT&#39;] ]</span>
+<span class="c1">#no_obs_file = os.path.join(L1a_path,&#39;no_obs&#39;,str(params.year) + FFS + str(params.month) + &#39;.psv&#39;)</span>
+<span class="c1">#c = 0</span>
+<span class="c1">#for data_obs in data_in.data:</span>
+<span class="c1">#    if len(data_obs[data_obs[OBS_VALUES].isna().all(axis=1)]) &gt; 0:</span>
+<span class="c1">#        if not os.path.isdir(os.path.join(L1a_path,&#39;no_obs&#39;)):</span>
+<span class="c1">#            os.mkdir(os.path.join(L1a_path,&#39;no_obs&#39;))</span>
+<span class="c1">#        wmode = &#39;a&#39; if c &gt; 0 else &#39;w&#39;</span>
+<span class="c1">#        header = False if c &gt; 0 else True</span>
+<span class="c1">#        data_obs[data_obs[OBS_VALUES].isna().all(axis=1)].to_csv(no_obs_file, sep = &#39;|&#39;, mode = wmode, header = header)</span>
+<span class="c1">#        c += 1  </span>
+            
+<span class="c1">#data_in.data = TextParser_hdlr.restore(data_in.data)</span>
+<span class="c1"># 3. Map to common data model and output files</span>
+<span class="k">if</span> <span class="n">process</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Mapping to CDM&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="tables"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.tables">[docs]</a>    <span class="n">tables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">,</span><span class="s1">&#39;observations-at&#39;</span><span class="p">,</span><span class="s1">&#39;observations-sst&#39;</span><span class="p">,</span><span class="s1">&#39;observations-dpt&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;observations-wbt&#39;</span><span class="p">,</span><span class="s1">&#39;observations-wd&#39;</span><span class="p">,</span><span class="s1">&#39;observations-ws&#39;</span><span class="p">,</span><span class="s1">&#39;observations-slp&#39;</span><span class="p">]</span></div>
+    <span class="n">obs_tables</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">io_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">table</span><span class="p">:{}</span> <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">})</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">cdm_map</span>
+    <span class="n">cdm_tables</span> <span class="o">=</span> <span class="n">cdm</span><span class="o">.</span><span class="n">map_model</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">data_in</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">data_in</span><span class="o">.</span><span class="n">atts</span><span class="p">,</span>
+                               <span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span><span class="p">)</span>
+    
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Printing tables to psv files&#39;</span><span class="p">)</span>
+    <span class="n">cdm</span><span class="o">.</span><span class="n">cdm_to_ascii</span><span class="p">(</span><span class="n">cdm_tables</span><span class="p">,</span><span class="n">log_level</span> <span class="o">=</span><span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span>
+                     <span class="n">out_dir</span> <span class="o">=</span> <span class="n">L1a_path</span><span class="p">,</span> <span class="n">suffix</span> <span class="o">=</span> <span class="n">L1a_id</span><span class="p">,</span> <span class="n">prefix</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+        
+    <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+        <span class="n">io_dict</span><span class="p">[</span><span class="n">table</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">get_length</span><span class="p">(</span><span class="n">cdm_tables</span><span class="p">[</span><span class="n">table</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+
+<span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;date processed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Saving json quicklook&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="L1a_io_filename"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.L1a_io_filename">[docs]</a><span class="n">L1a_io_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">L1a_ql_path</span><span class="p">,</span><span class="n">L1a_id</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">)</span></div>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">L1a_io_filename</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileObj</span><span class="p">:</span>
+    <span class="n">simplejson</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">params</span><span class="o">.</span><span class="n">year</span><span class="p">,</span><span class="n">params</span><span class="o">.</span><span class="n">month</span><span class="p">]):</span><span class="n">io_dict</span><span class="p">},</span><span class="n">fileObj</span><span class="p">,</span>
+                     <span class="n">default</span> <span class="o">=</span> <span class="n">date_handler</span><span class="p">,</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">ignore_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+<span class="c1"># Output exluded and invalid ---------------------------------------------</span>
+<span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="s1">&#39;filter_reports_by&#39;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">data_excluded</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">get_length</span><span class="p">(</span><span class="n">data_excluded</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<div class="viewcode-block" id="excluded_filename"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.excluded_filename">[docs]</a>            <span class="n">excluded_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">L1a_excluded_path</span><span class="p">,</span><span class="n">L1a_id</span> <span class="o">+</span> <span class="n">FFS</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;.psv&#39;</span><span class="p">)</span>  </div>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Writing </span><span class="si">{0}</span><span class="s1"> excluded data to file </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">excluded_filename</span><span class="p">))</span>
+            <span class="n">write_out_junk</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">excluded_filename</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">get_length</span><span class="p">(</span><span class="n">data_invalid</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<div class="viewcode-block" id="invalid_data_filename"><a class="viewcode-back" href="../autoapi/level1a/index.html#level1a.invalid_data_filename">[docs]</a>    <span class="n">invalid_data_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">L1a_invalid_path</span><span class="p">,</span><span class="n">L1a_id</span> <span class="o">+</span> <span class="n">FFS</span> <span class="o">+</span> <span class="s1">&#39;data.psv&#39;</span><span class="p">)</span></div>
+    <span class="n">invalid_mask_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">L1a_invalid_path</span><span class="p">,</span><span class="n">L1a_id</span> <span class="o">+</span> <span class="n">FFS</span> <span class="o">+</span> <span class="s1">&#39;mask.psv&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Writing invalid data to file </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">invalid_data_filename</span><span class="p">))</span>
+    <span class="n">write_out_junk</span><span class="p">(</span><span class="n">data_invalid</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span><span class="n">invalid_data_filename</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Writing invalid data mask to file </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">invalid_mask_filename</span><span class="p">))</span>
+    <span class="n">write_out_junk</span><span class="p">(</span><span class="n">data_invalid</span><span class="p">[</span><span class="s1">&#39;valid_mask&#39;</span><span class="p">],</span><span class="n">invalid_mask_filename</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

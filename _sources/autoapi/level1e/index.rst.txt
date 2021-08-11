@@ -1,0 +1,404 @@
+:mod:`level1e`
+==============
+
+.. py:module:: level1e
+
+.. autoapi-nested-parse::
+
+   Created on Mon Jun 17 14:24:10 2019
+
+   SEE IMPORTANT NOTE!
+
+   Script to generate level1e CDM data: adding MO-QC (a.k.a. John's QC) flags
+
+   - Reads QC files and creates unique flag per QC file (observed parameter) using columns from each QC file as parameterized at the very beginning. This is done with function get_qc_flags(). See notes below on how QC files are expected to be.
+   - Creates the report_quality CDM field with function add_report_quality(). See below notes on the rules to create it.
+   - Merge quality flags with CDM tables with function process_table(). Here, additionally,  we set 'report_time_quality' to '2' to all reports.
+   - Log, per table, total number of records and qc flag counts
+
+   Note again that the following flagging is decided/set here, does not come from QC files:
+
+   1. header.report_time_quality = '2', as by the time a report gets here we know that it is at least a valid datetime
+   2. header.report_quality = following the rules in the notes below
+
+   Note also that if a report is not qced (not in QC files, like worst duplicates) we override the default settings in the initial mappings (not all not-checked) to not-checked with:
+
+   - observations*.quality_flag = '2'
+   - header.'report_time_quality' = '2'
+   - header.'report_quality' = '2'
+   - header.'location_quality' = '3'
+
+   The processing unit is the source-deck monthly set of CDM tables.
+
+   Outputs data to:
+       - ``/<data_path>/<release>/<source>/level1e/<sid-dck>/table[i]-fileID.psv``
+   Outputs quicklook info to:
+       - ``/<data_path>/<release>/<source>/level1c/quicklooks/<sid-dck>/fileID.json``
+
+   Where fileID is yyyy-mm-release_tag-update_tag
+
+   Before processing starts:
+
+   - checks the existence of all io subdirectories in level1d|e -> exits if fails
+   - checks availability of the source header table -> exits if fails
+   - checks existence of source observation tables -> exits if no obs tables -> requirement removed to give way to sid-dck monthly partitions with no obs tables
+   - checks of existence of the monthly QC (POS) file -> exits if fails. See IMPORTANT NOTE!!!!
+   - removes all level1e products on input file resulting from previous runs
+
+   Inargs:
+   -------
+
+   - data_path: marine data path in file system
+   - release: release tag
+   - update: udpate tag
+   - dataset: dataset tag
+   - config_path: configuration file path
+   - sid_dck: source-deck data partition (optional, from config_file otherwise)
+   - year: data file year (yyyy) (optional, from config_file otherwise)
+   - month: data file month (mm) (optional, from config_file otherwise)
+
+   On expected format and content of QC files:
+   -------------------------------------------
+
+   - qc monthly files in ``<data_path/<release>/<source>/metoffice_qc/base/<yyyy>/<mm>/<id>_qc_yyyymm_CCIrun.csv`` with id in [POS,SST,AT,SLP,DPT,W]
+   - qc monthly files assumed to have 1 hdr line (first) with column names
+   - qc monthly files with FS=','
+   - qc field names assumed as those listed in qc_columns below
+
+   Note that all the qc files have an entry per qced** report in its header table, even if the corresponding observed parameter does not have an entry in that report, in which case has the ``noval`` flag set to ``1``.
+
+   WE ASSUME HERE THAT ALL MEASURED PARAMETERS HAVE A NOVAL FLAG THAT WE USE TO TELL APART MISSING AND FAILED *per qced report, but duplicates are not qced*
+
+   Note also that since the qc files have a UID that is the imma UID, not the CDM report_id,
+   with the source pre-appended (ICOADS-30-UID for source ICOADS_R3.0.0),
+   and I still don't have the rules to build the CDM report_id from the source (any) UID.
+
+   THE WAY QC-FILES UID AND CDM-TABLES REPORT_ID ARE LINKED HERE IS HARDCODED IN FUNCTION get_qc_flags() TO RELEASE1 SOURCE ICOADS_R3.0.0T
+
+
+   report_quality flag rules:
+   --------------------------
+   +-----------+------------------+---------------------+
+   | POS       | PARAMS           | report_quality      |
+   +-----------+------------------+---------------------+
+   |passed     |     all failed   |        fail         |
+   +-----------+------------------+---------------------+
+   |           |     rest         |        pass         |
+   +-----------+------------------+---------------------+
+   |failed     |     all          |        fail         |
+   +-----------+------------------+---------------------+
+   |not checked| at least 1 passed|   pass              |
+   +-----------+------------------+---------------------+
+   |(3)        |     all failed   |       fail          |
+   +-----------+------------------+---------------------+
+   |           |  all not checked |     not checked     |
+   +-----------+------------------+---------------------+
+
+   Dev NOTES:
+   ----------
+   There are some parts here hard-coded for ICOADS_R3.0.0.T: we are looking for report_id in CDM adding 'ICOADS_30' to the UID in the QC flags!!!!!
+   Maybe should pass a QC version configuration file, with the path of the QC files relative to a set path (i.e. informing of the QC version)
+
+   @author: iregon
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   level1e.script_setup
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   level1e.get_qc_flags
+   level1e.add_report_quality
+   level1e.process_table
+   level1e.clean_level
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   level1e.date_handler
+   level1e.qc_columns
+   level1e.qc_cdm
+   level1e.table_qc
+   level1e.qc_dtype
+   level1e.qc_delimiter
+   level1e.filename_field_sep
+   level1e.delimiter
+   level1e.level
+   level1e.level_prev
+   level1e.header
+   level1e.wmode
+   level1e.cdm_tables
+   level1e.obs_tables
+   level1e.history_tstmp
+   level1e.args
+   level1e.params
+   level1e.release_path
+   level1e.release_id
+   level1e.fileID
+   level1e.fileID_date
+   level1e.prev_level_path
+   level1e.level_path
+   level1e.level_ql_path
+   level1e.level_log_path
+   level1e.qc_path
+   level1e.data_paths
+   level1e.qc_pos_filename
+   level1e.qc_avail
+   level1e.file_date
+   level1e.header_filename
+   level1e.table
+   level1e.header_df
+   level1e.header_df
+   level1e.tables_in
+   level1e.table_filename
+   level1e.qc_dict
+   level1e.qc_list
+   level1e.qc_df
+   level1e.flag
+   level1e.flag
+   level1e.level_io_filename
+
+
+.. class:: script_setup(inargs)
+
+
+
+.. data:: date_handler
+   
+
+   
+
+.. function:: get_qc_flags(qc, qc_df_full)
+
+
+.. function:: add_report_quality(qc_df_full)
+
+
+.. function:: process_table(table_df, table_name)
+
+
+.. function:: clean_level(file_id)
+
+
+.. data:: qc_columns
+   
+
+   
+
+.. data:: qc_cdm
+   
+
+   
+
+.. data:: table_qc
+   
+
+   
+
+.. data:: qc_dtype
+   
+
+   
+
+.. data:: qc_delimiter
+   :annotation: = ,
+
+   
+
+.. data:: filename_field_sep
+   :annotation: = -
+
+   
+
+.. data:: delimiter
+   :annotation: = |
+
+   
+
+.. data:: level
+   :annotation: = level1e
+
+   
+
+.. data:: level_prev
+   :annotation: = level1d
+
+   
+
+.. data:: header
+   :annotation: = True
+
+   
+
+.. data:: wmode
+   :annotation: = w
+
+   
+
+.. data:: cdm_tables
+   
+
+   
+
+.. data:: obs_tables
+   
+
+   
+
+.. data:: history_tstmp
+   
+
+   
+
+.. data:: args
+   
+
+   
+
+.. data:: params
+   
+
+   
+
+.. data:: release_path
+   
+
+   
+
+.. data:: release_id
+   
+
+   
+
+.. data:: fileID
+   
+
+   
+
+.. data:: fileID_date
+   
+
+   
+
+.. data:: prev_level_path
+   
+
+   
+
+.. data:: level_path
+   
+
+   
+
+.. data:: level_ql_path
+   
+
+   
+
+.. data:: level_log_path
+   
+
+   
+
+.. data:: qc_path
+   
+
+   
+
+.. data:: data_paths
+   
+
+   
+
+.. data:: qc_pos_filename
+   
+
+   
+
+.. data:: qc_avail
+   :annotation: = True
+
+   
+
+.. data:: file_date
+   
+
+   
+
+.. data:: header_filename
+   
+
+   
+
+.. data:: table
+   :annotation: = header
+
+   
+
+.. data:: header_df
+   
+
+   
+
+.. data:: header_df
+   
+
+   
+
+.. data:: tables_in
+   :annotation: = ['header']
+
+   
+
+.. data:: table_filename
+   
+
+   
+
+.. data:: qc_dict
+   
+
+   
+
+.. data:: qc_list
+   
+
+   
+
+.. data:: qc_df
+   
+
+   
+
+.. data:: flag
+   
+
+   
+
+.. data:: flag
+   
+
+   
+
+.. data:: level_io_filename
+   
+
+   
+

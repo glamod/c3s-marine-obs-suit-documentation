@@ -1,0 +1,1382 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>1. Build and add a mdf_reader schema &mdash; C3S-marine-obs-suite v1.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Build and add a cdm-mapper" href="build-new-cdm-mapper.html" />
+    <link rel="prev" title="Adding new data models" href="adding-new-data-models.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> C3S-marine-obs-suite
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="obs-suite-set-up.html">Observation suite set up and directories overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-workflow.html">Release workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#configuration-directory-set-up">Configuration directory set up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#make-release-source-tree">Make release source tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-workflow.html#run-level1a">Run level1a</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="adding-new-data-models.html">Adding new data models</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Build and add a mdf_reader schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-your-script">1.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#copy-files-from-a-pre-existent-data-model">1.2 Copy files from a pre-existent data model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modify-the-imma1-d704-json-file">1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-the-code-tables">1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#re-start-your-python-environment">1.5 Re-start your python environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-to-your-python-script-the-new-schema">1.6 Add to your python script the new schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="build-new-cdm-mapper.html">2. Build and add a cdm-mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#set-up-your-script">2.1 Set up your script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#copy-files-from-a-pre-existent-data-model-mapper">2.2 Copy files from a pre-existent data model mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#modify-the-header-table">2.3 Modify the header table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#modify-the-observations-tables">2.4 Modify the observations tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#add-code-tables-needed">2.5 Add <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#add-the-functions-needed-to-the-icoads-r3000-d704-py">2.6 Add the functions needed to the <code class="docutils literal notranslate"><span class="pre">icoads_r3000_d704.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-new-cdm-mapper.html#test-your-new-cdm-mapper">2.7 Test your new CDM mapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html">3. Commit and push changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#clone-the-latest-version-of-the-modified-tools">4. Clone the latest version of the modified tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-steps.html#run-level1a-for-that-new-sid-dck-cdm">5. Run level1a for that new sid-dck CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="issues-with-data-models.html">Issues with data models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#missing-code-tables">Missing <code class="docutils literal notranslate"><span class="pre">code_tables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#exclusion-of-data">Exclusion of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues-with-data-models.html#invalid-data">Invalid data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/lotus_scripts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/lotus_scripts/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/array_output_hdlr/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.array_output_hdlr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1a_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1a_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1b_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1b_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1c_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1c_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1d_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1d_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level1e_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level1e_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/level2_slurm/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.level2_slurm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/lotus_scripts/lotus_paths/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lotus_scripts.lotus_paths</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1d/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1d</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1d/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1d/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">noc_duplicates_merge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/noc_duplicates_merge/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1c/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1c</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#notes-on-validations">Notes on validations:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#dev-notes">Dev notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1c/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1c/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1e/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1e</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#on-expected-format-and-content-of-qc-files">On expected format and content of QC files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#report-quality-flag-rules">report_quality flag rules:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#dev-notes">Dev NOTES:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1e/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1e/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1b/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1b</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#configfile-includes">configfile includes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1b/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1b/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level1a/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level1a</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#on-input-data">On input data:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#configfile">configfile:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level1a/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level1a/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/level2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">level2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#uses-level2-list">Uses level2_list:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/level2/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/level2/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/make_release_source_tree/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">make_release_source_tree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#inargs">Inargs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/make_release_source_tree/index.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">C3S-marine-obs-suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="adding-new-data-models.html">Adding new data models</a> &raquo;</li>
+        
+      <li>1. Build and add a mdf_reader schema</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/build-new-schema.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="build-and-add-a-mdf-reader-schema">
+<span id="built-new-schema"></span><h1>1. Build and add a mdf_reader schema<a class="headerlink" href="#build-and-add-a-mdf-reader-schema" title="Permalink to this headline">¶</a></h1>
+<p>Detail instructions on how to build and add a new schema for any type of data can be found in the <a class="reference external" href="https://glamod.github.io/mdf_reader_documentation/how-to-build-a-data-model.html">mdf_reader docs</a>. However, the process to create a <strong>schema</strong> for a data collection from ICOADS can be simplified by copying an <strong>already built in</strong> schema i.e., <code class="docutils literal notranslate"><span class="pre">imma1</span></code>. This can be adapted for a specific deck, by just modifying the last section of the <code class="docutils literal notranslate"><span class="pre">imma1.json</span></code> file (the <code class="docutils literal notranslate"><span class="pre">c99</span></code> section) and adding <a class="reference external" href="https://glamod.github.io/mdf_reader_documentation/data-models.html#code-tables">code_tables</a> needed to decode certain information. The <code class="docutils literal notranslate"><span class="pre">c99</span></code> section contains all the original collection supplemental metadata. The modification of this section will allowed you to read and map new metadata information to the C3S CDM format.</p>
+<div class="section" id="set-up-your-script">
+<h2>1.1 Set up your script<a class="headerlink" href="#set-up-your-script" title="Permalink to this headline">¶</a></h2>
+<p>After activating the correct python environment, you can start a new python console and create the following script by typing the commands below. Don’t forget to change your working directory path first:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">working_dir</span> <span class="o">=</span> <span class="s1">&#39;/to_your_designated_folder_where_you_installed_mdf_reader_and_cdm/&#39;</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">working_dir</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">mdf_reader</span>
+<span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+<p>To get familiar with the reader tool you can read a raw <cite>.imma</cite> file from dck 704 as an example, for a subset of the data collected in 1878/10:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="s1">&#39;imma1&#39;</span>
+<span class="n">data_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="s1">&#39;mdf_reader/tests/data/125-704_1878-10_subset.imma&#39;</span><span class="p">)</span>
+<span class="n">data_raw</span> <span class="o">=</span> <span class="n">mdf_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_file_path</span><span class="p">,</span> <span class="n">data_model</span> <span class="o">=</span> <span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now you can close your script, but don’t forget to save it!</p>
+</div>
+<div class="section" id="copy-files-from-a-pre-existent-data-model">
+<h2>1.2 Copy files from a pre-existent data model<a class="headerlink" href="#copy-files-from-a-pre-existent-data-model" title="Permalink to this headline">¶</a></h2>
+<p>To construct the schema for deck 704 you can copy a the default <code class="docutils literal notranslate"><span class="pre">imma1</span></code> schema and modify the <code class="docutils literal notranslate"><span class="pre">c99</span></code> section. Open a shell and do the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd ../mdf_reader/data_models/lib
+$ cp -r imma1 imma1_d704
+$ cd imma1_d704
+$ mv imma1.json imma1_d704.json
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is important that you change the <code class="docutils literal notranslate"><span class="pre">imma1.json</span></code> file name to the corresponding deck number (in this case <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code>). The main folder of the schema and the <code class="docutils literal notranslate"><span class="pre">.json</span></code> file need to have the same name, so the mdf_reader tool is able to recognize it .</p>
+</div>
+</div>
+<div class="section" id="modify-the-imma1-d704-json-file">
+<h2>1.3 Modify the <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> file<a class="headerlink" href="#modify-the-imma1-d704-json-file" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Now in the editor of your choice modify <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code> following the instructions below:</p>
+<blockquote>
+<div><ul>
+<li><p>In the <a class="reference external" href="https://glamod.github.io/mdf_reader_documentation/how-to-build-a-data-model.html#schema-header-block">header</a> section:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="s2">&quot;parsing_order&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;core&quot;</span><span class="p">]},{</span><span class="s2">&quot;o&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c1&quot;</span><span class="p">,</span><span class="s2">&quot;c5&quot;</span><span class="p">,</span><span class="s2">&quot;c6&quot;</span><span class="p">,</span><span class="s2">&quot;c7&quot;</span><span class="p">,</span><span class="s2">&quot;c8&quot;</span><span class="p">,</span><span class="s2">&quot;c9&quot;</span><span class="p">,</span><span class="s2">&quot;c95&quot;</span><span class="p">,</span><span class="s2">&quot;c96&quot;</span><span class="p">,</span><span class="s2">&quot;c97&quot;</span><span class="p">,</span> <span class="s2">&quot;c98&quot;</span><span class="p">,</span><span class="s2">&quot;c99&quot;</span><span class="p">]}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Replace the text by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;parsing_order&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;core&quot;</span><span class="p">]},</span>
+      <span class="p">{</span><span class="s2">&quot;o&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c1&quot;</span><span class="p">,</span><span class="s2">&quot;c5&quot;</span><span class="p">,</span><span class="s2">&quot;c6&quot;</span><span class="p">,</span><span class="s2">&quot;c7&quot;</span><span class="p">,</span><span class="s2">&quot;c8&quot;</span><span class="p">,</span><span class="s2">&quot;c9&quot;</span><span class="p">,</span><span class="s2">&quot;c95&quot;</span><span class="p">,</span><span class="s2">&quot;c96&quot;</span><span class="p">,</span><span class="s2">&quot;c97&quot;</span><span class="p">,</span><span class="s2">&quot;c98&quot;</span><span class="p">]},</span>
+      <span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c99_sentinal&quot;</span><span class="p">,</span><span class="s2">&quot;c99_journal&quot;</span><span class="p">,</span><span class="s2">&quot;c99_voyage&quot;</span><span class="p">,</span><span class="s2">&quot;c99_daily&quot;</span><span class="p">]},</span>
+      <span class="p">{</span><span class="s2">&quot;e&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c99_data4&quot;</span><span class="p">,</span><span class="s2">&quot;c99_data5&quot;</span><span class="p">]}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Here we are adding new sub-sections to the <strong>header</strong> to subdivide the <code class="docutils literal notranslate"><span class="pre">c99</span></code> string into its corresponding sub-sections.
+We found the information of how this string is subdivided by searching for this deck on the <a class="reference external" href="https://icoads.noaa.gov/e-doc/other/transpec/usmmj/mmj_transpec">ICOADS website</a>.</p>
+<ul>
+<li><p>Now we will delete the following text (~ from line 2214 onwards):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;c99&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sentinal&quot;</span><span class="p">:</span> <span class="s2">&quot;99 0&quot;</span><span class="p">,</span> <span class="s2">&quot;disable_read&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">}</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Each sub-section of the <code class="docutils literal notranslate"><span class="pre">c99</span></code> string declared at the header, is composed by a group of delimited elements that are decoded according to this <a class="reference external" href="https://icoads.noaa.gov/e-doc/other/transpec/usmmj/mmjdoc.pdf">documentation from ICOADS</a>. The information from the ICOADS website has been translated to a <code class="docutils literal notranslate"><span class="pre">.json</span></code> python dictionary. You can now replace the above <code class="docutils literal notranslate"><span class="pre">c99</span></code> text by copying the following subsections below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;c99_sentinal&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sentinal&quot;</span><span class="p">:</span> <span class="s2">&quot;99 0 &quot;</span><span class="p">,</span> <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;field_layout&quot;</span><span class="p">:</span><span class="s2">&quot;fixed_width&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;ATTI&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;attm ID&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ignore&quot;</span><span class="p">:</span><span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;ATTL&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;attm length&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;valid_max&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;valid_min&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;ignore&quot;</span><span class="p">:</span><span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;BLK&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;blank space&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ignore&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;disable_white_strip&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">},</span>
+<span class="s2">&quot;c99_journal&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sentinal&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;field_layout&quot;</span><span class="p">:</span><span class="s2">&quot;fixed_width&quot;</span><span class="p">,</span><span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">117</span><span class="p">},</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;sentinal&quot;</span><span class="p">:{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Journal header record identifier&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;reel_no&quot;</span><span class="p">:{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Microfilm reel number. See if we want the zero padding or not...&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;journal_no&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Marine Meteorological Journal number,right justified, zero padded&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;frame_no&quot;</span><span class="p">:{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;microfilm frame number found at number the top of the frame containing the Journal # and name of ship&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;ship_name&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Ship name, left justified&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;journal_ed&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Last two digits of year of issue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;rig&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Rig (type of ship) as appeared at beginning of journal&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.RIG&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;ship_material&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Construction material&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.MAT&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;vessel_type&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Type of vessel&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.VESS&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;vessel_length&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Length of vessel in feet rounded to nearest whole foot&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;vessel_beam&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Width of vessel in feet rounded to nearest whole foot&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;commander&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Commander as appeared in Journal, left justified&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Nation of registry&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.NAT&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;screw_paddle&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Screw or paddle&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.SP&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;hold_depth&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Rounded to the nearest whole foot&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;tonnage&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Rounded to nearest whole ton&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;baro_type&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Barometer type. Add code table&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.BAROT&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;baro_height&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Barometer height above sea level in feet&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;baro_cdate&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Date barometer last compared to standard (ddmmyyyy)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;baro_loc&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Barometer location description&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;baro_units&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Barometer units&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.BAROU&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;baro_cor&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Journal header record.Do something with this, see digitization format doc&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;thermo_mount&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Are thermos mounted as recommended in journal&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.THERMOM&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;SST_I&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Sea surface temperature method&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.SSTM&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">},</span>
+<span class="s2">&quot;c99_voyage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sentinal&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">52</span><span class="p">,</span><span class="s2">&quot;field_layout&quot;</span><span class="p">:</span><span class="s2">&quot;fixed_width&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;sentinal&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Voyage header record identifier&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;reel_no&quot;</span><span class="p">:{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Microfilm reel number. See if we want the zero padding or not...&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;journal_no&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Marine Meteorological Journal number,right justified, zero padded&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;frame_start&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;As starting frame number in the voyage header record: ensures connection between header info and data&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;from_city&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Departure port as it appears on the form&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;to_city&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Destination port as it appears on the form&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">},</span>
+<span class="s2">&quot;c99_daily&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sentinal&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;field_layout&quot;</span><span class="p">:</span><span class="s2">&quot;fixed_width&quot;</span><span class="p">,</span><span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">61</span><span class="p">},</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;sentinal&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Daily information record identifier&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;reel_no&quot;</span><span class="p">:{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Microfilm reel number. See if we want the zero padding or not...&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;journal_no&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Marine Meteorological Journal number,right justified, zero padded&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;frame_start&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;As starting frame number in the voyage header record: ensures connection between header info and data&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Frame number at the top of each frame from which the daily inforation was extracted&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;As indicated in the form&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int16&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;month&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;As indicated in the form&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;day&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;As indicated in the form&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Distance run by log since prededing run by log noon. Knots to tenths (tenth position blank if not reported)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lat_deg_an&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude by account at noon, degrees&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lat_min_an&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude by account at noon, minutes&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lat_hemis_an&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude by account at noon, hemisphere&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lon_deg_an&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude by account at noon, degrees&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lon_min_an&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude by account at noon, minutes&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lon_hemis_an&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude by account at noon, hemisphere&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lat_deg_on&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude by observation at noon, degrees&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lat_min_on&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude by observation at noon, minutes&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lat_hemis_on&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude by observation at noon, hemisphere&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lon_deg_of&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude by chronometer from forenoon observation, degrees&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lon_min_of&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude by chronometer from forenoon observation, minutes&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;lon_hemis_of&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude by chronometer from forenoon observation, hemisphere&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;current_speed&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Current speed in the past 24 hours. To knots hundreths&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;current_direction&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Direction towards which the currents are moving. Code table? not in document, probably as other directions....&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">},</span>
+<span class="s2">&quot;c99_data4&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sentinal&quot;</span> <span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;field_layout&quot;</span><span class="p">:</span><span class="s2">&quot;fixed_width&quot;</span><span class="p">,</span><span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">97</span><span class="p">},</span>
+      <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;sentinal&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Data information record type identifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;reel_no&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="s2">&quot;The number from the microfilm roll&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;journal_no&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Meteorological Journal Number, right justified, zero filled&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;frame_start&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;As starting frame number in the voyage header record: ensures connection between header info and data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Frame number at the top of each frame from which the daily inforation was extracted&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Year&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int16&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;month&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Month&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;day&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Day&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;time_ind&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Time indicator&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.TI&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Hour, right justified, zero filled&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;ship_speed&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Ship speed knots, to tenths&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;compass_ind&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Compass indicator. Reflects: course steered, compass correction, Leeway, ships true course&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.CI&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;ship_course_compass&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Ship course steered by compass. See digitization format for translation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;compass_correction&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Correction in points or degrees, as indicated in compass_ind. LMR6 false? see ref Jackson et. al. 2000 in translation info&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;ship_course_true&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Ship course true. Same rules as course steered by compass&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;wind_dir_mag&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Mean wind direction - magnetic. Same rules as course steered by compass&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;wind_dir_true&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Wind direction - true. Same rules as course steered by compass&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;wind_force&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Mean Beaufort force&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.BEAU&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;barometer&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Barometer in inches or millimetres. Left|right justified to confirm&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;disable_white_strip&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;temp_ind&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Temperature indicator&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.TEMPI&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;attached_thermometer&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Attached thermometer. It&#39;s integer values from tens to hundreds...&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;air_temperature&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Air temperature. Units according to temperature indicator&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;wet_bulb_temperature&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Wet bulb temperature. Units according to temperature indicator&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;sea_temperature&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Sea surface temperature&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span>  <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;present_weather&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Present weather, left justified, blank filled. Split in 5?&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;clouds&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Forms of clouds by symbols&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;sky_clear&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Clear sky in tenths&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;sea_state&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;State of the sea, left justified, blank filled. Split in 4?&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+  <span class="p">},</span>
+<span class="s2">&quot;c99_data5&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sentinal&quot;</span> <span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;field_layout&quot;</span><span class="p">:</span><span class="s2">&quot;fixed_width&quot;</span><span class="p">,</span><span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">103</span><span class="p">},</span>
+    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;sentinal&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Data information record type identifier&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;reel_no&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="s2">&quot;The number from the microfilm roll&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;journal_no&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Meteorological Journal Number, right justified, zero filled&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;frame_start&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;As starting frame number in the voyage header record: ensures connection between header info and data&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Frame number at the top of each frame from which the daily inforation was extracted&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Year&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;month&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Month&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;day&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Day&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;time_ind&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Time indicator&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.TI&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Hour, right justified, zero filled&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;ship_speed&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Ship speed knots, to tenths&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;compass_ind&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Compass indicator&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.CI&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;ship_course_compass&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Ship course steered by compass&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;blank&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;blank fields&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;ship_course_true&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Ship course true&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;wind_dir_mag&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Mean wind direction - magnetic&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;wind_dir_true&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Wind direction - true&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;wind_force&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Mean Beaufort force. Add code table&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.BEAU&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;barometer&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Barometer in inches or millimetres. Left|right justified to confirm&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;disable_white_strip&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;temp_ind&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Temperature indicator&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;codetable&quot;</span><span class="p">:</span> <span class="s2">&quot;ICOADS.C99.TEMPI&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;attached_thermometer&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Attached thermometer. It&#39;s integer values from tens to hundreds...&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;air_temperature&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Air temperature. Units according to temperature indicator&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;wet_bulb_temperature&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Wet bulb temperature. Units according to temperature indicator&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;sea_temperature&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Sea surface temperature&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span>  <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;present_weather&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Present weather, left justified, blank filled. Split in 5?&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;clouds&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Forms of clouds by symbols&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;sky_clear&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Clear sky in tenths&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Int8&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;sea_state&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;State of the sea, left justified, blank filled. Split in 4?&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;compass_correction_ind&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Compass correction indicator&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;compass_correction&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;compass correction&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;compass_correction_dir&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Direction of correction (of compass...)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;field_length&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;column_type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;LMR6&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For future decks you will have to type all this information yourself. Basically you will need to translate all the supplemental data information for that source&amp;deck from the ICOADS website to the <code class="docutils literal notranslate"><span class="pre">.json</span></code> file. The goal is to successfully separate the <code class="docutils literal notranslate"><span class="pre">c99</span></code> string into different sections of data and elements. You will have to add each element to the <code class="docutils literal notranslate"><span class="pre">schema.json</span></code> and make sure each element has the correct <a class="reference external" href="https://glamod.github.io/mdf_reader_documentation/how-to-build-a-data-model.html#">descriptors</a>.</p>
+</div>
+<ul class="simple">
+<li><p>Save all modifications done to <code class="docutils literal notranslate"><span class="pre">imma1_d704.json</span></code>, make sure the <code class="docutils literal notranslate"><span class="pre">.json</span></code> file is valid. You can copy the entire content and check via an <a class="reference external" href="https://jsonlint.com/">online tool</a> or just make sure you use a json editor.</p></li>
+</ul>
+</div>
+<div class="section" id="add-the-code-tables">
+<h2>1.4 Add the <code class="docutils literal notranslate"><span class="pre">code_tables</span></code><a class="headerlink" href="#add-the-code-tables" title="Permalink to this headline">¶</a></h2>
+<p>Now we will <strong>add</strong> code tables needed by some elements to decode information. Add the following files to the schema <code class="docutils literal notranslate"><span class="pre">code_tables</span></code> folder <code class="docutils literal notranslate"><span class="pre">../mdf_reader/data_models/lib/imma1_d704/code_tables/</span></code>. This part can be avoided by copying from the <strong>mdf_reader main repository</strong> all the code tables for this deck, if you don’t want to generate the files yourself:</p>
+<blockquote>
+<div><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.BAROT.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="s2">&quot;aneroid&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="s2">&quot;mercurial&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.BAROU.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="s2">&quot;inches&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="s2">&quot;millimeters&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;3&quot;</span><span class="p">:</span><span class="s2">&quot;millibars&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;4&quot;</span><span class="p">:</span><span class="s2">&quot;unable to determine&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;5&quot;</span><span class="p">:</span><span class="s2">&quot;Paris inches&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.BEAU.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;01&quot;</span><span class="p">:</span><span class="s2">&quot;Light air&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;02&quot;</span><span class="p">:</span><span class="s2">&quot;Light breeze&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;03&quot;</span><span class="p">:</span><span class="s2">&quot;Gentle breeze&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;04&quot;</span><span class="p">:</span><span class="s2">&quot;Moderate breeze&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;05&quot;</span><span class="p">:</span><span class="s2">&quot;Fresh breeze&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;06&quot;</span><span class="p">:</span><span class="s2">&quot;Strong breeze&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;07&quot;</span><span class="p">:</span><span class="s2">&quot;High wind,moderate gale,near gale&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;08&quot;</span><span class="p">:</span><span class="s2">&quot;Gale,fresh gale&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;09&quot;</span><span class="p">:</span><span class="s2">&quot;Strong, severe gale&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;10&quot;</span><span class="p">:</span><span class="s2">&quot;Storm,whole gale&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;11&quot;</span><span class="p">:</span><span class="s2">&quot;Violent storm&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;12&quot;</span><span class="p">:</span><span class="s2">&quot;Hurricane force&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.CI.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="s2">&quot;points&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="s2">&quot;degrees&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;3&quot;</span><span class="p">:</span><span class="s2">&quot;not indicated&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.MAT.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="s2">&quot;wood&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="s2">&quot;iron&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;3&quot;</span><span class="p">:</span><span class="s2">&quot;composite&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;4&quot;</span><span class="p">:</span><span class="s2">&quot;not identified&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.NAT.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;01&quot;</span><span class="p">:</span><span class="s2">&quot;American&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;02&quot;</span><span class="p">:</span><span class="s2">&quot;British&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;03&quot;</span><span class="p">:</span><span class="s2">&quot;Chinese&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;04&quot;</span><span class="p">:</span><span class="s2">&quot;French&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;05&quot;</span><span class="p">:</span><span class="s2">&quot;Austrian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;06&quot;</span><span class="p">:</span><span class="s2">&quot;Dutch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;07&quot;</span><span class="p">:</span><span class="s2">&quot;Russian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;08&quot;</span><span class="p">:</span><span class="s2">&quot;German&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;09&quot;</span><span class="p">:</span><span class="s2">&quot;Canadian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;10&quot;</span><span class="p">:</span><span class="s2">&quot;Belgian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;11&quot;</span><span class="p">:</span><span class="s2">&quot;Danish&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;12&quot;</span><span class="p">:</span><span class="s2">&quot;Italian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;13&quot;</span><span class="p">:</span><span class="s2">&quot;Norwegian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;14&quot;</span><span class="p">:</span><span class="s2">&quot;Nova Scotian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;15&quot;</span><span class="p">:</span><span class="s2">&quot;Portuguese&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;16&quot;</span><span class="p">:</span><span class="s2">&quot;Scottish&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;17&quot;</span><span class="p">:</span><span class="s2">&quot;Swedish&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;21&quot;</span><span class="p">:</span><span class="s2">&quot;Singaporean&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;99&quot;</span><span class="p">:</span><span class="s2">&quot;undefined&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;20&quot;</span><span class="p">:</span><span class="s2">&quot;undefined&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.RIG.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;01&quot;</span><span class="p">:</span><span class="s2">&quot;ship&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;02&quot;</span><span class="p">:</span><span class="s2">&quot;bark or barque&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;03&quot;</span><span class="p">:</span><span class="s2">&quot;barkentine or barquentine&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;04&quot;</span><span class="p">:</span><span class="s2">&quot;brigantine&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;05&quot;</span><span class="p">:</span><span class="s2">&quot;schooner&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;06&quot;</span><span class="p">:</span><span class="s2">&quot;frigate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;99&quot;</span><span class="p">:</span><span class="s2">&quot;not identified&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.SP.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="s2">&quot;screw&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="s2">&quot;paddle&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;3&quot;</span><span class="p">:</span><span class="s2">&quot;not identified&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.SSTM.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="s2">&quot;bucket&quot;</span><span class="p">,</span>
+<span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="s2">&quot;intake&quot;</span><span class="p">,</span>
+<span class="s2">&quot;3&quot;</span><span class="p">:</span><span class="s2">&quot;as directed in the journals instructions&quot;</span><span class="p">,</span>
+<span class="s2">&quot;4&quot;</span><span class="p">:</span><span class="s2">&quot;not indicated&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.TEMPI.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="s2">&quot;Fahrenheit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="s2">&quot;Centigrade&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;3&quot;</span><span class="p">:</span><span class="s2">&quot;Attached thermometer is Fahrenheit. Dry bulb, wet bulb and water temperature are Centigrade&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;4&quot;</span><span class="p">:</span><span class="s2">&quot;Attached thermometer is Centigrade. Dry bulb, wet bulb and water temperature are Fahrenheit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;5&quot;</span><span class="p">:</span><span class="s2">&quot;Water temperature is Centigrade with other temperatures in Fahrenheit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;6&quot;</span><span class="p">:</span><span class="s2">&quot;Dry bulb and wet bulb are Centigrade with other temperatures in Fahrenheit&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.THERMOM.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="s2">&quot;mounted as recommended in journal introduction&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="s2">&quot;not mounted as recommended in journal introduction&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;3&quot;</span><span class="p">:</span><span class="s2">&quot;not indicated&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;4&quot;</span><span class="p">:</span><span class="s2">&quot;not indicated&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.TI.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="s2">&quot;AM (local)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="s2">&quot;PM (local)&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">vim</span> <span class="pre">ICOADS.C99.VESS.json</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s2">&quot;1&quot;</span><span class="p">:</span><span class="s2">&quot;sailing ship&quot;</span><span class="p">,</span>
+<span class="s2">&quot;2&quot;</span><span class="p">:</span><span class="s2">&quot;steamer&quot;</span><span class="p">,</span>
+<span class="s2">&quot;3&quot;</span><span class="p">:</span><span class="s2">&quot;not identified&quot;</span><span class="p">,</span>
+<span class="s2">&quot;4&quot;</span><span class="p">:</span><span class="s2">&quot;not identified&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each <code class="docutils literal notranslate"><span class="pre">code_table</span></code> above was created by reading and translating the information found in the ICOADS website for this particular deck. The name of the file corresponds to the section.variable that need such decoding.</p>
+</div>
+</div>
+<div class="section" id="re-start-your-python-environment">
+<h2>1.5 Re-start your python environment<a class="headerlink" href="#re-start-your-python-environment" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This can be done simply by closing and re-starting your shell or deactivating your virtual environment and activating it again.</p></li>
+</ul>
+</div>
+<div class="section" id="add-to-your-python-script-the-new-schema">
+<h2>1.6 Add to your python script the new schema<a class="headerlink" href="#add-to-your-python-script-the-new-schema" title="Permalink to this headline">¶</a></h2>
+<p>Add the following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">working_dir</span> <span class="o">=</span> <span class="s1">&#39;/to_your_designated_folder_where_you_installed_mdf_reader_and_cdm/&#39;</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">working_dir</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">mdf_reader</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="s1">&#39;imma1&#39;</span>
+<span class="n">data_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="s1">&#39;mdf_reader/tests/data/125-704_1878-10_subset.imma&#39;</span><span class="p">)</span>
+<span class="n">data_raw</span> <span class="o">=</span> <span class="n">mdf_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_file_path</span><span class="p">,</span> <span class="n">data_model</span> <span class="o">=</span> <span class="n">schema</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Now we apply the new schema&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;---------------------------&#39;</span><span class="p">)</span>
+
+<span class="c1"># ADD THIS NEW LINES!</span>
+<span class="n">schema_new</span> <span class="o">=</span> <span class="s1">&#39;imma1_d704&#39;</span>
+<span class="n">data_new</span> <span class="o">=</span> <span class="n">mdf_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_file_path</span><span class="p">,</span> <span class="n">data_model</span> <span class="o">=</span> <span class="n">schema_new</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The metadata information of several decks in ICOADS has been documented in a word template as part of the C3S project to avoid users to find it themselves in the ICOADS website, this information can be found in the following url: <strong>PENDING ADD URL to ICOADS structure folder</strong>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="build-new-cdm-mapper.html" class="btn btn-neutral float-right" title="2. Build and add a cdm-mapper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="adding-new-data-models.html" class="btn btn-neutral float-left" title="Adding new data models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, David Berry, Irene Perez Gonzalez and Beatriz Recinos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
