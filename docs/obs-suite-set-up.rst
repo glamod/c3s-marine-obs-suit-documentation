@@ -1,7 +1,7 @@
 .. _obs-suite-set-up:
 
 ================================================
-Observation suit set up and directories overview
+Observation suite set up and directories overview
 ================================================
 
 1. Clone the latest version of the `glamod-marine-processing <https://github.com/glamod/glamod-marine-processing>`_ repository to a user workspace in the `JASMIN Cluster service <https://help.jasmin.ac.uk/category/158-getting-started>`_, most of the processing for the C3S project has taken place in the following directory ``/gws/smf/j04/c3s311a_lot2``, once there, you can type the following::
